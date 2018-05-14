@@ -15,6 +15,8 @@ const User = require('./models/user');
 const userRouter = require('./route/user.route');
 const blogpostRouter = require('./route/blogpost.route');
 
+const useradminRouter = require('./route/useradmin.route');
+
 const logDirectory = path.join(__dirname, 'log');
 const port = process.env.PORT || 8080;
 const app = express();
@@ -73,6 +75,7 @@ app.use(cors({
 // User User router
 app.use('/user/', userRouter);
 app.use('/blogpost/', blogpostRouter);
+app.use('/useradmin/', useradminRouter);
 
 // Start server
 app.listen(port);

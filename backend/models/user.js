@@ -11,6 +11,10 @@ const userSchema = mongoose.Schema({
     required: true,
     unique: true,
   },
+  admin: {
+    type: Boolean,
+    required: true
+  }
 }, {
   timestamps: true,
 });
