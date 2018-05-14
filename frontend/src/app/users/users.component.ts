@@ -29,14 +29,14 @@ export class UsersComponent implements OnInit {
 
   editUser(user) {
     this.selectedUser = user;
-    this.http.put(`http://localhost:8080/useradmin/${this.selectedUser['_id']}`, this.selectedUser)
+    this.http.put(`http://localhost:8080/useradmin/${this.selectedUser['_id']}`, this.selectedUser, this.options)
       .subscribe(data => {
         console.log(data);
       });
   }
 
   removeUser(user) {
-      this.http.delete(`http://localhost:8080/useradmin/${user['_id']}`)
+      this.http.delete(`http://localhost:8080/useradmin/${user['_id']}`, this.options)
       .subscribe(data => {
         console.log(data);
       });

@@ -13,7 +13,7 @@ const userSchema = mongoose.Schema({
   },
   isAdmin: {
     type: String,
-    required: true
+    required: true,
   }
 }, {
   timestamps: true,
