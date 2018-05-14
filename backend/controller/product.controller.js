@@ -59,28 +59,50 @@ module.exports = {
   },
   /**
    * generál egy productot, a producturl-t és a imgurl generálja a productname-ből
+   * csak admin jogosultsággal
    */
   create: (req, res) => {
-    req.body.producturl = nameConverter(req.body.productname);
-    req.body.imgurl = `img/${nameConverter(req.body.productname)}.jpg`;
-    Product.create(req.body)
-      .then(product => res.send(product))
-      .catch(err => res.send(err));
+    req.user = JSON.stringify(req.user);
+    req.user = JSON.parse(req.user);
+    if (req.user.isAdmin === 'true') {
+      req.body.producturl = nameConverter(req.body.productname);
+      req.body.imgurl = `img/${nameConverter(req.body.productname)}.jpg`;
+      Product.create(req.body)
+        .then(product => res.send(product))
+        .catch(err => res.send(err));
+    } else {
+      res.send({ err: 'You are not an admin!' });
+      // res.send({ err: 'You are not an admin!', data: req.user.isAdmin });
+    }
   },
   /**
    * update-el egy productot az id alapján
+   * csak admin jogosultsággal
    */
   update: (req, res) => {
-    Product.findByIdAndUpdate(req.params.id, req.body)
-      .then(product => res.json(product))
-      .catch(err => res.send(err));
+    req.user = JSON.stringify(req.user);
+    req.user = JSON.parse(req.user);
+    if (req.user.isAdmin === 'true') {
+      Product.findByIdAndUpdate(req.params.id, req.body)
+        .then(product => res.json(product))
+        .catch(err => res.send(err));
+    } else {
+      res.send({ err: 'You are not an admin!' });
+    }
   },
-/**
- * eltávolít egy productot az id alapján
- */
+  /**
+  * eltávolít egy productot az id alapján
+  csak admin jogosultsággal
+  */
   remove: (req, res) => {
-    Product.findByIdAndRemove(req.params.id)
-      .then(product => res.json(product))
-      .catch(err => res.send(err));
+    req.user = JSON.stringify(req.user);
+    req.user = JSON.parse(req.user);
+    if (req.user.isAdmin === 'true') {
+      Product.findByIdAndRemove(req.params.id)
+        .then(product => res.json(product))
+        .catch(err => res.send(err));
+    } else {
+      res.send({ err: 'You are not an admin!' });
+    }
   },
 };
