@@ -61,8 +61,12 @@ passport.deserializeUser(User.deserializeUser());
 
 // Connect to MongoDB
 mongoose.connect(db.uri, db.options)
-  .then(() => { console.log('MongoDB connected.'); })
-  .catch((err) => { console.error(`MongoDB error.:${err}`); });
+  .then(() => {
+    console.log('MongoDB connected.');
+  })
+  .catch((err) => {
+    console.error(`MongoDB error.:${err}`);
+  });
 
 // Enable CORS
 app.use(cors({
