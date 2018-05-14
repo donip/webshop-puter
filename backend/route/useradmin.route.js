@@ -15,6 +15,7 @@ useradminRouter.route('/')
   .get(useradminController.listUsers);
 
 useradminRouter.route('/:id')
-  .put(useradminController.editUser);
+  .put(useradminController.editUser)
+  .delete(useradminController.removeUser);
 
 module.exports = useradminRouter;
