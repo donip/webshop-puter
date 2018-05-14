@@ -36,7 +36,8 @@ export class UsersComponent implements OnInit {
   }
 
   removeUser(user) {
-      this.http.delete(`http://localhost:8080/useradmin/${user['_id']}`, this.options)
+    this.selectedUser = user;
+      this.http.delete(`http://localhost:8080/useradmin/${this.selectedUser['_id']}`, this.options)
       .subscribe(data => {
         console.log(data);
       });
