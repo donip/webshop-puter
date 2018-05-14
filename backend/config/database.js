@@ -12,11 +12,11 @@ db.createUser(
 )
 */
 
-const host = 'localhost';
-const port = 27017;
-const user = 'root';
-const password = 'toor';
-const database = 'blog';
+const host = 'ds219040.mlab.com';
+const port = 19040;
+const user = 'pewterschmidt';
+const password = '12345678';
+const database = 'pewterschmidt';
 
 module.exports = {
   uri: `mongodb://${user}:${password}@${host}:${port}/${database}`,
