@@ -20,4 +20,6 @@ productRouter.route('/:id')
   .put(loggedIn, productController.update)
   .delete(loggedIn, productController.remove);
 
+productRouter.route('/url/:producturl').get(productController.findByUrl);
+
 module.exports = productRouter;
