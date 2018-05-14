@@ -17,6 +17,8 @@ const blogpostRouter = require('./route/blogpost.route');
 const productRouter = require('./route/product.route');
 const multer = require('multer');
 
+const useradminRouter = require('./route/useradmin.route');
+
 const logDirectory = path.join(__dirname, 'log');
 const port = process.env.PORT || 8080;
 const app = express();
@@ -63,8 +65,12 @@ passport.deserializeUser(User.deserializeUser());
 
 // Connect to MongoDB
 mongoose.connect(db.uri, db.options)
-  .then(() => { console.log('MongoDB connected.'); })
-  .catch((err) => { console.error(`MongoDB error.:${err}`); });
+  .then(() => {
+    console.log('MongoDB connected.');
+  })
+  .catch((err) => {
+    console.error(`MongoDB error.:${err}`);
+  });
 
 // Enable CORS
 app.use(cors({
@@ -75,6 +81,7 @@ app.use(cors({
 // User User router
 app.use('/user/', userRouter);
 app.use('/blogpost/', blogpostRouter);
+
 // product router
 app.use('/product/', productRouter);
 
@@ -100,6 +107,9 @@ const fileFilter = (req, file, cb) => {
 };
 */
 // multer end
+
+app.use('/useradmin/', useradminRouter);
+
 
 // Start server
 app.listen(port);

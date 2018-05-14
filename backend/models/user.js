@@ -11,6 +11,10 @@ const userSchema = mongoose.Schema({
     required: true,
     unique: true,
   },
+  isAdmin: {
+    type: String,
+    required: true,
+  },
 }, {
   timestamps: true,
 });
@@ -18,6 +22,7 @@ const userSchema = mongoose.Schema({
 userSchema.plugin(passportLocalMongoose, {
   maxAttempts: 5,
   hashField: 'password',
+  usernameField: 'email',
 });
 
 module.exports = mongoose.model('User', userSchema);

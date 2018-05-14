@@ -11,6 +11,7 @@ module.exports = {
     User.register(new User({
       username: req.body.username,
       email: req.body.email,
+      isAdmin: req.body.isAdmin,
     }), req.body.password)
       .then(() => res.json({
         success: 'Sikeres regisztráció',

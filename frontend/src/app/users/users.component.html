@@ -1,0 +1,18 @@
+<h1>
+  Felhasználókezelés
+</h1>
+
+<div class="container">
+  <div class="row" *ngFor="let user of users">
+    <div class="input-group">
+      <input class="form-control" type="text" name="username" [(ngModel)]="user.username">
+      <input class="form-control" type="text" name="email" [(ngModel)]="user.email">
+      <select class="custom-select" name="isadmin" [(ngModel)]="user.isAdmin">
+        <option value="true">True</option>
+        <option value="false">False</option>
+      </select>
+      <button class="btn btn-danger" (click)="removeUser(user)">Törlés</button>
+      <button class="btn btn-warning" (click)="editUser(user)">Módosítások mentése</button>
+    </div>
+  </div>
+</div>
