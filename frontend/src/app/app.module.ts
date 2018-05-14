@@ -18,7 +18,7 @@ import { OrdersComponent } from './orders/orders.component';
   declarations: [
     AppComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
     StatisticsComponent,
     ProductsComponent,
     UsersComponent,
