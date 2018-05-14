@@ -5,11 +5,22 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './statistics.component.html',
   styleUrls: ['./statistics.component.css']
 })
-export class StatisticsComponent implements OnInit {
+export class StatisticsComponent {
+  usernumber = 200;
+  productnumber = 700;
+  buyernumber = 1200;
+  productprice = 200;
+};
 
-  constructor() { }
+Constructor () {
 
-  ngOnInit() {
-  }
-
+   drawChart() {
+    var data = google.visualization.arrayToDataTable([
+    ['Felhasználók', this.usernumber],
+    ['Rendelt termék', this.productnumber],
+    ['Vevők', this.buyernumber]
+  ]);
 }
+};
+
+Constructor ();
