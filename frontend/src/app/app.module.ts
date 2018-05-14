@@ -9,7 +9,7 @@ import { StatisticsComponent } from './statistics/statistics.component';
 import { ProductsComponent } from './products/products.component';
 import { UsersComponent } from './users/users.component';
 import { OrdersComponent } from './orders/orders.component';
-
+import { Ng2GoogleChartsModule } from 'ng2-google-charts';
 
 @NgModule({
   declarations: [
@@ -22,7 +22,8 @@ import { OrdersComponent } from './orders/orders.component';
   imports: [
     BrowserModule,
     HttpModule,
-    FormsModule
+    FormsModule,
+    Ng2GoogleChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
