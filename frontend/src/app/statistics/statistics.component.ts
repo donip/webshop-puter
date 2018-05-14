@@ -12,21 +12,21 @@ import { Component, OnInit, NgModule} from '@angular/core';
   ],
 })
 export class StatisticsComponent implements OnInit {
-  usernumber = 200;
-  productnumber = 700;
-  buyernumber = 1200;
-  productprice = 200;
+  usernumber = 400;
+  productnumber = 300;
+  buyernumber = 200;
+  productprice = 40;
   pieChartData =  {
     chartType: 'ColumnChart',
     dataTable: [
-      ['Task', 'Hours per Day'],
-      ['Work',     11],
-      ['Eat',      2],
-      ['Commute',  2],
-      ['Watch TV', 2],
-      ['Sleep',    7]
+      ['', ''],
+      ['Felhasználók',     this.usernumber],
+      ['Eladott termék',      this.productnumber],
+      ['Termék ára',  this.productprice],
+      ['Nem vásárló felhasználók', (this.buyernumber-this.usernumber)*(-1)],
+      ['SEgy főre eső átlagos bevétel',    (this.productnumber*this.productprice)/this.buyernumber]
     ],
-    options: {'title': 'Tasks'},
+    options: {'title': 'Statisztika'},
   };
 
   constructor() {
