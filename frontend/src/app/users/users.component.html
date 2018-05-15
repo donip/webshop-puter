@@ -1,6 +1,13 @@
-<h1>
-  Felhasználókezelés
-</h1>
+<div class="container">
+
+  <div class="row">
+    <h1>
+      Felhasználókezelés
+    </h1>
+    <span class="alert alert-success" *ngIf="addSuccess === 'Sikeres hozzáadás' ">{{addSuccess}}</span>
+    <span class="alert alert-danger" *ngIf="addSuccess === 'Hozzáadás sikertelen' ">{{addSuccess}}</span>
+  </div>
+</div>
 
 <div class="container">
   <div class="row">
