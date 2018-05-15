@@ -12,10 +12,7 @@ export class OrdersComponent {
   orders: any;
   selectedOrder: any;
   newOrder = {
-    username: '',
-    email: '',
-    password: '',
-    isAdmin: ''
+    userId: '',
   };
   userData: any;
   products: any;
