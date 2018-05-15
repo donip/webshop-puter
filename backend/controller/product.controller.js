@@ -68,8 +68,11 @@ module.exports = {
     req.user = JSON.stringify(req.user);
     req.user = JSON.parse(req.user);
     if (req.user.isAdmin === 'true') {
+      if (req.file) {
+        req.body.imgurl = `http://localhost:8080/${req.file.path.replace(/\\/,'/')}`;
+      }
       req.body.producturl = nameConverter(req.body.productname);
-      req.body.imgurl = `img/${nameConverter(req.body.productname)}.jpg`;
+
       Product.create(req.body)
         .then(product => res.send(product))
         .catch(err => res.send(err));
