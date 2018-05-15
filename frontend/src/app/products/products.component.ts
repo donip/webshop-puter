@@ -49,10 +49,11 @@ export class ProductsComponent implements OnInit {
       });
   }
 
-  navigate(productname) {
-    this.http.get('http://localhost:8080/product/url/' + productname, this.options).subscribe(
+  navigate(product) {
+    this.selectedProduct = product;
+    this.http.get('http://localhost:8080/product/url/' + this.selectedProduct['producturl'], this.options).subscribe(
       data => {
-        this.errorHandling(data);
+        console.log(data);
       });
   }
 
@@ -70,14 +71,15 @@ export class ProductsComponent implements OnInit {
     console.log(this.selectedProduct);
     this.http.put('http://localhost:8080/product/' + this.selectedProduct['_id'], this.selectedProduct, this.options).subscribe(
       data => {
-        console.log(data['_body']);
+        console.log(data);
       });
   }
 
-  rowDeleter(id) {
-    this.http.delete('http://localhost:8080/product/' + id, this.options).subscribe(
+  rowDeleter(product) {
+    this.selectedProduct = product;
+    this.http.delete('http://localhost:8080/product/' + this.selectedProduct['_id'], this.options).subscribe(
       data => {
-        this.errorHandling(data);
+        console.log(data);
       });
   }
 }
