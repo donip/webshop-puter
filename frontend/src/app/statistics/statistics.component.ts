@@ -24,8 +24,8 @@ export class StatisticsComponent implements OnInit {
       ['Felhasználók',     this.a],
       ['Eladott termék',      this.b],
       ['Termék ára',  this.d],
-      ['Nem vásárló felhasználók', (this.b-this.a)*(-1)],
-      ['SEgy főre eső átlagos bevétel',    (this.c*this.d)/this.b]
+      ['Nem vásárló felhasználók', (this.b - this.a) * (-1)],
+      ['SEgy főre eső átlagos bevétel',    (this.c * this.d) / this.b]
     ],
     options: {'title': 'Statisztika',
     legend: 'none'},
@@ -37,19 +37,19 @@ export class StatisticsComponent implements OnInit {
       ['Felhasználók',     this.a],
       ['Eladott termék',      this.b],
       ['Termék ára',  this.d],
-      ['Nem vásárló felhasználók', (this.b-this.a)*(-1)],
-      ['SEgy főre eső átlagos bevétel',    (this.c*this.d)/this.b*2]
+      ['Nem vásárló felhasználók', (this.b - this.a) * (-1)],
+      ['SEgy főre eső átlagos bevétel',    (this.c * this.d) / this.b * 2]
     ],
     options: {'title': 'Statisztika',
     legend: 'none'},
   };
 
   constructor() {
-    
+
    }
 
   ngOnInit() {
-  
+
     }
   }
 
