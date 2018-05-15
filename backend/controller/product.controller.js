@@ -80,6 +80,7 @@ module.exports = {
   },
   /**
    * update-el egy productot az id alapján
+   * a productname-ből generálja a product url-t és imgurl
    * csak admin jogosultsággal
    */
   update: (req, res) => {
