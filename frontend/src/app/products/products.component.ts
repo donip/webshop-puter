@@ -16,12 +16,8 @@ export class ProductsComponent implements OnInit {
     price: '',
     category: ''
   };
-  formname: any;
-  formbrand: any;
-  formprice: any;
-  formcategory: any;
+  checker: any;
   datas: any;
-  checker: boolean;
   selectedProduct: any;
   options = new RequestOptions({ withCredentials: true });
   constructor(public http: Http) {
@@ -62,47 +58,44 @@ export class ProductsComponent implements OnInit {
       });
   }
 
-  validateForm() {
-    this.formname = document.forms['myForm']['productname'].value;
-    this.formbrand = document.forms['myForm2']['brand'].value;
-    this.formprice = document.forms['myForm3']['price'];
-    // this.formcategory = document.forms['myForm4']['category'].value;
-    console.log(this.formname, this.formbrand, this.formprice, this.formcategory);
-    if (this.formname = ' ') {
-      this.checker = false;
-      alert('Kérlek az összes mezőt töltsd ki!');
-    }
-  }
-
   creator() {
     console.log(this.adat);
     console.log(this.datas);
-    this.validateForm();
-    if (this.checker = true) {
-      this.http.post('http://localhost:8080/product', this.adat, this.options).subscribe(
-        data => {
-          console.log(data['_body']);
-          this.getAll();
-        });
-    }
+    this.http.post('http://localhost:8080/product', this.adat, this.options).subscribe(
+      data => {
+        console.log(data['_body']);
+        this.getAll();
+      });
   }
 
   updater(product) {
     this.selectedProduct = product;
     console.log(this.selectedProduct);
-    this.http.put('http://localhost:8080/product/' + this.selectedProduct['_id'], this.selectedProduct, this.options).subscribe(
-      data => {
-        console.log(data);
-        this.getAll();
-      });
+    this.checker = prompt('Biztosan frissíted a terméket? y/n');
+    console.log(this.checker);
+    if (this.checker === 'y') {
+      this.http.put('http://localhost:8080/product/' + this.selectedProduct['_id'], this.selectedProduct, this.options).subscribe(
+        data => {
+          console.log(data);
+          this.getAll();
+        });
+    } else {
+      this.getAll();
+    }
   }
+
 
   rowDeleter(product) {
     this.selectedProduct = product;
-    this.http.delete('http://localhost:8080/product/' + this.selectedProduct['_id'], this.options).subscribe(
-      data => {
-        console.log(data);
-        this.getAll();
-      });
+    this.checker = prompt('Biztosan törlöd a terméket? y/n');
+    if (this.checker === 'y') {
+      this.http.delete('http://localhost:8080/product/' + this.selectedProduct['_id'], this.options).subscribe(
+        data => {
+          console.log(data);
+          this.getAll();
+        });
+    } else {
+      this.getAll();
+    }
   }
 }

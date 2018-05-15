@@ -1,5 +1,6 @@
 const Product = require('../models/product');
 const mongoose = require('mongoose');
+const fs=require('fs');
 mongoose.Promise = require('bluebird');
 
 /**
@@ -90,25 +91,48 @@ module.exports = {
     req.user = JSON.stringify(req.user);
     req.user = JSON.parse(req.user);
     if (req.user.isAdmin === 'true') {
+      if (req.file) {
+        req.body.imgurl = `http://localhost:8080/${req.file.path.replace(/\\/,'/')}`;
+      }
       req.body.producturl = nameConverter(req.body.productname);
-      req.body.imgurl = `img/${nameConverter(req.body.productname)}.jpg`;
       Product.findByIdAndUpdate(req.params.id, req.body)
-        .then(product => res.json(product))
+        .then((product) => {
+          if (req.file) {
+            const imgpath = `./${product.imgurl.substring(22)}`;
+            fs.unlink(imgpath, (err) => {
+              if (err) {
+                throw err;
+              }
+              console.log('img file was deleted');
+            });
+          }
+          res.json(product);
+        })
         .catch(err => res.send(err));
     } else {
       res.send({ err: 'You are not an admin!' });
     }
   },
   /**
-  * eltávolít egy productot az id alapján
-  csak admin jogosultsággal
+  * Eltávolít egy productot az id alapján
+  * törli a hozzátartozó képet
+  * csak admin jogosultsággal
   */
   remove: (req, res) => {
     req.user = JSON.stringify(req.user);
     req.user = JSON.parse(req.user);
     if (req.user.isAdmin === 'true') {
       Product.findByIdAndRemove(req.params.id)
-        .then(product => res.json(product))
+        .then((product) => {
+          if (product.imgurl) {
+            const imgpath = `./${product.imgurl.substring(22)}`;
+            fs.unlink(imgpath, (err) => {
+              if (err) throw err;
+              console.log('img file was deleted');
+            });
+          }
+          res.json(product);
+        })
         .catch(err => res.send(err));
     } else {
       res.send({ err: 'You are not an admin!' });
