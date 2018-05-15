@@ -21,7 +21,7 @@ export class ProductsComponent implements OnInit {
   formprice: any;
   formcategory: any;
   datas: any;
-  checker: boolean;
+  checker = true;
   selectedProduct: any;
   options = new RequestOptions({ withCredentials: true });
   constructor(public http: Http) {
@@ -65,10 +65,10 @@ export class ProductsComponent implements OnInit {
   validateForm() {
     this.formname = document.forms['myForm']['productname'].value;
     this.formbrand = document.forms['myForm2']['brand'].value;
-    this.formprice = document.forms['myForm3']['price'];
-    // this.formcategory = document.forms['myForm4']['category'].value;
+    this.formprice = document.forms['myForm3']['price'].value;
+    this.formcategory = document.forms['myForm4']['category'].value;
     console.log(this.formname, this.formbrand, this.formprice, this.formcategory);
-    if (this.formname = ' ') {
+    if (this.formname = '') {
       this.checker = false;
       alert('Kérlek az összes mezőt töltsd ki!');
     }
