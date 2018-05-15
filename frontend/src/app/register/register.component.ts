@@ -9,9 +9,9 @@ import { Http, RequestOptions } from '@angular/http';
 export class RegisterComponent implements OnInit {
 
   user: any = {
-    username: 'YOUR REGISTERED USERNAME',
-    email: 'YOUR EMAIL',
-    password: 'YOUR REGISTERED USER PASSWORD',
+    username: 'name',
+    email: 'email',
+    password: 'pw',
     isAdmin: 'false'
   };
 
