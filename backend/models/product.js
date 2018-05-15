@@ -13,7 +13,7 @@ const productSchema = mongoose.Schema({
   },
   imgurl: {
     type: String,
-    required: true,
+    required: false,
   },
   brand: {
     type: String,
