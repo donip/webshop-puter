@@ -11,6 +11,7 @@ import * as faker from 'faker';
 export class ProductsComponent implements OnInit {
   title = 'Final Countdown';
   categories = ['Hűtő', 'Kávéfőző', 'Légkondi', 'Mosogatógép', 'Mosógép', 'Porszívó'];
+  brands = ['AEG', 'Bosch', 'Indesit', 'Samsung', 'Siemens', 'Whirlpool'];
   adat: object = {
     id: '',
     productname: '',
@@ -81,26 +82,19 @@ export class ProductsComponent implements OnInit {
   }
 /**
  * Fake product generator
- * @param {string} username - random name
- * @param {string} email - user.name@gmail.com
- * @param {string} password - 8xa = 'aaaaaaaa'
- * @param {string} isAdmin - 'false'
- * @todo {string} Comment this out after testing, as this feature is only for developers.
+ * @param {string} brand - random brand from predefined list
+ * @param {string} category - random category from predefined list
+ * @param {string} productname - initial letters of brand and category + random number
+ * @todo Comment this out after testing, as this feature is only for developers.
  */
 createFakeProduct() {
-  const productname = '';
+  const brand = this.brands[Math.floor(Math.random() * this.brands.length)];
+  const category = this.categories[Math.floor(Math.random() * this.categories .length)];
+  const productname = brand.split('')[0] + category.split('')[0] + Math.ceil(Math.random() * 10) * 100;
+  const randomProductPrice = (faker.commerce.price().toString());
   const producturl = '';
   const imgurl = '';
-  const brand = '';
-  const randomProductPrice = (faker.commerce.price().toString());
-  const category = '';
   console.log(productname);
-  /*
-  this.newUser.username = faker.name.findName();
-  this.newUser.email = (this.newUser.username).split(' ').join('.') + '@gmail.com';
-  this.newUser.password = 'aaaaaaaa';
-  this.newUser.isAdmin = 'false';
-  */
   //this.creator();
 }
 }
