@@ -9,13 +9,13 @@ import { Observable } from 'rxjs/Observable';
 })
 export class ProductsComponent implements OnInit {
   title = 'Final Countdown';
+  // adat: any = [];
   adat: object = {
-    id: '',
     productname: '',
     producturl: '',
     imgurl: '',
     brand: '',
-    prize: '',
+    price: '',
     category: ''
   };
   datas: any;
@@ -58,6 +58,8 @@ export class ProductsComponent implements OnInit {
   }
 
   creator() {
+    console.log(this.adat);
+    console.log(this.datas);
     this.http.post('http://localhost:8080/product', this.adat, this.options).subscribe(
       data => {
         this.errorHandling(data);
