@@ -18,7 +18,6 @@ const productRouter = require('./route/product.route');
 
 
 const useradminRouter = require('./route/useradmin.route');
-const uploadRouter = require('./route/upload.route');
 
 const logDirectory = path.join(__dirname, 'log');
 const port = process.env.PORT || 8080;
