@@ -1,15 +1,29 @@
 <div class="container-fluid">
-    <div class="table">
-<div class="row" >
-<div class="col-sm">{{usernumber}}</div>
-<div class="col-sm">{{productnumber}}</div>
-<div class="col-sm">{{buyernumber}}</div>
-<div class="col-sm">{{income}}</div>
-</div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">First</th>
+        <th scope="col">Last</th>
+        <th scope="col">Handle</th>
+        <th scope="col">ÖsszSzám</th>
+        <th scope="col">ÖsszFelhasználók</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">1</th>
+        <td>{{usernumber}}</td>
+        <td>{{productnumber}}</td>
+        <td>{{buyernumber}}</td>
+        <td>{{income}}</td>
+        <td>{{this.sumuser}}</td>
+      </tr>
+    </tbody>
+  </table>
 </div>
 <div id="graph">
-<p> adott havi bevétel (számmal és grafikonon (pl.: google chart) is, napokra bontva)</p>
+  <p> adott havi bevétel (számmal és grafikonon (pl.: google chart) is, napokra bontva)</p>
 </div>
 
-<google-chart [data]="pieChartData"></google-chart>
-<google-chart [data]="pieChartData2"></google-chart>
+<google-chart  #cchart [data]="pieChartData"></google-chart>
