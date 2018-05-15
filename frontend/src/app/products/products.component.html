@@ -28,7 +28,12 @@
             </td>
             <td>
               <form name="myForm4">
-                <input type="text" class="form-control" name="category" [(ngModel)]="adat.category" placeholder="Kategória" required #category="ngModel">
+                <input type="text" class="form-control" name="category" [(ngModel)]="adat.category" required #category="ngModel">
+              </form>
+            </td>
+            <td>
+              <form name="myForm5">
+                <input (change)="onFileSelected($event)" type="file" id="uploader" class="form-control" name="category" placeholder="Kategória" required >
               </form>
             </td>
             <td>
