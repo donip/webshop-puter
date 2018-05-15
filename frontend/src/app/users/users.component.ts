@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Http, RequestOptions } from '@angular/http';
 import * as faker from 'faker';
 
-//const faker = require('faker');
-
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',

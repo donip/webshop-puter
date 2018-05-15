@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Http, Headers, Response, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
+import * as faker from 'faker';
 
 @Component({
   selector: 'app-products',
@@ -9,6 +10,7 @@ import { Observable } from 'rxjs/Observable';
 })
 export class ProductsComponent implements OnInit {
   title = 'Final Countdown';
+  categories = ['Hűtő', 'Kávéfőző', 'Légkondi', 'Mosogatógép', 'Mosógép', 'Porszívó'];
   adat: object = {
     id: '',
     productname: '',
@@ -77,4 +79,28 @@ export class ProductsComponent implements OnInit {
         this.errorHandling(data);
       });
   }
+/**
+ * Fake product generator
+ * @param {string} username - random name
+ * @param {string} email - user.name@gmail.com
+ * @param {string} password - 8xa = 'aaaaaaaa'
+ * @param {string} isAdmin - 'false'
+ * @todo {string} Comment this out after testing, as this feature is only for developers.
+ */
+createFakeProduct() {
+  const productname = '';
+  const producturl = '';
+  const imgurl = '';
+  const brand = '';
+  const randomProductPrice = (faker.commerce.price().toString());
+  const category = '';
+  console.log(productname);
+  /*
+  this.newUser.username = faker.name.findName();
+  this.newUser.email = (this.newUser.username).split(' ').join('.') + '@gmail.com';
+  this.newUser.password = 'aaaaaaaa';
+  this.newUser.isAdmin = 'false';
+  */
+  //this.creator();
+}
 }
