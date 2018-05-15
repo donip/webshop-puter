@@ -72,22 +72,30 @@ export class ProductsComponent implements OnInit {
     this.selectedProduct = product;
     console.log(this.selectedProduct);
     this.checker = prompt('Biztosan frissíted a terméket? y/n');
-    if (this.checker = 'y') {
-    this.http.put('http://localhost:8080/product/' + this.selectedProduct['_id'], this.selectedProduct, this.options).subscribe(
-      data => {
-        console.log(data);
-        this.getAll();
-      });
+    console.log(this.checker);
+    if (this.checker === 'y') {
+      this.http.put('http://localhost:8080/product/' + this.selectedProduct['_id'], this.selectedProduct, this.options).subscribe(
+        data => {
+          console.log(data);
+          this.getAll();
+        });
+    } else {
+      this.getAll();
     }
   }
 
 
   rowDeleter(product) {
     this.selectedProduct = product;
-    this.http.delete('http://localhost:8080/product/' + this.selectedProduct['_id'], this.options).subscribe(
-      data => {
-        console.log(data);
-        this.getAll();
-      });
+    this.checker = prompt('Biztosan törlöd a terméket? y/n');
+    if (this.checker === 'y') {
+      this.http.delete('http://localhost:8080/product/' + this.selectedProduct['_id'], this.options).subscribe(
+        data => {
+          console.log(data);
+          this.getAll();
+        });
+    } else {
+      this.getAll();
+    }
   }
 }
