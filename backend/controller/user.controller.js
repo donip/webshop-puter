@@ -8,15 +8,19 @@ module.exports = {
   },
 
   register: (req, res) => {
-    User.register(new User({
-      username: req.body.username,
-      email: req.body.email,
-      isAdmin: req.body.isAdmin,
-    }), req.body.password)
-      .then(() => res.json({
-        success: 'Sikeres regisztráció',
-      }))
-      .catch(err => res.send(err));
+    if (req.body.password.length > 7) {
+      User.register(new User({
+        username: req.body.username,
+        email: req.body.email,
+        isAdmin: req.body.isAdmin,
+      }), req.body.password)
+        .then(() => res.json({
+          success: 'Sikeres regisztráció',
+        }))
+        .catch(err => res.send(err));
+    } else {
+      res.json({ error: 'Túl rövid a jelszó (min 8 karakter hosszú legyen!' });
+    }
   },
 
   login: (req, res) => res.json({
