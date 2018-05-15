@@ -11,22 +11,37 @@ import { Component, OnInit, NgModule} from '@angular/core';
    ,
   ],
 })
+
 export class StatisticsComponent implements OnInit {
-  usernumber = 400;
-  productnumber = 300;
-  buyernumber = 200;
-  productprice = 40;
+  a = Math.floor(Math.random() * Math.floor(200));
+  b = 300;
+  c = 200;
+  d = 40;
   pieChartData =  {
     chartType: 'ColumnChart',
     dataTable: [
-      ['', ''],
-      ['Felhasználók',     this.usernumber],
-      ['Eladott termék',      this.productnumber],
-      ['Termék ára',  this.productprice],
-      ['Nem vásárló felhasználók', (this.buyernumber-this.usernumber)*(-1)],
-      ['SEgy főre eső átlagos bevétel',    (this.productnumber*this.productprice)/this.buyernumber]
+      ['0', '0'],
+      ['Felhasználók',     this.a],
+      ['Eladott termék',      this.b],
+      ['Termék ára',  this.d],
+      ['Nem vásárló felhasználók', (this.b-this.a)*(-1)],
+      ['SEgy főre eső átlagos bevétel',    (this.c*this.d)/this.b]
     ],
-    options: {'title': 'Statisztika'},
+    options: {'title': 'Statisztika',
+    legend: 'none'},
+  };
+  pieChartData2 =  {
+    chartType: 'ColumnChart',
+    dataTable: [
+      ['0', '0'],
+      ['Felhasználók',     this.a],
+      ['Eladott termék',      this.b],
+      ['Termék ára',  this.d],
+      ['Nem vásárló felhasználók', (this.b-this.a)*(-1)],
+      ['SEgy főre eső átlagos bevétel',    (this.c*this.d)/this.b*2]
+    ],
+    options: {'title': 'Statisztika',
+    legend: 'none'},
   };
 
   constructor() {
@@ -34,7 +49,8 @@ export class StatisticsComponent implements OnInit {
    }
 
   ngOnInit() {
-    
+  
+    }
   }
 
 }
