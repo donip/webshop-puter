@@ -10,12 +10,12 @@
           <thead>
             <tr>
               <th>ID</th>
-              <th (click)="sortingThis('productname')">Product Name</th>
+              <th>Product Name</th>
               <th>Product URL</th>
               <th>Image URL</th>
-              <th (click)="sortingThis('brand')">Brand</th>
-              <th (click)="sortingThis('prize')">Prize</th>
-              <th (click)="sortingThis('category')">Category</th>
+              <th>Brand</th>
+              <th>Price</th>
+              <th>Category</th>
               <th>Magic Makers</th>
             </tr>
           </thead>
@@ -72,7 +72,7 @@
               <td>
                 <div class="btn-group btn-group-block">
                   <button class="btn btn-outline-dark" type="button" (click)="navigate()">Részletek</button>
-                  <button class="btn btn-outline-primary" type="button" (click)="updater()">Frissítés</button>
+                  <button class="btn btn-outline-primary" type="button" (click)="updater(x)">Frissítés</button>
                   <button class="btn btn-outline-danger" type="button" (click)="rowDeleter(x.id)">Törlés</button>
                 </div>
               </td>

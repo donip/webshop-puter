@@ -10,15 +10,14 @@ import { Observable } from 'rxjs/Observable';
 export class ProductsComponent implements OnInit {
   title = 'Final Countdown';
   // adat: any = [];
-  adat: object = {
+  adat = {
     productname: '',
-    producturl: '',
-    imgurl: '',
     brand: '',
     price: '',
     category: ''
   };
   datas: any;
+  selectedProduct: any;
   options = new RequestOptions({ withCredentials: true });
   constructor(public http: Http) {
     this.getAll();
@@ -62,14 +61,16 @@ export class ProductsComponent implements OnInit {
     console.log(this.datas);
     this.http.post('http://localhost:8080/product', this.adat, this.options).subscribe(
       data => {
-        this.errorHandling(data);
+        console.log(data['_body']);
       });
   }
 
-  updater(id) {
-    this.http.put('http://localhost:8080/product/' + id, this.adat, this.options).subscribe(
+  updater(product) {
+    this.selectedProduct = product;
+    console.log(this.selectedProduct);
+    this.http.put('http://localhost:8080/product/' + this.selectedProduct['_id'], this.selectedProduct, this.options).subscribe(
       data => {
-        this.errorHandling(data);
+        console.log(data['_body']);
       });
   }
 
