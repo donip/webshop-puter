@@ -1,15 +1,55 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgModule} from '@angular/core';
+
 
 @Component({
   selector: 'app-statistics',
   templateUrl: './statistics.component.html',
   styleUrls: ['./statistics.component.css']
 })
-export class StatisticsComponent implements OnInit {
+@NgModule({
+  imports: [
+   ,
+  ],
+})
 
-  constructor() { }
+export class StatisticsComponent implements OnInit {
+  a = Math.floor(Math.random() * Math.floor(200));
+  b = 300;
+  c = 200;
+  d = 40;
+  pieChartData =  {
+    chartType: 'ColumnChart',
+    dataTable: [
+      ['0', '0'],
+      ['Felhasználók',     this.a],
+      ['Eladott termék',      this.b],
+      ['Termék ára',  this.d],
+      ['Nem vásárló felhasználók', (this.b-this.a)*(-1)],
+      ['SEgy főre eső átlagos bevétel',    (this.c*this.d)/this.b]
+    ],
+    options: {'title': 'Statisztika',
+    legend: 'none'},
+  };
+  pieChartData2 =  {
+    chartType: 'ColumnChart',
+    dataTable: [
+      ['0', '0'],
+      ['Felhasználók',     this.a],
+      ['Eladott termék',      this.b],
+      ['Termék ára',  this.d],
+      ['Nem vásárló felhasználók', (this.b-this.a)*(-1)],
+      ['SEgy főre eső átlagos bevétel',    (this.c*this.d)/this.b*2]
+    ],
+    options: {'title': 'Statisztika',
+    legend: 'none'},
+  };
+
+  constructor() {
+
+   }
 
   ngOnInit() {
+
+    }
   }
 
-}

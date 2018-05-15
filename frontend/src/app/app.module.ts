@@ -6,6 +6,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { HttpModule } from '@angular/http';
 import {FormsModule} from '@angular/forms';
+import { Ng2GoogleChartsModule } from 'ng2-google-charts';
+
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { StatisticsComponent } from './statistics/statistics.component';
@@ -22,7 +24,6 @@ const routes: Routes = [
   { component: UsersComponent, path: 'users' },
   { component: OrdersComponent, path: 'orders' },
   { component: StatisticsComponent, path: 'statistics' },
-
 ];
 
 @NgModule({
@@ -40,6 +41,7 @@ const routes: Routes = [
     BrowserModule,
     HttpModule,
     FormsModule,
+    Ng2GoogleChartsModule,
     RouterModule.forRoot(routes)
   ],
   providers: [],

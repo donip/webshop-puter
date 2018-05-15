@@ -9,6 +9,9 @@ mongoose.Promise = require('bluebird');
  * @return: {string} konvertált string
  */
 function nameConverter(namestr) {
+  if (!namestr) {
+    return 'default-name';
+  }
   let name = namestr.toLocaleLowerCase();
 
   // cseretömb
@@ -77,12 +80,15 @@ module.exports = {
   },
   /**
    * update-el egy productot az id alapján
+   * a productname-ből generálja a product url-t és imgurl
    * csak admin jogosultsággal
    */
   update: (req, res) => {
     req.user = JSON.stringify(req.user);
     req.user = JSON.parse(req.user);
     if (req.user.isAdmin === 'true') {
+      req.body.producturl = nameConverter(req.body.productname);
+      req.body.imgurl = `img/${nameConverter(req.body.productname)}.jpg`;
       Product.findByIdAndUpdate(req.params.id, req.body)
         .then(product => res.json(product))
         .catch(err => res.send(err));
