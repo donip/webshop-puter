@@ -12,6 +12,12 @@ export class UsersComponent implements OnInit {
   baseUrl = 'http://localhost:8080/useradmin/';
   users: any;
   selectedUser: any;
+  newUser = {
+    username: '',
+    email: '',
+    password: '',
+    isAdmin: ''
+  };
 
   constructor(public http: Http) {
     this.getUsers();
@@ -36,10 +42,18 @@ export class UsersComponent implements OnInit {
   }
 
   removeUser(user) {
-      this.http.delete(`http://localhost:8080/useradmin/${user['_id']}`, this.options)
+    this.selectedUser = user;
+      this.http.delete(`http://localhost:8080/useradmin/${this.selectedUser['_id']}`, this.options)
       .subscribe(data => {
         console.log(data);
       });
+  }
+
+  addUser() {
+    this.http.post('http://localhost:8080/user/register', this.newUser, this.options)
+        .subscribe(data => {
+            console.log(data['_body']);
+        });
   }
 
 }

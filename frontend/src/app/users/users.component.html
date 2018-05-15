@@ -3,13 +3,26 @@
 </h1>
 
 <div class="container">
+  <div class="row">
+      <div class="input-group">
+          <input class="form-control" type="text" name="username" [(ngModel)]="newUser.username">
+          <input class="form-control" type="text" name="email" [(ngModel)]="newUser.email">
+          <input class="form-control" type="password" name="pass" [(ngModel)]="newUser.password">
+          <select class="custom-select" name="isadmin" [(ngModel)]="newUser.isAdmin">
+            <option value="true">Admin</option>
+            <option value="false">Felhasználó</option>
+          </select>
+          <button class="btn btn-success" (click)="addUser()">Hozzáadás</button>
+
+        </div>
+  </div>
   <div class="row" *ngFor="let user of users">
     <div class="input-group">
       <input class="form-control" type="text" name="username" [(ngModel)]="user.username">
       <input class="form-control" type="text" name="email" [(ngModel)]="user.email">
       <select class="custom-select" name="isadmin" [(ngModel)]="user.isAdmin">
-        <option value="true">True</option>
-        <option value="false">False</option>
+        <option value="true">Admin</option>
+        <option value="false">Felhasználó</option>
       </select>
       <button class="btn btn-danger" (click)="removeUser(user)">Törlés</button>
       <button class="btn btn-warning" (click)="editUser(user)">Módosítások mentése</button>
