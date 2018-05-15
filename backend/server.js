@@ -16,7 +16,7 @@ const userRouter = require('./route/user.route');
 const blogpostRouter = require('./route/blogpost.route');
 const productRouter = require('./route/product.route');
 
-
+const orderRouter = require('./route/order.route');
 const useradminRouter = require('./route/useradmin.route');
 
 const logDirectory = path.join(__dirname, 'log');
@@ -85,6 +85,10 @@ app.use('/blogpost/', blogpostRouter);
 // product router
 app.use('/product/', productRouter);
 
+// order router
+app.use('/order/', orderRouter);
+
+// useradmin router
 app.use('/useradmin/', useradminRouter);
 
 // Start server
