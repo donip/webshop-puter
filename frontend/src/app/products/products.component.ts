@@ -16,10 +16,10 @@ export class ProductsComponent implements OnInit {
     price: '',
     category: ''
   };
-  formname: any;
-  formbrand: any;
-  formprice: any;
-  formcategory: any;
+  // formname: any;
+  // formbrand: any;
+  // formprice: any;
+  // formcategory: any;
   datas: any;
   checker = true;
   selectedProduct: any;
@@ -62,29 +62,29 @@ export class ProductsComponent implements OnInit {
       });
   }
 
-  validateForm() {
-    this.formname = document.forms['myForm']['productname'].value;
-    this.formbrand = document.forms['myForm2']['brand'].value;
-    this.formprice = document.forms['myForm3']['price'].value;
-    this.formcategory = document.forms['myForm4']['category'].value;
-    console.log(this.formname, this.formbrand, this.formprice, this.formcategory);
-    if (this.formname = '') {
-      this.checker = false;
-      alert('Kérlek az összes mezőt töltsd ki!');
-    }
-  }
+  // validateForm() {
+  //   this.formname = document.forms['myForm']['productname'].value;
+  //   this.formbrand = document.forms['myForm2']['brand'].value;
+  //   this.formprice = document.forms['myForm3']['price'].value;
+  //   this.formcategory = document.forms['myForm4']['category'].value;
+  //   console.log(this.formname, this.formbrand, this.formprice, this.formcategory);
+  //   if (this.formname = '') {
+  //     this.checker = false;
+  //     alert('Kérlek az összes mezőt töltsd ki!');
+  //   }
+  // }
 
   creator() {
     console.log(this.adat);
     console.log(this.datas);
-    this.validateForm();
-    if (this.checker = true) {
+    // this.validateForm();
+    // if (this.checker = true) {
       this.http.post('http://localhost:8080/product', this.adat, this.options).subscribe(
         data => {
           console.log(data['_body']);
           this.getAll();
         });
-    }
+    // }
   }
 
   updater(product) {
