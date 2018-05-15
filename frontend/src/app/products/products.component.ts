@@ -79,6 +79,12 @@ export class ProductsComponent implements OnInit {
   updater(product) {
     this.selectedProduct = product;
     console.log(this.selectedProduct);
+    const body = new FormData();
+    body.append('productname', product.productname);
+    body.append('category', product.category);
+    body.append('price', product.price);
+    body.append('brand', product.brand);
+    body.append('uploadimg', this.uploadFile, this.uploadFile.name);
     this.http.put('http://localhost:8080/product/' + this.selectedProduct['_id'], this.selectedProduct, this.options).subscribe(
       data => {
         console.log(data);
