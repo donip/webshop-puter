@@ -97,7 +97,7 @@ module.exports = {
       req.body.producturl = nameConverter(req.body.productname);
       Product.findByIdAndUpdate(req.params.id, req.body)
         .then((product) => {
-          if (product.imgurl) {
+          if (req.file) {
             const imgpath = `./${product.imgurl.substring(22)}`;
             fs.unlink(imgpath, (err) => {
               if (err) {
