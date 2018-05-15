@@ -14,9 +14,9 @@ import { Component, OnInit, NgModule} from '@angular/core';
 
 export class StatisticsComponent implements OnInit {
   a = Math.floor(Math.random() * Math.floor(200));
-  b = 300;
-  c = 200;
-  d = 40;
+  b = Math.floor(Math.random() * Math.floor(200));
+  c = Math.floor(Math.random() * Math.floor(200));
+  d = Math.floor(Math.random() * Math.floor(this.a));
   pieChartData =  {
     chartType: 'ColumnChart',
     dataTable: [
