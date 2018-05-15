@@ -1,53 +1,63 @@
-<div class="container">
+<div class="container-fluid">
+    <div class="jumbotron jumbotron-fluid">
+      <h1 class="display-2 text-center">Products</h1>
+    </div>
+    <hr>
+    <br>
     <div class="row">
-      <div class="col-sm-8">
-        <h1>Products</h1>
+      <div class="col-sm-10 offset-sm-1">
+        <table>
+          <tr>
+            <td class="text-center">
+              Új termék hozzáadása
+            </td>
+            <td>
+              <form name="myForm">
+                <input type="text" class="form-control" name="productname" [(ngModel)]="adat.productname" placeholder="Név">
+              </form>
+            </td>
+            <td>
+              <form name="myForm2">
+                <input type="text" class="form-control" name="brand" [(ngModel)]="adat.brand" placeholder="Márka">
+              </form>
+            </td>
+            <td>
+              <form name="myForm3">
+                <input type="number" class="form-control" name="prize" [(ngModel)]="adat.price" placeholder="Ár (HUF)">
+              </form>
+            </td>
+            <td>
+              <form name="myForm4">
+                <input type="text" class="form-control" name="category" [(ngModel)]="adat.category" placeholder="Kategória">
+              </form>
+            </td>
+            <td>
+              <button class="btn btn-outline-success btn-block" type="button" (click)="creator()">Bevitel</button>
+            </td>
+          </tr>
+        </table>
       </div>
     </div>
+    <br>
     <div class="row">
       <div class="col-sm-12">
         <table>
           <thead>
             <tr>
+              <th></th>
               <th>ID</th>
-              <th (click)="sortingThis('productname')">Product Name</th>
+              <th>Product Name</th>
               <th>Product URL</th>
               <th>Image URL</th>
-              <th (click)="sortingThis('brand')">Brand</th>
-              <th (click)="sortingThis('prize')">Prize</th>
-              <th (click)="sortingThis('category')">Category</th>
-              <th>Magic Makers</th>
+              <th>Brand</th>
+              <th>Price</th>
+              <th>Category</th>
+              <th class="text-center">Magic Makers</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>
-                #
-                <!-- <input type="text" class="form-control" name="id" readonly> -->
-              </td>
-              <td>
-                <input type="text" class="form-control" name="productname" [(ngModel)]="adat.productname">
-              </td>
-              <td>
-                <input type="text" class="form-control" name="producturl" [(ngModel)]="adat.producturl" disabled>
-              </td>
-              <td>
-                <input type="text" class="form-control" name="imgurl" [(ngModel)]="adat.imgurl" disabled>
-              </td>
-              <td>
-                <input type="text" class="form-control" name="brand" [(ngModel)]="adat.brand">
-              </td>
-              <td>
-                <input type="text" class="form-control" name="prize" [(ngModel)]="adat.price">
-              </td>
-              <td>
-                <input type="text" class="form-control" name="category" [(ngModel)]="adat.category">
-              </td>
-              <td>
-                <button class="btn btn-outline-dark" type="button" (click)="creator()">Bevitel</button>
-              </td>
-            </tr>
             <tr *ngFor="let x of datas">
+              <td></td>
               <td>
                 <input type="text" class="form-control" [(ngModel)]="x['_id']" readonly>
               </td>
@@ -64,16 +74,21 @@
                 <input type="text" class="form-control" [(ngModel)]="x.brand">
               </td>
               <td>
-                <input type="text" class="form-control" [(ngModel)]="x.price">
+                <div class="input-group">
+                  <input type="number" class="form-control" [(ngModel)]="x.price">
+                  <div class="input-group-append">
+                    <span class="input-group-text">Ft</span>
+                  </div>
+                </div>
               </td>
               <td>
                 <input type="text" class="form-control" [(ngModel)]="x.category">
               </td>
               <td>
                 <div class="btn-group btn-group-block">
-                  <button class="btn btn-outline-dark" type="button" (click)="navigate()">Részletek</button>
-                  <button class="btn btn-outline-primary" type="button" (click)="updater()">Frissítés</button>
-                  <button class="btn btn-outline-danger" type="button" (click)="rowDeleter(x.id)">Törlés</button>
+                  <button class="btn btn-outline-dark" type="button" (click)="navigate(x)">Részletek</button>
+                  <button class="btn btn-outline-primary" type="button" (click)="updater(x)">Frissítés</button>
+                  <button class="btn btn-outline-danger" type="button" (click)="rowDeleter(x)">Törlés</button>
                 </div>
               </td>
             </tr>

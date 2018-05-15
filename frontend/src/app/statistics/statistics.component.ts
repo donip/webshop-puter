@@ -53,6 +53,7 @@ export class StatisticsComponent implements OnInit {
       legend: 'none'
     },
   };
+
   constructor(public http: Http) {
     this.getProducts();
   }
