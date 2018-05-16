@@ -78,40 +78,40 @@
     <br>
     <div class="row">
       <div class="col-sm-12">
-        <table>
+        <table class="table table-fluid table-hover table-borderless">
           <thead>
             <tr>
               <th></th>
               <th>ID</th>
-              <th>Product Name</th>
-              <th>Product URL</th>
-              <th>Image</th>
-              <th>Brand</th>
-              <th>Price</th>
-              <th>Category</th>
+              <th>Termék Név</th>
+              <th>Termék URL</th>
+              <th>Kép</th>
+              <th>Márka</th>
+              <th>Ár</th>
+              <th>Kategória</th>
               <th class="text-center">Magic Makers</th>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let x of datas">
               <td></td>
-              <td>
+              <td class="align-middle">
                 <input type="text" class="form-control" [(ngModel)]="x['_id']" readonly>
               </td>
-              <td>
+              <td class="align-middle">
                 <input type="text" class="form-control" [(ngModel)]="x.productname">
               </td>
-              <td>
+              <td class="align-middle">
                 <input type="text" class="form-control" [(ngModel)]="x.producturl" readonly>
               </td>
-              <td>
+              <td class="align-middle">
                 <img *ngIf="x.imgurl" src="{{ x.imgurl }}" alt="{{ x.productname }}" width="150" height="150">
                 <img *ngIf="!x.imgurl" src="http://localhost:8080/uploads/feltoltes_alatt.jpg" alt="feltoltes-alatt" width="150" height="150">
               </td>
-              <td>
+              <td class="align-middle">
                 <input type="text" class="form-control" [(ngModel)]="x.brand">
               </td>
-              <td>
+              <td class="align-middle">
                 <div class="input-group">
                   <input type="number" class="form-control" [(ngModel)]="x.price">
                   <div class="input-group-append">
@@ -119,12 +119,12 @@
                   </div>
                 </div>
               </td>
-              <td>
+              <td class="align-middle">
                 <input type="text" class="form-control" [(ngModel)]="x.category">
               </td>
-              <td>
-                <div class="btn-group btn-group-block">
-                  <button class="btn btn-outline-dark" type="button" (click)="navigate(x)">Részletek</button>
+              <td class="align-middle">
+                <div class="btn-group-vertical btn-group-block">
+                  <button class="btn btn-outline-dark" type="button" (click)="navigate(x)" disabled>Részletek</button>
                   <button class="btn btn-outline-primary" type="button" (click)="updater(x)">Frissítés</button>
                   <button class="btn btn-outline-danger" type="button" (click)="rowDeleter(x)">Törlés</button>
                 </div>

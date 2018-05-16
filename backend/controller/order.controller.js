@@ -18,6 +18,7 @@ module.exports = {
   },
 
   create: (req, res) => {
+    req.body.status = 'active';
     Order.create(req.body)
       .then(order => res.send(order))
       .catch(err => res.send(err));

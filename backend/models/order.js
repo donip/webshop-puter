@@ -19,6 +19,10 @@ const orderSchema = mongoose.Schema(
       ref: 'User',
       required: true,
     },
+    status: {
+      type: String,
+      required: true,
+    },
   },
   {
     timestamps: true,
