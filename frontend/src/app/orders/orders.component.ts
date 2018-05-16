@@ -17,6 +17,7 @@ export class OrdersComponent {
       product: '',
       quantity: '',
     }],
+    status: '',
   };
   userData: any;
   products: any;
@@ -47,7 +48,18 @@ export class OrdersComponent {
   getOrders() {
     this.http.get(this.baseUrl, this.options)
       .subscribe(data => {
-        this.orders = JSON.parse(data['_body']);
+        const d = JSON.parse(data['_body']);
+        console.log(d);
+        console.log(data);
+
+        for (let i = 0; i < d.length; i++) {
+         for (let j = 0; j < d[i].products.length; j++) {
+          if (d[i].products[j]['product'] === null) {
+            d[i].products[j]['product'] = { productname: 'Termék törölve' };
+          }
+         }
+        }
+        this.orders = d;
         console.log(this.orders);
   });
   }
@@ -79,6 +91,7 @@ export class OrdersComponent {
     this.http.post(`${this.baseUrl}`, this.newOrder, this.options)
         .subscribe(data => {
             console.log(data['_body']);
+            this.getOrders();
         });
   }
 
