@@ -37,6 +37,18 @@
             <td>
               <button class="btn btn-outline-success btn-block" type="button" (click)="creator()">Bevitel</button>
             </td>
+            <td width="230" class="text-center">Kérlek, a feltöltésnél és a frissítésnél is ezt a mezőt használd kép bevitelére:</td>
+            <td width="100">
+              <form name="myForm5">
+                <!-- ez kell a file uploadhoz -->
+                <div class="input-group">
+                  <div class="custom-file">
+                    <input (change)="onFileSelected($event)" type="file" id="uploader" name="category" placeholder="Kategória" required >
+                    <label class="custom-file-label" for="uploader">Kép</label>
+                  </div>
+                </div>
+              </form>
+            </td>
           </tr>
           <tr>
             <td></td>
@@ -82,7 +94,7 @@
               <th>ID</th>
               <th>Product Name</th>
               <th>Product URL</th>
-              <th>Image URL</th>
+              <th>Image</th>
               <th>Brand</th>
               <th>Price</th>
               <th>Category</th>
@@ -102,8 +114,8 @@
                 <input type="text" class="form-control" [(ngModel)]="x.producturl" readonly>
               </td>
               <td>
-                <!-- <input type="text" class="form-control" [(ngModel)]="x.imgurl" readonly> -->
-                <img src="{{ x.imgurl }}" alt=" {{ x.productname }}" width="150" height="150">
+                <img *ngIf="x.imgurl" src="{{ x.imgurl }}" alt="{{ x.productname }}" width="150" height="150">
+                <img *ngIf="!x.imgurl" src="http://localhost:8080/uploads/feltoltes_alatt.jpg" alt="feltoltes-alatt" width="150" height="150">
               </td>
               <td>
                 <input type="text" class="form-control" [(ngModel)]="x.brand">

@@ -20,6 +20,9 @@ export class ProductsComponent implements OnInit {
     price: '',
     category: ''
   };
+  
+  uploadFile: File = null;
+
   checker: any;
   datas: any;
   selectedProduct: any;
@@ -62,8 +65,25 @@ export class ProductsComponent implements OnInit {
       });
   }
 
+  onFileSelected(event) {
+    this.uploadFile = <File>event.target.files[0];
+  }
+
+  bodyCreator(param) {
+    const body = new FormData();
+    body.append('productname', param.productname);
+    body.append('category', param.category);
+    body.append('price', param.price);
+    body.append('brand', param.brand);
+    if (this.uploadFile) {
+      body.append('uploadimg', this.uploadFile, this.uploadFile.name);
+    }
+    return body;
+  }
+
   creator() {
-    this.http.post('http://localhost:8080/product', this.adat, this.options).subscribe(
+    const body = this.bodyCreator(this.adat);
+    this.http.post('http://localhost:8080/product', body, this.options).subscribe(
       data => {
         console.log(data['_body']);
         this.getAll();
@@ -72,15 +92,16 @@ export class ProductsComponent implements OnInit {
 
   updater(product) {
     this.selectedProduct = product;
-    this.checker = prompt('Biztosan frissíted a terméket? y/n');
+    const body = this.bodyCreator(product);
+    this.checker = prompt('Biztosan frissíted a terméket?');
     if (this.checker === 'y') {
-      this.http.put('http://localhost:8080/product/' + this.selectedProduct['_id'], this.selectedProduct, this.options).subscribe(
+      this.http.put('http://localhost:8080/product/' + this.selectedProduct['_id'], body, this.options).subscribe(
         data => {
           console.log(data);
           this.getAll();
         });
     } else {
-      this.getAll();
+        this.getAll();
     }
   }
 
