@@ -5,6 +5,10 @@
     "scripts": {
         "test": "mocha"
     },
+    "nodemonConfig": {
+        "ignore": ["db/*"],
+        "delay": "1000"
+    },
     "dependencies": {
         "bluebird": "^3.5.1",
         "body-parser": "~1.15.2",
