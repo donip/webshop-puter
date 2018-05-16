@@ -16,6 +16,7 @@ export class NavbarComponent implements OnInit {
     { label: 'Statisztika', url: '/statistics' }
   ];
 
+  userInfo: any;
 
   constructor() { }
 

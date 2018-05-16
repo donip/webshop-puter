@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Http, Headers, Response, RequestOptions } from '@angular/http';
+
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-orders',
   templateUrl: './orders.component.html',
@@ -29,7 +31,7 @@ export class OrdersComponent {
   userData: any;
   products: any;
 
-  constructor(public http: Http) {
+  constructor(public http: Http, public router: Router) {
     this.getOrders();
     this.getUsers();
     this.getProducts();
@@ -63,9 +65,9 @@ export class OrdersComponent {
     this.http.get(this.baseUrl, this.options)
       .subscribe(data => {
         const d = JSON.parse(data['_body']);
-        console.log(d);
-        console.log(data);
-
+        if (d.err) {
+          this.router.navigate(['/login']);
+        } else {
         for (let i = 0; i < d.length; i++) {
          for (let j = 0; j < d[i].products.length; j++) {
           if (d[i].products[j]['product'] === null) {
@@ -75,6 +77,7 @@ export class OrdersComponent {
         }
         this.orders = d;
         console.log(this.orders);
+      }
   });
   }
 
@@ -89,7 +92,10 @@ export class OrdersComponent {
   editOrder() {
     this.http.put(`${this.baseUrl}${this.selectedOrder['_id']}`, this.selectedOrder, this.options)
       .subscribe(data => {
-        console.log(data);
+        const d = JSON.parse(data['_body']);
+        if (d.err) {
+          this.router.navigate(['/login']);
+        }
       });
   }
   removeOrder(order) {
