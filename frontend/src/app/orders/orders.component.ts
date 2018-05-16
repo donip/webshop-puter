@@ -47,7 +47,7 @@ export class OrdersComponent {
    addModalRow() {
      this.selectedOrder.products.push({
        product: '',
-       quantity: '',
+       quantity: ''
      });
    }
 
@@ -85,14 +85,13 @@ export class OrdersComponent {
       });
   }
 
-  editOrder(order) {
-    this.selectedOrder = order;
+
+  editOrder() {
     this.http.put(`${this.baseUrl}${this.selectedOrder['_id']}`, this.selectedOrder, this.options)
       .subscribe(data => {
         console.log(data);
       });
   }
-
   removeOrder(order) {
     this.selectedOrder = order;
       this.http.delete(`${this.baseUrl}${this.selectedOrder['_id']}`, this.options)
@@ -103,6 +102,7 @@ export class OrdersComponent {
   }
 
   createOrder() {
+    this.newOrder.products = this.newOrder.products.filter(pr => pr.product !== '');
     this.http.post(`${this.baseUrl}`, this.newOrder, this.options)
         .subscribe(data => {
             console.log(data['_body']);

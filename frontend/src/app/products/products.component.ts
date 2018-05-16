@@ -102,8 +102,13 @@ export class ProductsComponent implements OnInit {
     const body = this.bodyCreator(this.adat);
     this.http.post('http://localhost:8080/product', body, this.options).subscribe(
       data => {
-        console.log(data['_body']);
+        console.log(data);
         this.getAll();
+        if (!JSON.parse(data['_body']).errors) {
+          alert('A termék hozzáadásra került.');
+        } else {
+          alert('Hozzáadás sikertelen.');
+        }
       });
   }
   /**
@@ -119,9 +124,11 @@ export class ProductsComponent implements OnInit {
         data => {
           console.log(data);
           this.getAll();
+          alert('A termék sikeresen frissítve.');
         });
     } else {
         this.getAll();
+        alert('Sikertelen frissítés.');
     }
   }
   /**
@@ -136,20 +143,21 @@ export class ProductsComponent implements OnInit {
         data => {
           console.log(data);
           this.getAll();
+          alert('A termék sikeresen törölve!');
         });
     } else {
       this.getAll();
+      alert('Sikertelen törlés.');
     }
   }
   /**
-<<<<<<< HEAD
- * Fake product generator
- * @param {string} brand - random brand from predefined list
- * @param {string} category - random category from predefined list
- * @param {string} productname - initial letters of brand and category + random number
- * @param {string} price - random number toString!
- * @todo Comment this out after testing, as this feature is only for developers.
- */
+  * Fake product generator
+  * @param {string} brand - random brand from predefined list
+  * @param {string} category - random category from predefined list
+  * @param {string} productname - initial letters of brand and category + random number
+  * @param {string} price - random number toString!
+  * @todo Comment this out after testing, as this feature is only for developers.
+  */
   createFakeProduct() {
     this.adat.brand = this.brands[Math.floor(Math.random() * this.brands.length)];
     this.adat.category = this.categories[Math.floor(Math.random() * this.categories .length)];
