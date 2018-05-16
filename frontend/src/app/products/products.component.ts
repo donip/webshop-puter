@@ -59,8 +59,6 @@ export class ProductsComponent implements OnInit {
   }
 
   creator() {
-    console.log(this.adat);
-    console.log(this.datas);
     this.http.post('http://localhost:8080/product', this.adat, this.options).subscribe(
       data => {
         console.log(data['_body']);
@@ -70,9 +68,7 @@ export class ProductsComponent implements OnInit {
 
   updater(product) {
     this.selectedProduct = product;
-    console.log(this.selectedProduct);
     this.checker = prompt('Biztosan frissíted a terméket? y/n');
-    console.log(this.checker);
     if (this.checker === 'y') {
       this.http.put('http://localhost:8080/product/' + this.selectedProduct['_id'], this.selectedProduct, this.options).subscribe(
         data => {
