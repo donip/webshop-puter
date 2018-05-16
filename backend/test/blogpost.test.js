@@ -1,7 +1,7 @@
 const chai = require('chai');
 const {
   expect,
-} = require('chai').expect;
+} = require('chai');
 const chaiHttp = require('chai-http');
 
 const baseUrl = 'http://localhost:8080/blogpost';

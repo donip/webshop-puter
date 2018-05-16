@@ -9,8 +9,8 @@ import { Http, RequestOptions } from '@angular/http';
 export class LoginComponent implements OnInit {
 
   user: any = {
-    username: 'YOUR REGISTERED EMAIL',
-    password: 'YOUR REGISTERED USER PASSWORD',
+    username: 'a@b.c',
+    password: '12345678',
   };
 
   options = new RequestOptions({ withCredentials: true });
