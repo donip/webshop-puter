@@ -14,9 +14,13 @@ const orderSchema = mongoose.Schema(
         required: true,
       },
     }],
-    costumer: {
+    customer: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
+      required: true,
+    },
+    status: {
+      type: String,
       required: true,
     },
   },

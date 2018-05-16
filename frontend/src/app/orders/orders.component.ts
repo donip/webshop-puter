@@ -10,9 +10,21 @@ export class OrdersComponent {
   options = new RequestOptions({ withCredentials: true });
   baseUrl = 'http://localhost:8080/order/';
   orders: any;
-  selectedOrder: any;
+  selectedOrder  = {
+    customer: '',
+    products: [{
+      product: '',
+      quantity: '',
+    }],
+    status: '',
+  };
   newOrder = {
-    userId: '',
+    customer: '',
+    products: [{
+      product: '',
+      quantity: '',
+    }],
+    status: '',
   };
   userData: any;
   products: any;
@@ -22,6 +34,21 @@ export class OrdersComponent {
     this.getUsers();
     this.getProducts();
 
+   }
+
+   addRow() {
+    this.newOrder.products.push({
+      product: '',
+      quantity: ''
+    });
+    console.log(this.newOrder);
+   }
+
+   addModalRow() {
+     this.selectedOrder.products.push({
+       product: '',
+       quantity: '',
+     });
    }
 
    getUsers() {
@@ -35,7 +62,18 @@ export class OrdersComponent {
   getOrders() {
     this.http.get(this.baseUrl, this.options)
       .subscribe(data => {
-        this.orders = JSON.parse(data['_body']);
+        const d = JSON.parse(data['_body']);
+        console.log(d);
+        console.log(data);
+
+        for (let i = 0; i < d.length; i++) {
+         for (let j = 0; j < d[i].products.length; j++) {
+          if (d[i].products[j]['product'] === null) {
+            d[i].products[j]['product'] = { productname: 'Termék törölve' };
+          }
+         }
+        }
+        this.orders = d;
         console.log(this.orders);
   });
   }
@@ -60,6 +98,7 @@ export class OrdersComponent {
       this.http.delete(`${this.baseUrl}${this.selectedOrder['_id']}`, this.options)
       .subscribe(data => {
         console.log(data);
+        this.getOrders();
       });
   }
 
@@ -67,7 +106,13 @@ export class OrdersComponent {
     this.http.post(`${this.baseUrl}`, this.newOrder, this.options)
         .subscribe(data => {
             console.log(data['_body']);
+            this.getOrders();
         });
+  }
+
+  loadModalData(order) {
+    this.selectedOrder = order;
+    console.log(this.selectedOrder);
   }
 
 

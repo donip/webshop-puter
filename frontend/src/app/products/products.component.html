@@ -15,10 +15,6 @@
               <form name="myForm">
                 <input type="text" class="form-control" name="productname" [(ngModel)]="adat.productname" placeholder="Név" required #productname="ngModel">
               </form>
-            </td>
-            <td>
-              <input type="file" id="photo">
-            </td>
             <td>
               <form name="myForm2">
                 <input type="text" class="form-control" name="brand" [(ngModel)]="adat.brand" placeholder="Márka" required #brand="ngModel">
@@ -36,6 +32,13 @@
             </td>
             <td>
               <button class="btn btn-outline-success btn-block" type="button" (click)="creator()">Bevitel</button>
+            </td>
+            <td width="230" class="text-center">Kérlek, a feltöltésnél és a frissítésnél is ezt a mezőt használd kép bevitelére:</td>
+            <td width="100">
+              <form name="myForm5">
+                <!-- ez kell a file uploadhoz -->
+                <input (change)="onFileSelected($event)" type="file" id="uploader" class="fileinput">
+              </form>
             </td>
           </tr>
           <tr>
@@ -82,7 +85,7 @@
               <th>ID</th>
               <th>Product Name</th>
               <th>Product URL</th>
-              <th>Image URL</th>
+              <th>Image</th>
               <th>Brand</th>
               <th>Price</th>
               <th>Category</th>
@@ -102,8 +105,8 @@
                 <input type="text" class="form-control" [(ngModel)]="x.producturl" readonly>
               </td>
               <td>
-                <!-- <input type="text" class="form-control" [(ngModel)]="x.imgurl" readonly> -->
-                <img src="{{ x.imgurl }}" alt=" {{ x.productname }}" width="150" height="150">
+                <img *ngIf="x.imgurl" src="{{ x.imgurl }}" alt="{{ x.productname }}" width="150" height="150">
+                <img *ngIf="!x.imgurl" src="http://localhost:8080/uploads/feltoltes_alatt.jpg" alt="feltoltes-alatt" width="150" height="150">
               </td>
               <td>
                 <input type="text" class="form-control" [(ngModel)]="x.brand">
@@ -132,7 +135,9 @@
       </div>
     </div>
     <div class="row">
-      <button class="btn btn-outline-danger" (click)="createFakeProduct()">Create Fake Product</button>
+      <div class="col-sm-2 offset-5">
+        <button class="btn btn-outline-light" (click)="createFakeProduct()">Create Fake Product</button>
+      </div>
     </div>
   </div>
   
