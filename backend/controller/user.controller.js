@@ -7,6 +7,9 @@ module.exports = {
     });
   },
 
+  /**
+   * Új user regisztráció
+   */
   register: (req, res) => {
     User.register(new User({
       username: req.body.username,
@@ -19,10 +22,16 @@ module.exports = {
       .catch(err => res.send(err));
   },
 
+  /**
+   * Belépés
+   */
   login: (req, res) => res.json({
     success: 'Sikeres belépés',
   }),
 
+  /**
+   * Kilépés
+   */
   logout: (req, res) => {
     req.logout();
     res.json({

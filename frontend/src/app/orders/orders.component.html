@@ -1,10 +1,37 @@
 <h2>Új megrendelés felvétele</h2>
-<input id="customer" list="customers" class="form-control tableinput" name="myCustomers" type="text" placeholder="Ügyfél kiválasztása">
-  <datalist id="customers">
-    <option *ngFor="let customer of userData" value="{{customer['_id']}}">{{customer.username}}</option>
-  </datalist>
-<input id="product" list="products" class="form-control tableinput" name="myProducts" type="text" placeholder="Termék kiválasztása">
-  <datalist id="products">
-    <option *ngFor="let product of products" value="{{product['_id']}}">{{product.productname}}</option>
-  </datalist>
-  <input type="number" name="amount" id="amount" min="0" placeholder="Mennyiség">
+<div class="container">
+  <div class="row">
+    <input id="customer" list="customers" class="form-control tableinput" name="myCustomers" type="text" placeholder="Ügyfél kiválasztása" [(ngModel)]="newOrder.customer">
+    <datalist id="customers">
+      <option *ngFor="let customer of userData" value="{{customer['_id']}}">{{customer.username}}</option>
+    </datalist>
+    <div *ngFor="let pr of newOrder.products; let i = index">
+      <input list="products" class="form-control tableinput" name="myProducts" type="text" placeholder="Termék kiválasztása" [(ngModel)]="newOrder.products[i].product">
+      <datalist id="products">
+        <option *ngFor="let product of products" value="{{product['_id']}}">{{product.productname}}</option>
+      </datalist>
+      <input class="form-control" type="number" name="amount" id="amount" min="0" placeholder="Mennyiség" [(ngModel)]="newOrder.products[i].quantity">
+    </div>
+    <button class="btn btn-secondary" (click)="addRow()">Új termék</button>
+    <button class="btn btn-primary" (click)="createOrder()">Rögzítés</button>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row" *ngFor="let order of orders">
+    <div>
+    <input class="form-control" type="text" name="order" [(ngModel)]="order.customer.username">
+  </div>
+  <div>
+    <input class="form-control" type="text" name="order" [(ngModel)]="order.customer.email">
+  </div>
+  <div *ngFor="let pr of order.products; let i = index">
+    <label>{{i}}</label>
+      <input list="products" class="form-control tableinput" name="myProducts" type="text" placeholder="Termék kiválasztása" [(ngModel)]="pr.product.productname">
+      <datalist id="products">
+        <option *ngFor="let product of products" value="{{product['_id']}}">{{product.productname}}</option>
+      </datalist>
+
+  </div>
+  </div>
+</div>

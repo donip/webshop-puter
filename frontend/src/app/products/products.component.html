@@ -17,6 +17,9 @@
               </form>
             </td>
             <td>
+              <input type="file" id="photo">
+            </td>
+            <td>
               <form name="myForm2">
                 <input type="text" class="form-control" name="brand" [(ngModel)]="adat.brand" placeholder="Márka" required #brand="ngModel">
               </form>
@@ -139,6 +142,9 @@
           </tbody>
         </table>
       </div>
+    </div>
+    <div class="row">
+      <button class="btn btn-outline-danger" (click)="createFakeProduct()">Create Fake Product</button>
     </div>
   </div>
   
