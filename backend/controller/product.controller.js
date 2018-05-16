@@ -6,8 +6,8 @@ mongoose.Promise = require('bluebird');
 /**
  * Egy nevet átkonvertál használható formátúmuvá, úgy hogy a space-et kicseréli kötőjelre
  * a betűket pedig átírja ékezet nélkülire
- * @param {string} namestr konvertálandó név
- * @return {string} konvertált string, ha nem kap paramétert akkor default name-el tér vissza
+ * @param {string} namestr - konvertálandó név
+ * @return {string} - konvertált string, ha nem kap paramétert akkor "default-name"-el tér vissza
  */
 function nameConverter(namestr) {
   if (!namestr) {
@@ -39,6 +39,9 @@ function nameConverter(namestr) {
 module.exports = {
   /**
    * kilistáz minden productot
+   * @param {Object} req - HTTP request objektum
+   * @param {Object} res - HTTP response objektum
+   * @return {Array} - visszatér a product-ok tömbjével
    */
   list: (req, res) => {
     Product.find({})
@@ -47,6 +50,8 @@ module.exports = {
   },
   /**
   * mongo _id alapján megkeres egy productot
+  * @param {object} req - HTTP request objektum
+  * @param {object} res - HTTP response objektum
   */
   find: (req, res) => {
     Product.findById(req.params.id)
@@ -55,6 +60,9 @@ module.exports = {
   },
   /**
    * url alapján megkeres egy productot
+   * @param {Object} req - HTTP request objektum
+   * @param {Object} res - HTTP response objektum
+   * @return {Object} - product object-jét küldi vissza
    */
   findByUrl: (req, res) => {
     Product.findOne({ producturl: req.params.producturl })
@@ -63,14 +71,17 @@ module.exports = {
   },
   /**
    * Generál egy productot, a producturl-t és a imgurl generálja a file.path-ból
-   * csak admin jogosultsággal
+   * csak admin jogosultsággal fut le ha nem admin akkor visszadob egy hibát
+   * @param {Object} req - HTTP request objektum
+   * @param {Object} res - HTTP response objektum
+   * @return létrehozott product object-jét küldi vissza
    */
   create: (req, res) => {
     req.user = JSON.stringify(req.user);
     req.user = JSON.parse(req.user);
     if (req.user.isAdmin === 'true') {
       if (req.file) {
-        req.body.imgurl = `http://localhost:8080/${req.file.path.replace(/\\/,'/')}`;
+        req.body.imgurl = `http://localhost:8080/${req.file.path.replace(/\\/, '/')}`;
       }
       req.body.producturl = nameConverter(req.body.productname);
 
@@ -84,15 +95,19 @@ module.exports = {
   },
   /**
    * update-el egy productot az id alapján
-   * a productname-ből generálja a product url-t és imgurl
-   * csak admin jogosultsággal
+   * a productname-ből generálja a product url-t és imgurl-t.
+   * csak admin jogosultsággal működik.
+   * Amennyiben az imgurl property létezik törli az url-ből kinyert nevű imaget.
+   * @param {Object} req - HTTP request objektum
+   * @param {Object} res - HTTP response objektum
+   * @return {Object} - az update-d product régi értékével tér vissza
    */
   update: (req, res) => {
     req.user = JSON.stringify(req.user);
     req.user = JSON.parse(req.user);
     if (req.user.isAdmin === 'true') {
       if (req.file) {
-        req.body.imgurl = `http://localhost:8080/${req.file.path.replace(/\\/,'/')}`;
+        req.body.imgurl = `http://localhost:8080/${req.file.path.replace(/\\/, '/')}`;
       } else {
         req.body.imgurl = '';
       }
@@ -118,8 +133,11 @@ module.exports = {
   },
   /**
   * Eltávolít egy productot az id alapján
-  * és törli a hozzátartozó képet
-  * csak admin jogosultsággal működik
+  * és törli a hozzátartozó képet az imgurl-ből nyert img fájlnév és útvonal alapján.
+  * Csak admin jogosultsággal működik.
+  *@param {object} req - HTTP request objektum
+  *@param {object} res - HTTP response objektum
+  *@return {Object} - A törölt elemmet küldi vissza
   */
   remove: (req, res) => {
     req.user = JSON.stringify(req.user);
