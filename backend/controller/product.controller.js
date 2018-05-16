@@ -93,17 +93,21 @@ module.exports = {
     if (req.user.isAdmin === 'true') {
       if (req.file) {
         req.body.imgurl = `http://localhost:8080/${req.file.path.replace(/\\/,'/')}`;
+      } else {
+        req.body.imgurl = '';
       }
       req.body.producturl = nameConverter(req.body.productname);
       Product.findByIdAndUpdate(req.params.id, req.body)
         .then((product) => {
-          const imgpath = `./${product.imgurl.substring(22)}`;
-          fs.unlink(imgpath, (err) => {
-            if (err) {
-              throw err;
-            }
-            console.log('img file was deleted');
-          });
+          if (product.imgurl !== '') {
+            const imgpath = `./${product.imgurl.substring(22)}`;
+            fs.unlink(imgpath, (err) => {
+              if (err) {
+                throw err;
+              }
+              console.log('img file was deleted');
+            });
+          }
           
           res.json(product);
         })
