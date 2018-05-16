@@ -17,6 +17,7 @@ export class ProductsComponent implements OnInit {
     category: ''
   };
   uploadFile: File = null;
+  checker: any;
   datas: any;
   selectedProduct: any;
   options = new RequestOptions({ withCredentials: true });
@@ -62,17 +63,20 @@ export class ProductsComponent implements OnInit {
     this.uploadFile = <File>event.target.files[0];
   }
 
-  creator() {
-    console.log(this.adat);
-    console.log(this.datas);
+  bodyCreator(param) {
     const body = new FormData();
-    body.append('productname', this.adat.productname);
-    body.append('category', this.adat.category);
-    body.append('price', this.adat.price);
-    body.append('brand', this.adat.brand);
+    body.append('productname', param.productname);
+    body.append('category', param.category);
+    body.append('price', param.price);
+    body.append('brand', param.brand);
     if (this.uploadFile) {
       body.append('uploadimg', this.uploadFile, this.uploadFile.name);
     }
+    return body;
+  }
+
+  creator() {
+    const body = this.bodyCreator(this.adat);
     this.http.post('http://localhost:8080/product', body, this.options).subscribe(
       data => {
         console.log(data['_body']);
@@ -82,26 +86,30 @@ export class ProductsComponent implements OnInit {
 
   updater(product) {
     this.selectedProduct = product;
-    console.log(this.selectedProduct);
-    const body = new FormData();
-    body.append('productname', product.productname);
-    body.append('category', product.category);
-    body.append('price', product.price);
-    body.append('brand', product.brand);
-    body.append('uploadimg', this.uploadFile, this.uploadFile.name);
-    this.http.put('http://localhost:8080/product/' + this.selectedProduct['_id'], this.selectedProduct, this.options).subscribe(
-      data => {
-        console.log(data);
+    const body = this.bodyCreator(product);
+    this.checker = prompt('Biztosan frissíted a terméket?');
+    if (this.checker === 'y') {
+      this.http.put('http://localhost:8080/product/' + this.selectedProduct['_id'], body, this.options).subscribe(
+        data => {
+          console.log(data);
+          this.getAll();
+        });
+    } else {
         this.getAll();
-      });
+    }
   }
 
   rowDeleter(product) {
     this.selectedProduct = product;
-    this.http.delete('http://localhost:8080/product/' + this.selectedProduct['_id'], this.options).subscribe(
-      data => {
-        console.log(data);
-        this.getAll();
-      });
+    this.checker = prompt('Biztosan törlöd a terméket? y/n');
+    if (this.checker === 'y') {
+      this.http.delete('http://localhost:8080/product/' + this.selectedProduct['_id'], this.options).subscribe(
+        data => {
+          console.log(data);
+          this.getAll();
+        });
+    } else {
+      this.getAll();
+    }
   }
 }

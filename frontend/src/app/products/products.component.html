@@ -32,13 +32,19 @@
               </form>
             </td>
             <td>
+              <button class="btn btn-outline-success btn-block" type="button" (click)="creator()">Bevitel</button>
+            </td>
+            <td width="230" class="text-center">Kérlek, a feltöltésnél és a frissítésnél is ezt a mezőt használd kép bevitelére:</td>
+            <td width="100">
               <form name="myForm5">
                 <!-- ez kell a file uploadhoz -->
-                <input (change)="onFileSelected($event)" type="file" id="uploader" class="form-control" name="category" placeholder="Kategória" required >
+                <div class="input-group">
+                  <div class="custom-file">
+                    <input (change)="onFileSelected($event)" type="file" id="uploader" name="category" placeholder="Kategória" required >
+                    <label class="custom-file-label" for="uploader">Kép</label>
+                  </div>
+                </div>
               </form>
-            </td>
-            <td>
-              <button class="btn btn-outline-success btn-block" type="button" (click)="creator()">Bevitel</button>
             </td>
           </tr>
           <tr>
