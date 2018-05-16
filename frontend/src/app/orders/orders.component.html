@@ -21,9 +21,10 @@
 <br>
 <hr>
 <br>
+<h2>Folyamatban lévő megrendelések</h2>
 <br>
 <table class="table">
-  <tbody *ngFor="let order of orders; let i = index">
+  <tbody *ngFor="let order of activeOrders; let i = index">
     <tr class="tr-customer">
       <td>{{i+1}}</td>
       <td>
@@ -40,7 +41,51 @@
         <button class="btn btn-warning" data-toggle="modal" data-target="#editOrderModal" (click)="loadModalData(order)">Módosít</button>
         <button class="btn btn-danger" (click)="removeOrder(order)">X</button>
       </td>
+    </tr>
+    <tr class="tr-head">
+      <td></td>
+      <td>Termék</td>
+      <td>Mennyiség</td>
+      <td>Összesen</td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr *ngFor="let pr of order.products">
+      <td></td>
+      <td>
+        {{pr.product.productname}}
+      </td>
+      <td>
+        {{pr.quantity}}
+      </td>
+      <td>{{pr.product.price*pr.quantity}}</td>
+      <td></td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
 
+<br>
+ <h2>Lezárult megrendelések</h2>
+<br>
+<table class="table">
+  <tbody *ngFor="let order of doneOrders; let i = index">
+    <tr class="tr-customer">
+      <td>{{i+1}}</td>
+      <td>
+        {{order.customer.username}}
+      </td>
+      <td>
+        {{order.customer.email}}
+      </td>
+      <td>
+        {{order.createdAt | date : 'yyyy.MM.dd HH:mm'}}
+      </td>
+      <td>{{order.status}}</td>
+      <td>
+        <button class="btn btn-warning" data-toggle="modal" data-target="#editOrderModal" (click)="loadModalData(order)">Módosít</button>
+        <button class="btn btn-danger" (click)="removeOrder(order)">X</button>
+      </td>
     </tr>
     <tr class="tr-head">
       <td></td>
