@@ -71,4 +71,21 @@ export class UsersComponent implements OnInit {
       this.addSuccess = 'empty';
  }, 5000);
   }
+  
+  /**
+ * Fake user generator
+ * @param {string} username - random name
+ * @param {string} email - user.name@gmail.com
+ * @param {string} password - 8xa = 'aaaaaaaa'
+ * @param {string} isAdmin - 'false'
+ * @todo Comment this out after testing, as this feature is only for developers.
+ */
+  createFakeUser() {
+    const randomEmail = faker.internet.email();
+    this.newUser.username = faker.name.findName();
+    this.newUser.email = (this.newUser.username).split(' ').join('.') + '@gmail.com';
+    this.newUser.password = 'aaaaaaaa';
+    this.newUser.isAdmin = 'false';
+    this.addUser();
+  }
 }
