@@ -1,6 +1,7 @@
-import { Component, OnInit, NgModule } from '@angular/core';
+import { Component, OnInit, NgModule, ViewChild } from '@angular/core';
 import { Http, RequestOptions } from '@angular/http';
 import { ProductsComponent } from '../products/products.component';
+import { Ng2GoogleChartsModule } from 'ng2-google-charts';
 
 @Component({
   selector: 'app-statistics',
@@ -14,6 +15,8 @@ import { ProductsComponent } from '../products/products.component';
 })
 
 export class StatisticsComponent implements OnInit {
+  @ViewChild('cchart') cchart;
+  googleChartWrapper: any;
   b = Math.floor(Math.random() * Math.floor(200));
   c = Math.floor(Math.random() * Math.floor(200));
   d = Math.floor(Math.random() * Math.floor(200));
@@ -26,26 +29,11 @@ export class StatisticsComponent implements OnInit {
     chartType: 'ColumnChart',
     dataTable: [
       ['0', '0'],
-      ['Felhasználók', this.sumuser],
+      ['Felhasználók', this.allusers],
       ['Eladott termék', this.b],
       ['Termék ára', this.d],
-      ['Nem vásárló felhasználók', (this.b - this.sumuser) * (-1)],
+      ['Nem vásárló felhasználók', (this.b - this.allusers) * (-1)],
       ['SEgy főre eső átlagos bevétel', (this.c * this.d) / this.b]
-    ],
-    options: {
-      'title': 'Statisztika',
-      legend: 'none'
-    },
-  };
-  pieChartData2 = {
-    chartType: 'ColumnChart',
-    dataTable: [
-      ['0', '0'],
-      ['Felhasználók', this.sumuser],
-      ['Eladott termék', this.b],
-      ['Termék ára', this.d],
-      ['Nem vásárló felhasználók', (this.b - this.sumuser) * (-1)],
-      ['SEgy főre eső átlagos bevétel', (this.c * this.d) / this.b * 2]
     ],
     options: {
       'title': 'Statisztika',
@@ -59,6 +47,12 @@ export class StatisticsComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+  Redraw() {
+    this.googleChartWrapper = this.cchart.wrapper;
+
+    // force a redraw
+    this.cchart.redraw();
   }
   getProducts() {
     this.http.get('http://localhost:8080/product', this.options)
@@ -85,4 +79,5 @@ export class StatisticsComponent implements OnInit {
   Lengthening(array) {
     return array.length;
   }
+
 }
