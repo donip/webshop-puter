@@ -9,6 +9,8 @@ module.exports = {
 
   /**
    * Új user regisztráció
+   * @param {object} req - c
+   * @param {object} res - c
    */
   register: (req, res) => {
     User.register(new User({

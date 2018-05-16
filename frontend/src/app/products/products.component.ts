@@ -30,7 +30,10 @@ export class ProductsComponent implements OnInit {
 
   ngOnInit() {
   }
-
+  /**
+   * A szerverről lekért adatokat parse-olja a megjelenítés érdekében.
+   * @param res Maga a data, amit a szerverről lekérünk.
+   */
   errorHandling(res) {
     res = JSON.parse(res['_body']);
     if (res.error) {
@@ -39,21 +42,29 @@ export class ProductsComponent implements OnInit {
       this.datas = res;
     }
   }
-
+  /**
+   * Az összes lekért adatot listázza.
+   */
   getAll() {
     this.http.get('http://localhost:8080/product', this.options).subscribe(
       data => {
         this.errorHandling(data);
       });
   }
-
+  /**
+   * Egy adott lekért adatot ad vissza, későbbiekben szükséges lesz.
+   * @param id Az egyedi azonosító, ami speciálisan a keresett adatra mutat.
+   */
   getOne(id) {
     this.http.get('http://localhost:8080/product/url/' + id, this.options).subscribe(
       data => {
         this.errorHandling(data);
       });
   }
-
+  /**
+   * Egy adott termék oldalára navigál át - még folyamatban van, későbbiekben lesz rá szükség.
+   * @param product A termék, aminek az oldalára navigálunk.
+   */
   navigate(product) {
     this.selectedProduct = product;
     this.http.get('http://localhost:8080/product/url/' + this.selectedProduct['producturl'], this.options).subscribe(
@@ -61,11 +72,18 @@ export class ProductsComponent implements OnInit {
         console.log(data);
       });
   }
-
+  /**
+   * A file uploadhoz esszenciális függvény.
+   * @param event Az esemény amit figyel.
+   */
   onFileSelected(event) {
     this.uploadFile = <File>event.target.files[0];
   }
-
+  /**
+   * A file uploadhoz esszenciális függvény, ami átadja a szükséges adatokat egy új FormData példánynak,
+   * majd visszatér azzal a példánnyal.
+   * @param param Az átadáshoz szükséges adatokat ebből a paraméterből nyeri ki.
+   */
   bodyCreator(param) {
     const body = new FormData();
     body.append('productname', param.productname);
@@ -77,16 +95,26 @@ export class ProductsComponent implements OnInit {
     }
     return body;
   }
-
+  /**
+   * Új terméket hoz létre.
+   */
   creator() {
     const body = this.bodyCreator(this.adat);
     this.http.post('http://localhost:8080/product', body, this.options).subscribe(
       data => {
-        console.log(data['_body']);
+        console.log(data);
         this.getAll();
+        if (!JSON.parse(data['_body']).errors) {
+          alert('A termék hozzáadásra került.');
+        } else {
+          alert('Hozzáadás sikertelen.');
+        }
       });
   }
-
+  /**
+   * Meglévő terméket frissít.
+   * @param product Maga a frissítendő termék.
+   */
   updater(product) {
     this.selectedProduct = product;
     const body = this.bodyCreator(product);
@@ -96,13 +124,17 @@ export class ProductsComponent implements OnInit {
         data => {
           console.log(data);
           this.getAll();
+          alert('A termék sikeresen frissítve.');
         });
     } else {
         this.getAll();
+        alert('Sikertelen frissítés.');
     }
   }
-
-
+  /**
+   * Egy terméket töröl az adatbázisból.
+   * @param product Maga a törlendő termék.
+   */
   rowDeleter(product) {
     this.selectedProduct = product;
     this.checker = prompt('Biztosan törlöd a terméket? y/n');
@@ -111,9 +143,11 @@ export class ProductsComponent implements OnInit {
         data => {
           console.log(data);
           this.getAll();
+          alert('A termék sikeresen törölve!');
         });
     } else {
       this.getAll();
+      alert('Sikertelen törlés.');
     }
   }
   /**
@@ -121,6 +155,7 @@ export class ProductsComponent implements OnInit {
   * @param {string} brand - random brand from predefined list
   * @param {string} category - random category from predefined list
   * @param {string} productname - initial letters of brand and category + random number
+  * @param {string} price - random number toString!
   * @todo Comment this out after testing, as this feature is only for developers.
   */
   createFakeProduct() {
