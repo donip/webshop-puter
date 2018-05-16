@@ -1,7 +1,8 @@
 <h2>Új megrendelés felvétele</h2>
 <div class="container">
   <div class="row">
-    <input id="customer" list="customers" class="form-control tableinput" name="myCustomers" type="text" placeholder="Ügyfél kiválasztása" [(ngModel)]="newOrder.customer">
+    <input id="customer" list="customers" class="form-control tableinput" name="myCustomers" type="text" placeholder="Ügyfél kiválasztása"
+      [(ngModel)]="newOrder.customer">
     <datalist id="customers">
       <option *ngFor="let customer of userData" value="{{customer['_id']}}">{{customer.username}}</option>
     </datalist>
@@ -16,22 +17,79 @@
     <button class="btn btn-primary" (click)="createOrder()">Rögzítés</button>
   </div>
 </div>
+<br>
+<br>
+<hr>
+<br>
+<br>
+<table class="table">
+  <tbody *ngFor="let order of orders; let i = index">
+    <tr class="tr-customer">
+      <td>{{i+1}}</td>
+      <td>
+        {{order.customer.username}}
+      </td>
+      <td>
+        {{order.customer.email}}
+      </td>
+      <td>
+        <input list="customers" class="form-control tableinput" name="myCustomers" type="text" [(ngModel)]="order.customer._id">
+        <datalist id="customers">
+          <option *ngFor="let customer of userData" value="{{customer['_id']}}">{{customer.username}}</option>
+        </datalist>
+      </td>
+      <td>
+        <button class="btn btn-warning" data-toggle="modal" data-target="#editOrderModal" (click)="loadModalData(order)">Módosít</button>
+        <button class="btn btn-danger" (click)="removeOrder(order)">X</button>
+      </td>
+    </tr>
+    <tr *ngFor="let pr of order.products">
+      <td></td>
+      <td></td>
+      <td>
+        {{pr.product.productname}}
+      </td>
+      <td>
+        {{pr.quantity}}
+      </td>
+      <td>{{pr.product.price*pr.quantity}}</td>
+    </tr>
+  </tbody>
+</table>
 
-<div class="container">
-  <div class="row" *ngFor="let order of orders">
-    <div>
-    <input class="form-control" type="text" name="order" [(ngModel)]="order.customer.username">
-  </div>
-  <div>
-    <input class="form-control" type="text" name="order" [(ngModel)]="order.customer.email">
-  </div>
-  <div *ngFor="let pr of order.products; let i = index">
-    <label>{{i}}</label>
-      <input list="products" class="form-control tableinput" name="myProducts" type="text" placeholder="Termék kiválasztása" [(ngModel)]="pr.product.productname">
-      <datalist id="products">
-        <option *ngFor="let product of products" value="{{product['_id']}}">{{product.productname}}</option>
-      </datalist>
+<!-- modal -->
 
-  </div>
+<!-- Modal -->
+<div class="modal fade" id="editOrderModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>{{selectedOrder.customer.username}}
+            <input id="customer" list="customers" class="form-control tableinput" name="myCustomers" type="text" placeholder="Ügyfél kiválasztása"
+      [(ngModel)]="selectedOrder.customer._id">
+    <datalist id="customers">
+      <option *ngFor="let customer of userData" value="{{customer['_id']}}">{{customer.username}}</option>
+    </datalist>
+        </p>
+        <div *ngFor="let p of selectedOrder.products">
+          <input list="products" class="form-control tableinput" name="myProducts" type="text" placeholder="Termék kiválasztása" [(ngModel)]="p.product._id">
+          <datalist id="products">
+            <option *ngFor="let product of products" value="{{product['_id']}}">{{product.productname}}</option>
+          </datalist> 
+
+        </div>
+        <button class="btn btn-secondary" (click)="addModalRow()">Új termék</button>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
   </div>
 </div>
