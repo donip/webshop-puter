@@ -5,7 +5,7 @@ mongoose.Promise = require('bluebird');
 module.exports = {
   list: (req, res) => {
     Order.find({})
-      .populate('costumer', 'username')
+      .populate('customer', 'username email')
       .populate('products.product', 'productname brand price category')
       .then(order => res.json(order))
       .catch(err => res.send(err));

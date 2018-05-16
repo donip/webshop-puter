@@ -33,6 +33,7 @@ export class OrdersComponent {
       product: '',
       quantity: ''
     });
+    console.log(this.newOrder);
    }
 
    getUsers() {
