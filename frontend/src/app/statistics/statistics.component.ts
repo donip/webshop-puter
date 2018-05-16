@@ -23,6 +23,9 @@ export class StatisticsComponent implements OnInit {
   sumuser: number;
   sumbuyer: number;
   sumsoldstuff: number;
+  chartData: any = [
+    ['Task', 'Forint']
+  ];
   pieChartData = {
     chartType: 'ColumnChart',
     dataTable:
@@ -36,11 +39,26 @@ export class StatisticsComponent implements OnInit {
   constructor(public http: Http) {
     this.getUsers();
     this.getOrders();
+    this.createDataForChart(this.allorders);
   }
 
   ngOnInit() {
   }
+  createDataForChart(adat) {
 
+    const now = new Date();
+    for (let i = 1; i <= now.getDate(); i++) {
+      this.chartData.push([i, 0]);
+    }
+    console.log(this.chartData);
+    this.formatChartData();
+  }
+  formatChartData() {
+    this.chartData.sort((a, b) => a[0] - b[0]);
+    for (let i = 1; i < this.chartData.length; i++) {
+      this.chartData[i][0] += '.';
+    }
+  }
   getUsers() {
     this.http.get('http://localhost:8080/useradmin', this.options)
       .subscribe(getUsers => {
