@@ -151,14 +151,13 @@ export class ProductsComponent implements OnInit {
     }
   }
   /**
-<<<<<<< HEAD
- * Fake product generator
- * @param {string} brand - random brand from predefined list
- * @param {string} category - random category from predefined list
- * @param {string} productname - initial letters of brand and category + random number
- * @param {string} price - random number toString!
- * @todo Comment this out after testing, as this feature is only for developers.
- */
+  * Fake product generator
+  * @param {string} brand - random brand from predefined list
+  * @param {string} category - random category from predefined list
+  * @param {string} productname - initial letters of brand and category + random number
+  * @param {string} price - random number toString!
+  * @todo Comment this out after testing, as this feature is only for developers.
+  */
   createFakeProduct() {
     this.adat.brand = this.brands[Math.floor(Math.random() * this.brands.length)];
     this.adat.category = this.categories[Math.floor(Math.random() * this.categories .length)];
