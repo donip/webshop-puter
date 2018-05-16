@@ -34,34 +34,34 @@ export class OrdersComponent {
     this.getUsers();
     this.getProducts();
 
-   }
+  }
 
-   addRow() {
+  addRow() {
     this.newOrder.products.push({
       product: '',
       quantity: ''
     });
     console.log(this.newOrder);
-   }
+  }
 
-   addModalRow() {
+  addModalRow() {
      this.selectedOrder.products.push({
        product: '',
        quantity: ''
      });
-   }
+  }
 
-   getUsers() {
+  getUsers() {
     this.http.get('http://localhost:8080/useradmin/', this.options)
-      .subscribe(data => {
+    .subscribe(data => {
         this.userData = JSON.parse(data['_body']);
         console.log(this.userData);
-  });
+    });
   }
 
   getOrders() {
     this.http.get(this.baseUrl, this.options)
-      .subscribe(data => {
+    .subscribe(data => {
         const d = JSON.parse(data['_body']);
         console.log(d);
         console.log(data);
@@ -75,7 +75,7 @@ export class OrdersComponent {
         }
         this.orders = d;
         console.log(this.orders);
-  });
+    });
   }
 
   getProducts() {
@@ -92,6 +92,7 @@ export class OrdersComponent {
         console.log(data);
       });
   }
+
   removeOrder(order) {
     this.selectedOrder = order;
       this.http.delete(`${this.baseUrl}${this.selectedOrder['_id']}`, this.options)
