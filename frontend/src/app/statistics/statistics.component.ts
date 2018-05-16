@@ -16,10 +16,6 @@ import { Ng2GoogleChartsModule } from 'ng2-google-charts';
 })
 
 export class StatisticsComponent implements OnInit {
-  b = Math.floor(Math.random() * Math.floor(200));
-  c = Math.floor(Math.random() * Math.floor(200));
-  d = Math.floor(Math.random() * Math.floor(200));
-  productcat: any;
   allusers: any;
   allorders: any;
   options = new RequestOptions({ withCredentials: true });
@@ -29,14 +25,8 @@ export class StatisticsComponent implements OnInit {
   sumsoldstuff: number;
   pieChartData = {
     chartType: 'ColumnChart',
-    dataTable: [
-      ['0', '0'],
-      ['Felhasználók', this.allusers],
-      ['Eladott termék', this.b],
-      ['Termék ára', this.d],
-      ['Nem vásárló felhasználók', (this.b - this.allusers) * (-1)],
-      ['SEgy főre eső átlagos bevétel', (this.c * this.d) / this.b]
-    ],
+    dataTable:
+      this.chartData,
     options: {
       'title': 'Statisztika',
       legend: 'none'
@@ -45,18 +35,12 @@ export class StatisticsComponent implements OnInit {
 
   constructor(public http: Http) {
     this.getUsers();
-    this.getProducts();
     this.getOrders();
   }
 
   ngOnInit() {
   }
-  getProducts() {
-    this.http.get('http://localhost:8080/product', this.options)
-      .subscribe(getProducts => {
-        this.productcat = JSON.parse(getProducts['_body']);
-      });
-  }
+
   getUsers() {
     this.http.get('http://localhost:8080/useradmin', this.options)
       .subscribe(getUsers => {
