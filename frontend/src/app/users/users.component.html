@@ -1,9 +1,10 @@
-<div class="container">
-
+<div class="container-fluid">
+  <div class="jumbotron jumbotron-fluid">
+    <h1 class="display-2 text-center">Felhasználókezelés</h1>
+  </div>
+  <hr>
+  <br>
   <div class="row">
-    <h1>
-      Felhasználókezelés
-    </h1>
     <span class="alert alert-success" *ngIf="addSuccess === 'Sikeres hozzáadás' ">{{addSuccess}}</span>
     <span class="alert alert-danger" *ngIf="addSuccess === 'Hozzáadás sikertelen' ">{{addSuccess}}</span>
   </div>
@@ -11,32 +12,96 @@
 
 <div class="container">
   <div class="row">
-      <div class="input-group">
-          <input class="form-control" type="text" name="username" [(ngModel)]="newUser.username">
-          <input class="form-control" type="text" name="email" [(ngModel)]="newUser.email">
-          <input class="form-control" type="password" name="pass" [(ngModel)]="newUser.password">
-          <select class="custom-select" name="isadmin" [(ngModel)]="newUser.isAdmin">
-            <option value="true">Admin</option>
-            <option value="false">Felhasználó</option>
-          </select>
-          <button class="btn btn-success" (click)="addUser()">Hozzáadás</button>
-
-        </div>
-  </div>
-  <div class="row" *ngFor="let user of users">
-    <div class="input-group">
-      <input class="form-control" type="text" name="username" [(ngModel)]="user.username">
-      <input class="form-control" type="text" name="email" [(ngModel)]="user.email">
-      <select class="custom-select" name="isadmin" [(ngModel)]="user.isAdmin">
-        <option value="true">Admin</option>
-        <option value="false">Felhasználó</option>
-      </select>
-      <button class="btn btn-danger" (click)="removeUser(user)">Törlés</button>
-      <button class="btn btn-warning" (click)="editUser(user)">Módosítások mentése</button>
+    <div class="col-sm-12">
+      <h1 class="text-center">Új felhasználó hozzáadása</h1>
+      <hr class="col-sm-5">
+      <table class="table table-fluid table-hover table-borderless">
+        <thead>
+          <tr>
+            <th>
+              <label for="username">Felhasználónév</label>
+            </th>
+            <th>
+              <label for="email">Email</label>
+            </th>
+            <th>
+              <label for="pass">Jelszó</label>
+            </th>
+            <th>
+              <label for="isadmin">Jogkör</label>
+            </th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <input class="form-control" type="text" name="username" [(ngModel)]="newUser.username">
+            </td>
+            <td>
+              <input class="form-control" type="text" name="email" [(ngModel)]="newUser.email">
+            </td>
+            <td>
+              <input class="form-control" type="password" name="pass" [(ngModel)]="newUser.password">
+            </td>
+            <td>
+              <select class="custom-select" name="isadmin" [(ngModel)]="newUser.isAdmin">
+                <option value="true">Admin</option>
+                <option value="false">Felhasználó</option>
+              </select>
+            </td>
+            <td>
+              <button class="btn btn-success" (click)="addUser()">Hozzáadás</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
+  <br>
+  <h1 class="text-center">Felhasználóink</h1>
+  <hr class="col-sm-3">
   <div class="row">
-    <button class="btn btn-warning" (click)="createFakeUser()">Create new user</button>
+    <div class="col-sm-12">
+      <table class="table table-fluid table-borderless table-hover table-striped shadow-lg p-3 bg-white-rounded">
+        <thead>
+          <tr>
+            <th>Felhasználónév</th>
+            <th>Email</th>
+            <th>Jogkör</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of users">
+            <td>
+              <input class="form-control" type="text" name="username" [(ngModel)]="user.username">
+            </td>
+            <td>
+              <input class="form-control" type="text" name="email" [(ngModel)]="user.email">
+            </td>
+            <td>
+              <select class="custom-select" name="isadmin" [(ngModel)]="user.isAdmin">
+                <option value="true">Admin</option>
+                <option value="false">Felhasználó</option>
+              </select>
+            </td>
+            <td>
+              <div class="btn-group">
+                <button class="btn btn-danger" (click)="removeUser(user)">Törlés</button>
+                <button class="btn btn-warning" (click)="editUser(user)">Módosítások mentése</button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
-
+</div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-4 offset-4">
+      <button class="btn btn-warning btn-block" (click)="createFakeUser()">Create new fake user</button>
+    </div>
+  </div>
 </div>
