@@ -28,11 +28,12 @@
             </td>
             <td>
               <form name="myForm4">
-                <input type="text" class="form-control" name="category" [(ngModel)]="adat.category" required #category="ngModel">
+                <input type="text" class="form-control" name="category" [(ngModel)]="adat.category" placeholder="Kategória" required #category="ngModel">
               </form>
             </td>
             <td>
               <form name="myForm5">
+                <!-- ez kell a file uploadhoz -->
                 <input (change)="onFileSelected($event)" type="file" id="uploader" class="form-control" name="category" placeholder="Kategória" required >
               </form>
             </td>
@@ -84,7 +85,7 @@
               <th>ID</th>
               <th>Product Name</th>
               <th>Product URL</th>
-              <th>Image URL</th>
+              <th>Image</th>
               <th>Brand</th>
               <th>Price</th>
               <th>Category</th>
@@ -104,8 +105,8 @@
                 <input type="text" class="form-control" [(ngModel)]="x.producturl" readonly>
               </td>
               <td>
-                <!-- <input type="text" class="form-control" [(ngModel)]="x.imgurl" readonly> -->
-                <img src="{{ x.imgurl }}" alt=" {{ x.productname }}" width="150" height="150">
+                <img *ngIf="x.imgurl" src="{{ x.imgurl }}" alt="{{ x.productname }}" width="150" height="150">
+                <img *ngIf="!x.imgurl" src="http://localhost:8080/uploads/feltoltes_alatt.jpg" alt="feltoltes-alatt" width="150" height="150">
               </td>
               <td>
                 <input type="text" class="form-control" [(ngModel)]="x.brand">

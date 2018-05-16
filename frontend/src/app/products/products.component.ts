@@ -23,7 +23,7 @@ export class ProductsComponent implements OnInit {
   constructor(public http: Http) {
     this.getAll();
   }
-  
+
   ngOnInit() {
   }
 
@@ -57,9 +57,11 @@ export class ProductsComponent implements OnInit {
         console.log(data);
       });
   }
-   onFileSelected(event) {
+
+  onFileSelected(event) {
     this.uploadFile = <File>event.target.files[0];
   }
+
   creator() {
     console.log(this.adat);
     console.log(this.datas);
@@ -68,7 +70,9 @@ export class ProductsComponent implements OnInit {
     body.append('category', this.adat.category);
     body.append('price', this.adat.price);
     body.append('brand', this.adat.brand);
-    body.append('uploadimg', this.uploadFile, this.uploadFile.name);
+    if (this.uploadFile) {
+      body.append('uploadimg', this.uploadFile, this.uploadFile.name);
+    }
     this.http.post('http://localhost:8080/product', body, this.options).subscribe(
       data => {
         console.log(data['_body']);
