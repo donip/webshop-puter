@@ -116,5 +116,5 @@ export class ProductsComponent implements OnInit {
     this.adat['productname'] = this.adat['brand'].split('')[0] + this.adat['category'].split('')[0] + Math.ceil(Math.random() * 10) * 100;
     this.adat['price'] = (faker.commerce.price().toString());
     this.creator();
-}
+  }
 }

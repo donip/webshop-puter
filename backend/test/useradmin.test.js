@@ -3,9 +3,30 @@ const {
   expect,
 } = require('chai');
 const chaiHttp = require('chai-http');
+
 const baseUrl = 'http://localhost:8080/useradmin';
 chai.use(chaiHttp);
-//const useradmin = require('../controller/useradmin.controller');
+const superagent = require('superagent');
+
+const request1 = require('supertest');
+
+const agent = superagent.agent();
+const theAccount = {
+  username: 'testAdmin@gmail.com',
+  password: '1234',
+};
+const login = function logTest(req, done) {
+  request1('http://localhost:8080/user')
+    .post('/login')
+    .send(theAccount)
+    .end((err, res) => {
+      if (err) {
+        throw err;
+      }
+      agent.saveCookies(res);
+      done(agent);
+    });
+};
 
 /**
  * useradmin.controller összevont unit teszt
@@ -34,9 +55,17 @@ describe('useradmin.controller functions', () => {
     });
   });
   describe('removeUser()', () => {
+    let agent1;
+    before((done) => {
+      login.logTest(request1, (loginAgent) => {
+        agent1 = loginAgent;
+        done();
+      });
+    });
     it('response statusCode equal to 200', (done) => {
+      agent1.attachCookies(request1);
       chai.request(baseUrl)
-        .delete('/5afab001e8a028273ccecb24')
+        .delete('/5afb311edfdd372d041dda96')
         .end((err, res) => {
           expect(res).to.have.status(200);
           done();
