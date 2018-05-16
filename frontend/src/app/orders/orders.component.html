@@ -18,15 +18,15 @@
 </div>
 
 <div class="container">
-  <div class="row" *ngFor="let order of orders">
+  <div class="row" *ngFor="let order of orders; let i = index">
+    <span>{{i+1}}</span>
     <div>
     <input class="form-control" type="text" name="order" [(ngModel)]="order.customer.username">
   </div>
   <div>
     <input class="form-control" type="text" name="order" [(ngModel)]="order.customer.email">
   </div>
-  <div *ngFor="let pr of order.products; let i = index">
-    <label>{{i}}</label>
+  <div *ngFor="let pr of order.products">
       <input list="products" class="form-control tableinput" name="myProducts" type="text" placeholder="Termék kiválasztása" [(ngModel)]="pr.product.productname">
       <datalist id="products">
         <option *ngFor="let product of products" value="{{product['_id']}}">{{product.productname}}</option>
