@@ -1,13 +1,13 @@
 const Product = require('../models/product');
 const mongoose = require('mongoose');
-const fs=require('fs');
+const fs = require('fs');
 mongoose.Promise = require('bluebird');
 
 /**
- * nevet átkonvertál használható formátúmuvá, úgy hogy a space-et kicseréli kötőjelre
- * a szöveget pedig átírja ékezet nélkülire
- * @param: namestr {string} konvertálandó név
- * @return: {string} konvertált string
+ * Egy nevet átkonvertál használható formátúmuvá, úgy hogy a space-et kicseréli kötőjelre
+ * a betűket pedig átírja ékezet nélkülire
+ * @param {string} namestr konvertálandó név
+ * @return {string} konvertált string, ha nem kap paramétert akkor default name-el tér vissza
  */
 function nameConverter(namestr) {
   if (!namestr) {
@@ -27,7 +27,7 @@ function nameConverter(namestr) {
     ü: 'u',
     ű: 'u',
   };
-  //  ékezetes karaktert cserél
+  //  ékezetes karaktert cseréli angol megfelelőjére a hunChars tömb alapján
   name = name.replace(/[áéíúóöőüű]/g, c => hunChars[c]);
   // ami nem normál karakter az kidobja
   name = name.replace(/[^a-z0-9 -]/g, '');
@@ -38,7 +38,7 @@ function nameConverter(namestr) {
 
 module.exports = {
   /**
-   * kilistáz minden terméket
+   * kilistáz minden productot
    */
   list: (req, res) => {
     Product.find({})
@@ -46,7 +46,7 @@ module.exports = {
       .catch(err => res.send(err));
   },
   /**
-  * id alapján megkeres egy terméket
+  * mongo _id alapján megkeres egy productot
   */
   find: (req, res) => {
     Product.findById(req.params.id)
@@ -54,7 +54,7 @@ module.exports = {
       .catch(err => res.send(err));
   },
   /**
-   * url sor alapján megkeres egy terméket
+   * url alapján megkeres egy productot
    */
   findByUrl: (req, res) => {
     Product.findOne({ producturl: req.params.producturl })
@@ -62,7 +62,7 @@ module.exports = {
       .catch(err => res.send(err));
   },
   /**
-   * generál egy productot, a producturl-t és a imgurl generálja a productname-ből
+   * Generál egy productot, a producturl-t és a imgurl generálja a file.path-ból
    * csak admin jogosultsággal
    */
   create: (req, res) => {
@@ -93,11 +93,13 @@ module.exports = {
     if (req.user.isAdmin === 'true') {
       if (req.file) {
         req.body.imgurl = `http://localhost:8080/${req.file.path.replace(/\\/,'/')}`;
+      } else {
+        req.body.imgurl = '';
       }
       req.body.producturl = nameConverter(req.body.productname);
       Product.findByIdAndUpdate(req.params.id, req.body)
         .then((product) => {
-          if (req.file) {
+          if (product.imgurl !== '') {
             const imgpath = `./${product.imgurl.substring(22)}`;
             fs.unlink(imgpath, (err) => {
               if (err) {
@@ -106,6 +108,7 @@ module.exports = {
               console.log('img file was deleted');
             });
           }
+          
           res.json(product);
         })
         .catch(err => res.send(err));
@@ -115,8 +118,8 @@ module.exports = {
   },
   /**
   * Eltávolít egy productot az id alapján
-  * törli a hozzátartozó képet
-  * csak admin jogosultsággal
+  * és törli a hozzátartozó képet
+  * csak admin jogosultsággal működik
   */
   remove: (req, res) => {
     req.user = JSON.stringify(req.user);

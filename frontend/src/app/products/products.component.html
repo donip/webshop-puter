@@ -15,10 +15,6 @@
               <form name="myForm">
                 <input type="text" class="form-control" name="productname" [(ngModel)]="adat.productname" placeholder="Név" required #productname="ngModel">
               </form>
-            </td>
-            <td>
-              <input type="file" id="photo">
-            </td>
             <td>
               <form name="myForm2">
                 <input type="text" class="form-control" name="brand" [(ngModel)]="adat.brand" placeholder="Márka" required #brand="ngModel">
@@ -41,12 +37,7 @@
             <td width="100">
               <form name="myForm5">
                 <!-- ez kell a file uploadhoz -->
-                <div class="input-group">
-                  <div class="custom-file">
-                    <input (change)="onFileSelected($event)" type="file" id="uploader" name="category" placeholder="Kategória" required >
-                    <label class="custom-file-label" for="uploader">Kép</label>
-                  </div>
-                </div>
+                <input (change)="onFileSelected($event)" type="file" id="uploader" class="fileinput">
               </form>
             </td>
           </tr>
@@ -144,7 +135,9 @@
       </div>
     </div>
     <div class="row">
-      <button class="btn btn-outline-danger" (click)="createFakeProduct()">Create Fake Product</button>
+      <div class="col-sm-2 offset-5">
+        <button class="btn btn-outline-light" (click)="createFakeProduct()">Create Fake Product</button>
+      </div>
     </div>
   </div>
   
