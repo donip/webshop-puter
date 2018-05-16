@@ -124,13 +124,11 @@ export class ProductsComponent implements OnInit {
   * @todo Comment this out after testing, as this feature is only for developers.
   */
   createFakeProduct() {
-    const brand = this.brands[Math.floor(Math.random() * this.brands.length)];
-    const category = this.categories[Math.floor(Math.random() * this.categories .length)];
-    const productname = brand.split('')[0] + category.split('')[0] + Math.ceil(Math.random() * 10) * 100;
-    const randomProductPrice = (faker.commerce.price().toString());
-    const producturl = '';
-    const imgurl = '';
-    console.log(productname);
-    // this.creator();
+    this.adat.brand = this.brands[Math.floor(Math.random() * this.brands.length)];
+    this.adat.category = this.categories[Math.floor(Math.random() * this.categories .length)];
+    this.adat.productname = this.adat.brand.split('')[0] + this.adat.category.split('')[0] + Math.ceil(Math.random() * 10) * 100;
+    this.adat.price = (faker.commerce.price().toString());
+    console.log(this.adat.productname);
+    this.creator();
   }
 }
