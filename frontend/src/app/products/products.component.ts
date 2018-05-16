@@ -13,16 +13,13 @@ export class ProductsComponent implements OnInit {
   title = 'Final Countdown';
   categories = ['Hűtő', 'Kávéfőző', 'Légkondi', 'Mosogatógép', 'Mosógép', 'Porszívó'];
   brands = ['AEG', 'Bosch', 'Indesit', 'Samsung', 'Siemens', 'Whirlpool'];
-  adat: object = {
-    id: '',
+  adat = {
     productname: '',
     brand: '',
     price: '',
     category: ''
   };
-  
   uploadFile: File = null;
-
   checker: any;
   datas: any;
   selectedProduct: any;
@@ -120,20 +117,20 @@ export class ProductsComponent implements OnInit {
     }
   }
   /**
- * Fake product generator
- * @param {string} brand - random brand from predefined list
- * @param {string} category - random category from predefined list
- * @param {string} productname - initial letters of brand and category + random number
- * @todo Comment this out after testing, as this feature is only for developers.
- */
-createFakeProduct() {
-  const brand = this.brands[Math.floor(Math.random() * this.brands.length)];
-  const category = this.categories[Math.floor(Math.random() * this.categories .length)];
-  const productname = brand.split('')[0] + category.split('')[0] + Math.ceil(Math.random() * 10) * 100;
-  const randomProductPrice = (faker.commerce.price().toString());
-  const producturl = '';
-  const imgurl = '';
-  console.log(productname);
-  // this.creator();
-}
+  * Fake product generator
+  * @param {string} brand - random brand from predefined list
+  * @param {string} category - random category from predefined list
+  * @param {string} productname - initial letters of brand and category + random number
+  * @todo Comment this out after testing, as this feature is only for developers.
+  */
+  createFakeProduct() {
+    const brand = this.brands[Math.floor(Math.random() * this.brands.length)];
+    const category = this.categories[Math.floor(Math.random() * this.categories .length)];
+    const productname = brand.split('')[0] + category.split('')[0] + Math.ceil(Math.random() * 10) * 100;
+    const randomProductPrice = (faker.commerce.price().toString());
+    const producturl = '';
+    const imgurl = '';
+    console.log(productname);
+    // this.creator();
+  }
 }
