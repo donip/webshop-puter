@@ -6,17 +6,10 @@ const chaiHttp = require('chai-http');
 
 const baseUrl = 'http://localhost:8080/product';
 chai.use(chaiHttp);
-const theAccount = {
-  username: 'testAdmin@gmail.com',
-  password: '1234',
-};
 
-let cookie;
 /**
-* useradmin.controller összevont unit teszt
-* @todo debug test of editUser, removeUser
+* product.controller összevont unit teszt
 */
-
 describe('product.controller functions', () => {
   describe('getAll()', () => {
     it('response statusCode equal to 200 and object in res', (done) => {
