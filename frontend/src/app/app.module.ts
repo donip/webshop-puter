@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { HttpModule } from '@angular/http';
 import {FormsModule} from '@angular/forms';
 import { Ng2GoogleChartsModule } from 'ng2-google-charts';
+import { FileSelectDirective } from 'ng2-file-upload';
 
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
@@ -35,7 +36,8 @@ const routes: Routes = [
     ProductsComponent,
     UsersComponent,
     OrdersComponent,
-    NavbarComponent
+    NavbarComponent,
+    FileSelectDirective
   ],
   imports: [
     BrowserModule,
