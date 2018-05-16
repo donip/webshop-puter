@@ -10,7 +10,14 @@ export class OrdersComponent {
   options = new RequestOptions({ withCredentials: true });
   baseUrl = 'http://localhost:8080/order/';
   orders: any;
-  selectedOrder: any;
+  selectedOrder  = {
+    customer: '',
+    products: [{
+      product: '',
+      quantity: '',
+    }],
+    status: '',
+  };
   newOrder = {
     customer: '',
     products: [{
@@ -35,6 +42,13 @@ export class OrdersComponent {
       quantity: ''
     });
     console.log(this.newOrder);
+   }
+
+   addModalRow() {
+     this.selectedOrder.products.push({
+       product: '',
+       quantity: '',
+     });
    }
 
    getUsers() {
@@ -84,6 +98,7 @@ export class OrdersComponent {
       this.http.delete(`${this.baseUrl}${this.selectedOrder['_id']}`, this.options)
       .subscribe(data => {
         console.log(data);
+        this.getOrders();
       });
   }
 
@@ -93,6 +108,11 @@ export class OrdersComponent {
             console.log(data['_body']);
             this.getOrders();
         });
+  }
+
+  loadModalData(order) {
+    this.selectedOrder = order;
+    console.log(this.selectedOrder);
   }
 
 
