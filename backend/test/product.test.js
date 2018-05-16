@@ -3,7 +3,7 @@ const {
   expect,
 } = require('chai');
 const chaiHttp = require('chai-http');
-const baseUrl = 'http://localhost:8080/useradmin';
+const baseUrl = 'http://localhost:8080/product';
 chai.use(chaiHttp);
 const theAccount = {
   username: 'testAdmin@gmail.com',
@@ -16,8 +16,8 @@ let cookie;
 * @todo debug test of editUser, removeUser
 */
 
-describe('useradmin.controller functions', () => {
-  describe('listUsers()', () => {
+describe('product.controller functions', () => {
+  describe('getAll()', () => {
     it('response statusCode equal to 200 and object in res', (done) => {
       chai.request(baseUrl)
         .get('/')
@@ -28,8 +28,30 @@ describe('useradmin.controller functions', () => {
         });
     });
   });
-
-  describe('editUser()', () => {
+  describe('find()', () => {
+    it('response statusCode equal to 200 and object in res', (done) => {
+      chai.request(baseUrl)
+        .get('/5afad826c4a42f0de8412316')
+        .end((err, res) => {
+          expect(res).to.have.status(200);
+          expect(res).to.be.an('object');
+          done();
+        });
+    });
+  });
+  describe('findByUrl()', () => {
+    it('response statusCode equal to 200 and object in res', (done) => {
+      chai.request(baseUrl)
+        .get('/url/cheap-blender')
+        .end((err, res) => {
+          expect(res).to.have.status(200);
+          expect(res).to.be.an('object');
+          done();
+        });
+    });
+  });
+/*
+  describe('create()', () => {
     // Login során kapunk egy sütit a http headerbe, ezt lementjük a süti változóba
     // Ez azért kell mert minden kérésnél, amihez szükséges a belépett user,
     // el kell küldeni a kapott sütit is. Hiszen ez azonosítja a usert
@@ -46,7 +68,8 @@ describe('useradmin.controller functions', () => {
           done();
         });
     });
-
+    
+    
     it('response statusCode equal to 200', (done) => {
       chai.request(baseUrl)
         .put('/5afab001e8a028273ccecb24')
@@ -54,6 +77,7 @@ describe('useradmin.controller functions', () => {
         .set('Cookie', cookie)
         .end((err, res) => {
           expect(res).to.have.status(200);
+          console.log(cookie);
           done();
         });
     });
@@ -71,4 +95,5 @@ describe('useradmin.controller functions', () => {
         });
     });
   });
+  */
 });
