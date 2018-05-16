@@ -12,7 +12,11 @@ export class OrdersComponent {
   orders: any;
   selectedOrder: any;
   newOrder = {
-    userId: '',
+    customer: '',
+    products: [{
+      product: '',
+      quantity: '',
+    }],
   };
   userData: any;
   products: any;
@@ -22,6 +26,13 @@ export class OrdersComponent {
     this.getUsers();
     this.getProducts();
 
+   }
+
+   addRow() {
+    this.newOrder.products.push({
+      product: '',
+      quantity: ''
+    });
    }
 
    getUsers() {

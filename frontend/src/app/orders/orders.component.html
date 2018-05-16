@@ -1,10 +1,17 @@
 <h2>Új megrendelés felvétele</h2>
-<input id="customer" list="customers" class="form-control tableinput" name="myCustomers" type="text" placeholder="Ügyfél kiválasztása">
-  <datalist id="customers">
-    <option *ngFor="let customer of userData" value="{{customer['_id']}}">{{customer.username}}</option>
-  </datalist>
-<input id="product" list="products" class="form-control tableinput" name="myProducts" type="text" placeholder="Termék kiválasztása">
-  <datalist id="products">
-    <option *ngFor="let product of products" value="{{product['_id']}}">{{product.productname}}</option>
-  </datalist>
-  <input type="number" name="amount" id="amount" min="0" placeholder="Mennyiség">
+<div class="container">
+  <div class="row">
+    <input id="customer" list="customers" class="form-control tableinput" name="myCustomers" type="text" placeholder="Ügyfél kiválasztása">
+    <datalist id="customers">
+      <option *ngFor="let customer of userData" value="{{customer['_id']}}">{{customer.username}}</option>
+    </datalist>
+    <div *ngFor="let pr of newOrder.products; let i = index">
+      <input id="product" list="products" class="form-control tableinput" name="myProducts" type="text" placeholder="Termék kiválasztása">
+      <datalist id="products">
+        <option *ngFor="let product of products" value="{{product['_id']}}">{{product.productname}}</option>
+      </datalist>
+      <input class="form-control" type="number" name="amount" id="amount" min="0" placeholder="Mennyiség">
+    </div>
+    <button class="btn btn-primary" (click)="addRow()">Új termék</button>
+  </div>
+</div>
