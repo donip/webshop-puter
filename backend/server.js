@@ -15,8 +15,8 @@ const User = require('./models/user');
 const userRouter = require('./route/user.route');
 const blogpostRouter = require('./route/blogpost.route');
 const productRouter = require('./route/product.route');
-const multer = require('multer');
 
+const orderRouter = require('./route/order.route');
 const useradminRouter = require('./route/useradmin.route');
 
 const logDirectory = path.join(__dirname, 'log');
@@ -85,31 +85,14 @@ app.use('/blogpost/', blogpostRouter);
 // product router
 app.use('/product/', productRouter);
 
-// Multer
-// ***** file upload parsing *****
-/*
-const storage = multer.diskStorage({
-  destination(req, file, cb) {
-    cb(null, './uploads');
-  },
-  filename(req, file, cb) {
-    const fullFileName = new Date().toISOString().replace(/:/g, '-').concat(file.originalname.substr(file.originalname.length - 4));
-    cb(null, fullFileName);
-  },
-});
-// ***** IMG file extension validation *****
-const fileFilter = (req, file, cb) => {
-  if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
-    cb(null, true);
-  } else {
-    cb(null, false);
-  }
-};
-*/
-// multer end
+// order router
+app.use('/order/', orderRouter);
 
+// useradmin router
 app.use('/useradmin/', useradminRouter);
-
 
 // Start server
 app.listen(port);
+
+app.use('/uploads', express.static('./uploads'));
+

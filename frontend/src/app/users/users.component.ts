@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Http, RequestOptions } from '@angular/http';
 import * as faker from 'faker';
+import { timeout } from 'q';
 
 @Component({
   selector: 'app-users',
@@ -19,9 +20,11 @@ export class UsersComponent implements OnInit {
     password: '',
     isAdmin: ''
   };
+  addSuccess = 'empty';
 
   constructor(public http: Http) {
     this.getUsers();
+    this.hideMessage();
    }
 
   ngOnInit() {
@@ -53,16 +56,30 @@ export class UsersComponent implements OnInit {
   addUser() {
     this.http.post('http://localhost:8080/user/register', this.newUser, this.options)
         .subscribe(data => {
-            console.log(data['_body']);
-        });
+          const body = JSON.parse(data['_body']);
+          if (body.success) {
+            this.addSuccess = 'Sikeres hozzáadás';
+        } else {
+          this.addSuccess = 'Hozzáadás sikertelen';
+        }
+        console.log(data['_body']);
+        this.hideMessage();
+    });
   }
-/**
+
+  hideMessage() {
+    setTimeout(() => {
+      this.addSuccess = 'empty';
+    }, 5000);
+  }
+  /**
  * Fake user generator
  * @param {string} username - random name
  * @param {string} email - user.name@gmail.com
  * @param {string} password - 8xa = 'aaaaaaaa'
  * @param {string} isAdmin - 'false'
  * @todo {string} Comment this out after testing, as this feature is only for developers.
+ * @todo Comment this out after testing, as this feature is only for developers.
  */
   createFakeUser() {
     const randomEmail = faker.internet.email();
