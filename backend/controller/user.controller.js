@@ -1,5 +1,5 @@
 const User = require('../models/user');
-
+/** @module User */
 module.exports = {
   profile: (req, res) => {
     res.json({
@@ -9,8 +9,9 @@ module.exports = {
 
   /**
    * Új user regisztráció
-   * @param {object} req - c
-   * @param {object} res - c
+   * @param {Object} req - HTTP request objektum
+   * @param {Object} res - HTTP response objektum
+   * @return {Object} - visszaküld egy objektumot aminek van success tulajdonsága
    */
   register: (req, res) => {
     User.register(new User({
@@ -26,6 +27,9 @@ module.exports = {
 
   /**
    * Belépés
+   * @param {Object} req - HTTP request objektum
+   * @param {Object} res - HTTP response objektum
+   * @return {Object} - sikeres belépés esetén visszaküld egy success tulajdonságú objektumot
    */
   login: (req, res) => res.json({
     success: 'Sikeres belépés',
@@ -33,6 +37,9 @@ module.exports = {
 
   /**
    * Kilépés
+   * @param {Object} req - HTTP request objektum
+   * @param {Object} res - HTTP response objektum
+   * @return {Object} - sikeres kilépés esetén visszaküld egy success tulajdonságú objektumot
    */
   logout: (req, res) => {
     req.logout();
