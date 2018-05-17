@@ -79,6 +79,7 @@ export class UsersComponent implements OnInit {
           isAdmin: 'false'
         };
         this.hideMessage();
+        this.getUsers();
       });
   }
 
