@@ -1,52 +1,60 @@
+<div class="container-fluid">
+    <div class="jumbotron jumbotron-fluid">
+      <h1 class="display-2 text-center">Regisztráció</h1>
+    </div>
+    <hr>
+    <br>
+</div>
 <div class="container">
   <div class="row">
     <div class="col-md-6 offset-md-3">
-      <h1>Regisztráció</h1>
-      <label for="name">Username</label>
-      <input class="form-control" type="text" id="name" [(ngModel)]="user.username">
+      <label for="name">Név</label>
+      <input class="form-control" type="text" id="name" [(ngModel)]="user.username" required #name="ngModel">
+      <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
+        <div *ngIf="name.errors.required">
+          Kötelező kitölteni.
+        </div>
+      </div>
+
       <label for="email">Email</label>
-      <input class="form-control" type="email" id="email" [(ngModel)]="user.email">
+      <input class="form-control" type="email" id="email" [(ngModel)]="user.email" required #email="ngModel">
+      <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
+        <div *ngIf="email.errors.required">
+          Kötelező kitölteni.
+        </div>
+      </div>
 
+      <label for="password">Jelszó</label>
       <div class="form-group has-danger">
-        <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-          <div class="input-group-addon" style="width: 2.6rem">
-            <i class="fa fa-key"></i>
-          </div>
-          <input type="password" name="password" class="form-control" id="passwordReg" placeholder="Password" minlength="8" required [(ngModel)]="user.password" #password="ngModel">
+        <div class="input-group">
+
+          <input type="password" name="password" class="form-control" id="passwordReg" minlength="8" required [(ngModel)]="user.password"
+            #password="ngModel">
         </div>
       </div>
 
-      <div class="form-control-feedback">
-        <span class="text-danger align-middle">
-          <i class="fa fa-close"></i>
-        </span>
-      </div>
-      <label for="password2">Confirm Password</label>
-      <div class="col-md-6">
-        <div class="form-group">
-          <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-            <div class="input-group-addon" style="width: 2.6rem">
-              <i class="fas fa-reply"></i>
-            </div>
-            <input type="password" name="passwordConfirmation" class="form-control" id="passwordConfirm" placeholder="Password" required
-              [(ngModel)]="passwordConf">
-          </div>
-        </div>
-      </div>
       <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert-danger">
-            <div *ngIf="password.errors.required">
-                Password is required.
-              </div>
-            <div *ngIf="password.errors.minlength">
-                Password must be at least 8 characters long.
-            </div>
+        <div *ngIf="password.errors.required">
+            Kötelező kitölteni.
         </div>
-        
+        <div *ngIf="password.errors.minlength">
+          Minimum 8 karakter
+        </div>
+      </div>
+
+      <label for="password2">Jelszó megerősítése</label>
+      <div class="form-group">
+        <div class="input-group">
+          <input type="password" name="passwordConfirmation" class="form-control" id="passwordConfirm" required [(ngModel)]="passwordConf">
+        </div>
+      </div>
+
+
+      <input type="button" class="btn btn-success" value="Regisztráció" (click)="validation()">
     </div>
   </div>
 </div>
 
-<input type="button" class="btn btn-success" value="Register" (click)="validation()">
 
 
 <!--
@@ -65,4 +73,3 @@
 <label for="password">Confirm Password</label>
 
 -->
-
