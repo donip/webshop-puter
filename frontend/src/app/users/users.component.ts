@@ -20,7 +20,7 @@ export class UsersComponent implements OnInit {
     username: '',
     email: '',
     password: '',
-    isAdmin: ''
+    isAdmin: 'false'
   };
   addSuccess = 'empty';
 
@@ -72,7 +72,12 @@ export class UsersComponent implements OnInit {
         } else {
           this.addSuccess = 'Hozzáadás sikertelen';
         }
-        console.log(data['_body']);
+        this.newUser = {
+          username: '',
+          email: '',
+          password: '',
+          isAdmin: 'false'
+        };
         this.hideMessage();
       });
   }
