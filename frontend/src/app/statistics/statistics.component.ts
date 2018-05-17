@@ -44,7 +44,7 @@ export class StatisticsComponent implements OnInit {
 
   ngOnInit() {
   }
-  createDataForChart(adat) {
+  createDataForChart(data) {
 
     const now = new Date();
     for (let i = 1; i <= now.getDate(); i++) {
@@ -89,9 +89,11 @@ export class StatisticsComponent implements OnInit {
       this.sumsoldstuff += sumsold;
       this.income += sumprice;
     }
+    
   }
   Lengthening(array) {
     return array.length;
   }
-
 }
+/** https://github.com/peterbanfi/Lighting-Foo-bar/blob/chart/frontend/src/app/statistics/statistics.component.ts
+*/
