@@ -5,7 +5,6 @@ const {
 const chaiHttp = require('chai-http');
 
 const baseUrl = 'http://localhost:8080/user';
-// const user = require('../controller/user.controller');
 
 chai.use(chaiHttp);
 /**

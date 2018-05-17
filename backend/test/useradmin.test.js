@@ -6,17 +6,12 @@ const chaiHttp = require('chai-http');
 
 const baseUrl = 'http://localhost:8080/useradmin';
 chai.use(chaiHttp);
-const theAccount = {
-  username: 'testAdmin@gmail.com',
-  password: '1234',
-};
 
 let cookie;
+
 /**
 * useradmin.controller összevont unit teszt
-* @todo debug test of editUser, removeUser
 */
-
 describe('useradmin.controller functions', () => {
   describe('listUsers()', () => {
     it('response statusCode equal to 200 and object in res', (done) => {
@@ -37,7 +32,10 @@ describe('useradmin.controller functions', () => {
   before((done) => {
     chai.request('http://localhost:8080/user')
       .post('/login')
-      .send(theAccount)
+      .send({
+        username: 'testAdmin@gmail.com',
+        password: '1234',
+      })
       .end((err, res) => {
         if (err) {
           throw err;
