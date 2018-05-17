@@ -13,6 +13,7 @@ export class LoginComponent implements OnInit {
     password: '12345678',
   };
   loginChecker = false;
+  loginCheckerForButton = false;
   logoutChecker = false;
   options = new RequestOptions({ withCredentials: true });
   baseUrl = 'http://localhost:8080/user/';
@@ -33,6 +34,7 @@ export class LoginComponent implements OnInit {
             console.log(data['_body']);
             if (data['_body'] = '{"success":"Sikeres belépés"}' ) {
               this.loginChecker = true;
+              this.loginCheckerForButton = true;
               this.thingHider();
             }
         });
@@ -44,6 +46,7 @@ export class LoginComponent implements OnInit {
             console.log(data['_body']);
             if (data['_body'] = '{"success":"Sikeres kilépés"}') {
               this.logoutChecker = true;
+              this.loginCheckerForButton = false;
               this.thingHider();
             }
         });
