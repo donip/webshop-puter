@@ -55,7 +55,7 @@ export class LoginComponent implements OnInit {
       this.logoutChecker = false;
     }, 4000);
   }
-  
+
   ngOnInit() {
   }
 
