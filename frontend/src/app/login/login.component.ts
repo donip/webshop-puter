@@ -12,7 +12,8 @@ export class LoginComponent implements OnInit {
     username: 'a@b.c',
     password: '12345678',
   };
-
+  loginChecker = false;
+  logoutChecker = false;
   options = new RequestOptions({ withCredentials: true });
   baseUrl = 'http://localhost:8080/user/';
 
@@ -30,6 +31,10 @@ export class LoginComponent implements OnInit {
     this.http.post(this.baseUrl + 'login', this.user, this.options)
         .subscribe(data => {
             console.log(data['_body']);
+            if (data['_body'] = '{"success":"Sikeres belépés"}' ) {
+              this.loginChecker = true;
+              this.thingHider();
+            }
         });
   }
 
@@ -37,7 +42,18 @@ export class LoginComponent implements OnInit {
     this.http.get(this.baseUrl + 'logout', this.options)
         .subscribe(data => {
             console.log(data['_body']);
+            if (data['_body'] = '{"success":"Sikeres kilépés"}') {
+              this.logoutChecker = true;
+              this.thingHider();
+            }
         });
+  }
+
+  thingHider() {
+    setTimeout(() => {
+      this.loginChecker = false;
+      this.logoutChecker = false;
+    }, 4000);
   }
 
   ngOnInit() {

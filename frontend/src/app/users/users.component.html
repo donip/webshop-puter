@@ -4,10 +4,6 @@
   </div>
   <hr>
   <br>
-  <div class="row">
-    <span class="alert alert-success" *ngIf="addSuccess === 'Sikeres hozzáadás' ">{{addSuccess}}</span>
-    <span class="alert alert-danger" *ngIf="addSuccess === 'Hozzáadás sikertelen' ">{{addSuccess}}</span>
-  </div>
 </div>
 
 <div class="container">
@@ -36,13 +32,15 @@
         <tbody>
           <tr>
             <td>
-              <input class="form-control" type="text" name="username" [(ngModel)]="newUser.username">
+              <input class="form-control" type="text" name="username" autocomplete="off" readonly onfocus="this.removeAttribute('readonly');"
+                [(ngModel)]="newUser.username" placeholder="Minimum 3 karakter">
             </td>
             <td>
-              <input class="form-control" type="text" name="email" [(ngModel)]="newUser.email">
+              <input class="form-control" type="text" name="email" autocomplete="off" [(ngModel)]="newUser.email" placeholder="Kötelező">
             </td>
             <td>
-              <input class="form-control" type="password" name="pass" [(ngModel)]="newUser.password">
+              <input class="form-control" type="password" readonly onfocus="this.removeAttribute('readonly');" name="pass" minlength="8"
+                [(ngModel)]="newUser.password" placeholder="Minimum 8 karakter">
             </td>
             <td>
               <select class="custom-select" name="isadmin" [(ngModel)]="newUser.isAdmin">
@@ -50,12 +48,19 @@
                 <option value="false">Felhasználó</option>
               </select>
             </td>
-            <td>
-              <button class="btn btn-success" (click)="addUser()">Hozzáadás</button>
+          </tr>
+          <tr>
+            <td colspan="4">
+              <button *ngIf="newUser.password.length > 7 && newUser.email.length > 4 && newUser.username.length > 2 " class="btn btn-success col-12"
+                (click)="addUser()">Hozzáadás</button>
             </td>
           </tr>
         </tbody>
       </table>
+      <div class="row">
+        <span class="alert alert-success col-12" *ngIf="addSuccess === 'Sikeres hozzáadás' ">{{addSuccess}}</span>
+        <span class="alert alert-danger col-12" *ngIf="addSuccess === 'Hozzáadás sikertelen' ">{{addSuccess}}</span>
+      </div>
     </div>
   </div>
   <br>
