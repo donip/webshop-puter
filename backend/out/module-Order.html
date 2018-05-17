@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Module: Product</title>
+    <title>JSDoc: Module: Order</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Module: Product</h1>
+    <h1 class="page-title">Module: Order</h1>
 
     
 
@@ -29,6 +29,8 @@
 <header>
     
         
+            
+        
     
 </header>
 
@@ -36,6 +38,186 @@
     <div class="container-overview">
     
         
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="module:Order"><span class="type-signature"></span>module:Order<span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Kilistázza a rendeléseket. Populate-tel hozzákapcsolja a user-eket és a product-okat
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>req</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">HTTP request objektum</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>res</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">HTTP response objektum</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="order.controller.js.html">order.controller.js</a>, <a href="order.controller.js.html#line12">line 12</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - a rendelések objektumát küldi vissza
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
 
         
     
@@ -64,7 +246,7 @@
     
 
     
-    <h4 class="name" id=".create"><span class="type-signature">(static) </span>create<span class="signature">(req, res)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id=".create"><span class="type-signature">(static) </span>create<span class="signature">(req, res)</span><span class="type-signature"> &rarr; {Object}</span></h4>
     
 
     
@@ -72,8 +254,7 @@
 
 
 <div class="description">
-    Generál egy productot, a producturl-t és a imgurl generálja a file.path-ból
-csak admin jogosultsággal fut le ha nem admin akkor visszadob egy hibát
+    Generál egy rendelést activ státusszal.
 </div>
 
 
@@ -189,7 +370,7 @@ csak admin jogosultsággal fut le ha nem admin akkor visszadob egy hibát
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="product.controller.js.html">product.controller.js</a>, <a href="product.controller.js.html#line81">line 81</a>
+        <a href="order.controller.js.html">order.controller.js</a>, <a href="order.controller.js.html#line45">line 45</a>
     </li></ul></dd>
     
 
@@ -216,333 +397,7 @@ csak admin jogosultsággal fut le ha nem admin akkor visszadob egy hibát
 
         
 <div class="param-desc">
-    létrehozott product object-jét küldi vissza
-</div>
-
-
-
-    
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id=".find"><span class="type-signature">(static) </span>find<span class="signature">(req, res)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    mongo _id alapján megkeres egy productot
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>req</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">HTTP request objektum</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>res</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">HTTP response objektum</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="product.controller.js.html">product.controller.js</a>, <a href="product.controller.js.html#line58">line 58</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id=".findByUrl"><span class="type-signature">(static) </span>findByUrl<span class="signature">(req, res)</span><span class="type-signature"> &rarr; {Object}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    url alapján megkeres egy productot
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>req</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">HTTP request objektum</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>res</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">HTTP response objektum</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="product.controller.js.html">product.controller.js</a>, <a href="product.controller.js.html#line69">line 69</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    - product object-jét küldi vissza
+    - a rendelés objektumát küldi vissza
 </div>
 
 
@@ -571,7 +426,7 @@ csak admin jogosultsággal fut le ha nem admin akkor visszadob egy hibát
     
 
     
-    <h4 class="name" id=".list"><span class="type-signature">(static) </span>list<span class="signature">(req, res)</span><span class="type-signature"> &rarr; {Array}</span></h4>
+    <h4 class="name" id=".find"><span class="type-signature">(static) </span>find<span class="signature">(req, res)</span><span class="type-signature"> &rarr; {Object}</span></h4>
     
 
     
@@ -579,7 +434,7 @@ csak admin jogosultsággal fut le ha nem admin akkor visszadob egy hibát
 
 
 <div class="description">
-    kilistáz minden productot
+    Kilistázza egy rendelést id szerint. Populate-tel hozzákapcsolja a user-eket és a product-okat
 </div>
 
 
@@ -695,7 +550,7 @@ csak admin jogosultsággal fut le ha nem admin akkor visszadob egy hibát
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="product.controller.js.html">product.controller.js</a>, <a href="product.controller.js.html#line48">line 48</a>
+        <a href="order.controller.js.html">order.controller.js</a>, <a href="order.controller.js.html#line30">line 30</a>
     </li></ul></dd>
     
 
@@ -722,7 +577,7 @@ csak admin jogosultsággal fut le ha nem admin akkor visszadob egy hibát
 
         
 <div class="param-desc">
-    - visszatér a product-ok tömbjével
+    egy rendelés objektumát küldi vissza
 </div>
 
 
@@ -733,7 +588,7 @@ csak admin jogosultsággal fut le ha nem admin akkor visszadob egy hibát
     </dt>
     <dd>
         
-<span class="param-type">Array</span>
+<span class="param-type">Object</span>
 
 
     </dd>
@@ -759,9 +614,7 @@ csak admin jogosultsággal fut le ha nem admin akkor visszadob egy hibát
 
 
 <div class="description">
-    Eltávolít egy productot az id alapján
-és törli a hozzátartozó képet az imgurl-ből nyert img fájlnév és útvonal alapján.
-Csak admin jogosultsággal működik.
+    Ellenőrzi az admin jogosultságot és kitöröl egy rendelést id szerint.
 </div>
 
 
@@ -803,7 +656,7 @@ Csak admin jogosultsággal működik.
             <td class="type">
             
                 
-<span class="param-type">object</span>
+<span class="param-type">Object</span>
 
 
             
@@ -826,7 +679,7 @@ Csak admin jogosultsággal működik.
             <td class="type">
             
                 
-<span class="param-type">object</span>
+<span class="param-type">Object</span>
 
 
             
@@ -877,7 +730,7 @@ Csak admin jogosultsággal működik.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="product.controller.js.html">product.controller.js</a>, <a href="product.controller.js.html#line144">line 144</a>
+        <a href="order.controller.js.html">order.controller.js</a>, <a href="order.controller.js.html#line75">line 75</a>
     </li></ul></dd>
     
 
@@ -904,7 +757,7 @@ Csak admin jogosultsággal működik.
 
         
 <div class="param-desc">
-    - A törölt elemmet küldi vissza
+    - a kitörölt megrendelés objektumát küldi vissza
 </div>
 
 
@@ -941,10 +794,8 @@ Csak admin jogosultsággal működik.
 
 
 <div class="description">
-    update-el egy productot az id alapján
-a productname-ből generálja a product url-t és imgurl-t.
-csak admin jogosultsággal működik.
-Amennyiben az imgurl property létezik törli az url-ből kinyert nevű imaget.
+    admin jogosultságot ellenőriz,
+majd frissíti az adott azonosítójú (id) rendelést
 </div>
 
 
@@ -1060,7 +911,7 @@ Amennyiben az imgurl property létezik törli az url-ből kinyert nevű imaget.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="product.controller.js.html">product.controller.js</a>, <a href="product.controller.js.html#line107">line 107</a>
+        <a href="order.controller.js.html">order.controller.js</a>, <a href="order.controller.js.html#line59">line 59</a>
     </li></ul></dd>
     
 
@@ -1087,7 +938,8 @@ Amennyiben az imgurl property létezik törli az url-ből kinyert nevű imaget.
 
         
 <div class="param-desc">
-    - az update-d product régi értékével tér vissza
+    - visszajelzést ad a művelet sikerességéről,
+visszaadja az eredeti adatot is, ha sikeres
 </div>
 
 
@@ -1099,164 +951,6 @@ Amennyiben az imgurl property létezik törli az url-ből kinyert nevű imaget.
     <dd>
         
 <span class="param-type">Object</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="~nameConverter"><span class="type-signature">(inner) </span>nameConverter<span class="signature">(namestr)</span><span class="type-signature"> &rarr; {string}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Egy nevet átkonvertál használható formátúmuvá, úgy hogy a space-et kicseréli kötőjelre
-a betűket pedig átírja ékezet nélkülire
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>namestr</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">konvertálandó név</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="product.controller.js.html">product.controller.js</a>, <a href="product.controller.js.html#line14">line 14</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    - konvertált string, ha nem kap paramétert akkor "default-name"-el tér vissza
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">string</span>
 
 
     </dd>
