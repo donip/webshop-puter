@@ -16,6 +16,9 @@ import { Ng2GoogleChartsModule } from 'ng2-google-charts';
 })
 
 export class StatisticsComponent implements OnInit {
+  d = new Date();
+  currentmonth = this.d.getMonth();
+  newDate: any;
   allusers: any;
   allorders: any;
   options = new RequestOptions({ withCredentials: true });
@@ -23,42 +26,47 @@ export class StatisticsComponent implements OnInit {
   sumuser: number;
   sumbuyer: number;
   sumsoldstuff: number;
+  currentdate = '2018-05-16T13:21:04.430Z';
+  ordersofoneday = 0;
+
   chartData: any = [
-    ['Task', 'Forint']
+    ['Rendelések', 'Napra leosztott rendelések'],
   ];
-  pieChartData = {
+
+  pieChartData: any = {
     chartType: 'ColumnChart',
     dataTable:
       this.chartData,
     options: {
-      'title': 'Statisztika',
+      'title': 'Havi rendelések',
       legend: 'none'
     },
   };
 
+
   constructor(public http: Http) {
     this.getUsers();
     this.getOrders();
-    this.createDataForChart(this.allorders);
+
   }
 
   ngOnInit() {
   }
-  createDataForChart(data) {
+  // createDataForChart(data) {
 
-    const now = new Date();
-    for (let i = 1; i <= now.getDate(); i++) {
-      this.chartData.push([i, 0]);
-    }
-    console.log(this.chartData);
-    this.formatChartData();
-  }
-  formatChartData() {
-    this.chartData.sort((a, b) => a[0] - b[0]);
-    for (let i = 1; i < this.chartData.length; i++) {
-      this.chartData[i][0] += '.';
-    }
-  }
+  //   const now = new Date();
+  //   for (let i = 1; i <= now.getDate(); i++) {
+  //     this.chartData.push([i, 0]);
+  //   }
+  //   console.log(this.chartData);
+  //   this.formatChartData();
+  // }
+  // formatChartData() {
+  //   this.chartData.sort((a, b) => a[0] - b[0]);
+  //   for (let i = 1; i < this.chartData.length; i++) {
+  //     this.chartData[i][0] += '.';
+  //   }
+  // }
   getUsers() {
     this.http.get('http://localhost:8080/useradmin', this.options)
       .subscribe(getUsers => {
@@ -72,10 +80,12 @@ export class StatisticsComponent implements OnInit {
   .subscribe(getOrders => {
     this.allorders = JSON.parse(getOrders['_body']);
   this.Income(this.allorders);
+  console.log(this.allorders);
   });
 }
 
   Income(adat) {
+    console.log(this.chartData);
     this.income = 0;
     this.sumsoldstuff = 0;
     let sumprice = 0;
@@ -85,15 +95,23 @@ export class StatisticsComponent implements OnInit {
       for (let j = 0; j < adat[i].products.length; j++) {
         sumprice += adat[i].products[j].product.price * adat[i].products[j].quantity;
         sumsold += adat[i].products[j].quantity;
+        this.newDate = new Date(adat[i].createdAt);
+        if (this.newDate.getMonth() === this.currentmonth) {
+          this.ordersofoneday += adat[i].products[j].quantity;
+        }
+this.chartData.push([i + 1, 6 + i ]);
       }
       this.sumsoldstuff += sumsold;
       this.income += sumprice;
     }
-    
+
   }
   Lengthening(array) {
     return array.length;
   }
+  populateChart(data) {
+    for (let i = 0; i < data.length; i++) {
+      this.pieChartData.dataTable.push(data[i]);
+    }
 }
-/** https://github.com/peterbanfi/Lighting-Foo-bar/blob/chart/frontend/src/app/statistics/statistics.component.ts
-*/
+}

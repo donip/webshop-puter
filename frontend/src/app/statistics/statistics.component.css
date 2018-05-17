@@ -1,7 +1,7 @@
-#container {
+.container-fluid {
     position: relative;
 };
-.dashboard {
+.table {
     position: relative;
     float:  left;
     width : 200px;
