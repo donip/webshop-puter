@@ -1,7 +1,13 @@
+<div class="container-fluid">
+    <div class="jumbotron jumbotron-fluid">
+      <h1 class="display-2 text-center">Regisztráció</h1>
+    </div>
+    <hr>
+    <br>
+</div>
 <div class="container">
   <div class="row">
     <div class="col-md-6 offset-md-3">
-      <h1>Regisztráció</h1>
       <label for="name">Név</label>
       <input class="form-control" type="text" id="name" [(ngModel)]="user.username" required #name="ngModel">
       <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
