@@ -35,7 +35,12 @@ export class NavbarComponent implements OnInit {
   constructor(public http: Http) {
     this.profile();
   }
-
+/**
+ * Profiladatok lekérdezése bejelentkezés után
+ * Ha nincs bejelentkezve userData-ban user objektum léterehozása 'false' értékekkel
+ * Bejelentkező modal elrejtése (sikeres bejelentkezésnél)
+ * loginButtonHandler(username, isAdmin) meghívása userData átadásával
+ */
   profile() {
     this.http.get(this.baseUrl + 'profile', this.options)
       .subscribe(data => {
@@ -55,34 +60,38 @@ export class NavbarComponent implements OnInit {
         this.loginButtonHandler(userData['user'].username, userData['user'].isAdmin);
       });
   }
-
+/**
+ * Paraméterek:
+ * Bejelentkezett felhasználó neve || vagy 'false'
+ * Admin van bejelentkezve: 'true' || 'false'
+ *
+ * this.userName és this.userAdmin értékeit a html-ben ngIf-ek figyelik
+ * így jelennek meg vagy tűnnek el bizonyos linkek és gombok a navbaron
+ */
   loginButtonHandler(username = 'false', admin = 'false') {
-    if (username === 'false') {
+    if (username === 'false') { // nincs bejelentkezve
       this.userName = 'none';
       this.userAdmin = 'false';
-      console.log('nope');
-    } else if (username && admin === 'true') {
+    } else if (username && admin === 'true') {  // admin van bejelentkezve
       this.userName = username;
       this.userAdmin = 'true';
-      console.log('yes');
-    } else {
+    } else {          // normál felhasználó van bejelentkezve
       this.userName = username;
       this.userAdmin = 'false';
-      console.log('quite');
     }
   }
 
   login() {
-    setTimeout(() => {
+    setTimeout(() => {    // bejelentkezés sikertelen üzenet megjelenítése
       this.loginError = true;
     }, 1000);
-    setTimeout(() => {
+    setTimeout(() => {    // és elrejtése (ngIf a HTML-ben)
       this.loginError = false;
     }, 8000);
     this.http.post(this.baseUrl + 'login', this.user, this.options)
       .subscribe(data => {
         console.log(data['_body']);
-        this.profile();
+        this.profile();   // profiladat lekérdezés navbarhoz
 
       });
   }
@@ -91,7 +100,7 @@ export class NavbarComponent implements OnInit {
     this.http.get(this.baseUrl + 'logout', this.options)
       .subscribe(data => {
         console.log(data['_body']);
-        this.profile();
+        this.profile();   // profiladat frissítés navbarhoz
       });
   }
 
@@ -102,6 +111,10 @@ export class NavbarComponent implements OnInit {
     }, 4000);
   }
 
+  /**
+   * bejelentkezési hiba nullázása
+   * Modal megjelenítése jquery-vel
+   */
   showLoginModal() {
     this.loginError = false;
     $('#login-modal').modal('show');

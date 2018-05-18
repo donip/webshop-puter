@@ -13,7 +13,7 @@
     <button *ngIf="userName === 'none'" class="btn btn-primary" href="#" routerLink="/register">Regisztráció</button>
     <button *ngIf="userName !== 'none' && userAdmin === 'false'" class="btn btn-success" href="#" routerLink="/profile" >{{userName}}</button>
     <button *ngIf="userAdmin === 'true'" class="btn btn-success" href="#" routerLink="/statistics" >ADMIN: {{userName}}</button>
-    <button *ngIf="userName !=='none'" class="btn btn-danger" href="#" routerLink="/login" (click)="logout()" >Kijelentkezés</button>
+    <button *ngIf="userName !=='none'" class="btn btn-danger" href="#" routerLink="/main" (click)="logout()" >Kijelentkezés</button>
   </div>
   </div>
 </nav>
