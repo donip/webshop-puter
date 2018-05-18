@@ -9,5 +9,41 @@
       <li class="nav-item justify-content"><a class="nav-link text-center" routerLink="/orders">Rendelések</a></li>
       <li class="nav-item justify-content"><a class="nav-link text-center" routerLink="/statistics">Statisztika</a></li>
     </ul>
+    <div class="ml-auto">
+    <button *ngIf="userName === 'none'" class="btn btn-success" href="#" data-toggle="modal" data-target="#login-modal">Bejelentkezés</button>
+    <button *ngIf="userName !== 'none' && userAdmin === 'false'" class="btn btn-success" href="#" routerLink="/profile" >{{userName}}</button>
+    <button *ngIf="userAdmin === 'true'" class="btn btn-success" href="#" routerLink="/statistics" >ADMIN: {{userName}}</button>
+    <button *ngIf="userName !=='none'" class="btn btn-danger" href="#" routerLink="/login" (click)="logout()" >Kijelentkezés</button>
+  </div>
   </div>
 </nav>
+
+<!-- MODAL -->
+<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="jumbotron jumbotron-fluid col-12">
+          <h1 class="display-2 text-center">Login</h1>
+        </div>
+      </div>
+      <div class="modal-body">
+        <form>
+          <label for="email">Email</label>
+          <input class="form-control" type="email" name="email" id="emailModal" [(ngModel)]="user.username">
+          <label for="password">Password</label>
+          <input class="form-control" type="password" name="password" id="passwordModal" [(ngModel)]="user.password">
+          <br>
+          <div class="btn-group">
+              <button type="button" class="btn btn-success" (click)="login()">Login</button>
+              <button *ngIf="loginCheckerForButton" type="button" class="btn btn-info" (click)="profile()">Profil</button>
+              <button type="button" class="btn btn-danger" (click)="logout()">Logout</button>
+          </div>
+      </form>
+      <br>
+      <div class="modal-footer">
+        <button class="btn btn-link" routerLink="/register" data-toggle="modal" data-target="#login-modal">Még nem regisztrált felhasználó?</button>
+      </div>
+    </div>
+  </div>
+</div>
