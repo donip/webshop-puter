@@ -1,0 +1,50 @@
+<!-- this creates a google map on the page with the given lat/lng from -->
+<!-- the component as the initial center of the map: -->
+
+<agm-map [latitude]="lat" [longitude]="lng">
+  <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+</agm-map>
+<br>
+<div class="container">
+  <div class="row">
+    <div class="col-md-5 offset-md-1">
+      <h5>ELÉRHETŐSÉGEINK</h5>
+      <hr>
+      <div>
+        <strong>Bemutatóterem:</strong>
+        3210-Acélváros, Gagarin utca 101/B.</div>
+      <div>
+        <strong>Tel:</strong>
+        +19/ 841-9841</div>
+      <div>
+        <strong>Fax:</strong>
+        +84/ 198-4198</div>
+      <div>
+        <strong>Email:</strong>
+        pjutoersmitt@gmail.com</div>
+      <br>
+      <div>
+        <strong>H-P: </strong>
+        10:00 - 21:00</div>
+      <div>
+        <strong>Szo-Va: </strong>
+        12:00 - 16:00</div>
+    </div>
+    <br>
+    <div class="col-md-5">
+      <form>
+        <div class="form-group">
+          <H5>Írjon nekünk!</H5>
+          <hr>
+          <input type="email" class="form-control" id="InputEmail1" aria-describedby="emailHelp" placeholder="az Ön email címe">
+        </div>
+        <div class="form-group">
+          <textarea class="form-control" id="Textarea" rows="5" placeholder="az Ön észrevételei"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-block btn-outline-dark">Submit</button>
+      </form>
+      <br>
+    </div>
+  </div>
+</div>

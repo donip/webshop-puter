@@ -93,7 +93,6 @@ export class UsersComponent implements OnInit {
  * @param {string} email - user.name@gmail.com
  * @param {string} password - 8xa = 'aaaaaaaa'
  * @param {string} isAdmin - 'false'
- * @todo {string} Comment this out after testing, as this feature is only for developers.
  * @todo Comment this out after testing, as this feature is only for developers.
  */
   createFakeUser() {
