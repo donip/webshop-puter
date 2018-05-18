@@ -16,9 +16,11 @@ import { ProductsComponent } from './products/products.component';
 import { UsersComponent } from './users/users.component';
 import { OrdersComponent } from './orders/orders.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { MainComponent } from './main/main.component';
 
 const routes: Routes = [
-  { path: '', component: LoginComponent, pathMatch: 'full' },
+  { path: '', component: MainComponent, pathMatch: 'full' },
+  { component: MainComponent, path: 'main' },
   { component: LoginComponent, path: 'login' },
   { component: RegisterComponent, path: 'register' },
   { component: ProductsComponent, path: 'products' },
@@ -37,7 +39,8 @@ const routes: Routes = [
     UsersComponent,
     OrdersComponent,
     NavbarComponent,
-    FileSelectDirective
+    FileSelectDirective,
+    MainComponent
   ],
   imports: [
     BrowserModule,

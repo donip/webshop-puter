@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Http, RequestOptions } from '@angular/http';
+declare var $: any;
+declare var jquery: any;
 
 @Component({
   selector: 'app-navbar',
@@ -28,6 +30,7 @@ export class NavbarComponent implements OnInit {
   userInfo: any;
   userName = '';
   userAdmin = 'false';
+  loginError = false;
 
   constructor(public http: Http) {
     this.profile();
@@ -48,6 +51,7 @@ export class NavbarComponent implements OnInit {
             }
           };
         }
+        $('#login-modal').modal('hide');
         this.loginButtonHandler(userData['user'].username, userData['user'].isAdmin);
       });
   }
@@ -69,6 +73,12 @@ export class NavbarComponent implements OnInit {
   }
 
   login() {
+    setTimeout(() => {
+      this.loginError = true;
+    }, 1000);
+    setTimeout(() => {
+      this.loginError = false;
+    }, 8000);
     this.http.post(this.baseUrl + 'login', this.user, this.options)
       .subscribe(data => {
         console.log(data['_body']);
@@ -90,6 +100,11 @@ export class NavbarComponent implements OnInit {
       this.loginChecker = false;
       this.logoutChecker = false;
     }, 4000);
+  }
+
+  showLoginModal() {
+    this.loginError = false;
+    $('#login-modal').modal('show');
   }
 
   ngOnInit() {
