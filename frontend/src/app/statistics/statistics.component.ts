@@ -22,15 +22,17 @@ export class StatisticsComponent implements OnInit {
   allusers: any;
   allorders: any;
   options = new RequestOptions({ withCredentials: true });
-  income: number;
-  sumuser: number;
-  sumbuyer: number;
-  sumsoldstuff: number;
+  income: any;
+  sumuser: any;
+  sumbuyer: any;
+  sumsoldstuff: any;
   currentdate = '2018-05-16T13:21:04.430Z';
   ordersofoneday = 0;
 
-  chartData: any = [
+  chartData = [
     ['Rendelések', 'Napra leosztott rendelések'],
+    ['1.', 10],
+    
   ];
 
   pieChartData: any = {
@@ -39,6 +41,7 @@ export class StatisticsComponent implements OnInit {
       this.chartData,
     options: {
       'title': 'Havi rendelések',
+      hAxis: {title: "Time"},
       legend: 'none'
     },
   };
@@ -52,21 +55,7 @@ export class StatisticsComponent implements OnInit {
 
   ngOnInit() {
   }
-  // createDataForChart(data) {
 
-  //   const now = new Date();
-  //   for (let i = 1; i <= now.getDate(); i++) {
-  //     this.chartData.push([i, 0]);
-  //   }
-  //   console.log(this.chartData);
-  //   this.formatChartData();
-  // }
-  // formatChartData() {
-  //   this.chartData.sort((a, b) => a[0] - b[0]);
-  //   for (let i = 1; i < this.chartData.length; i++) {
-  //     this.chartData[i][0] += '.';
-  //   }
-  // }
   getUsers() {
     this.http.get('http://localhost:8080/useradmin', this.options)
       .subscribe(getUsers => {
@@ -77,15 +66,14 @@ export class StatisticsComponent implements OnInit {
 
   getOrders() {
     this.http.get('http://localhost:8080/order', this.options)
-  .subscribe(getOrders => {
-    this.allorders = JSON.parse(getOrders['_body']);
-  this.Income(this.allorders);
-  console.log(this.allorders);
-  });
-}
+      .subscribe(getOrders => {
+        this.allorders = JSON.parse(getOrders['_body']);
+        this.Income(this.allorders);
+        console.log(this.allorders);
+      });
+  }
 
   Income(adat) {
-    console.log(this.chartData);
     this.income = 0;
     this.sumsoldstuff = 0;
     let sumprice = 0;
@@ -95,11 +83,13 @@ export class StatisticsComponent implements OnInit {
       for (let j = 0; j < adat[i].products.length; j++) {
         sumprice += adat[i].products[j].product.price * adat[i].products[j].quantity;
         sumsold += adat[i].products[j].quantity;
+          
         this.newDate = new Date(adat[i].createdAt);
         if (this.newDate.getMonth() === this.currentmonth) {
           this.ordersofoneday += adat[i].products[j].quantity;
+          
         }
-this.chartData.push([i + 1, 6 + i ]);
+        this.chartData.push(['nap', 6 + i]);
       }
       this.sumsoldstuff += sumsold;
       this.income += sumprice;
@@ -113,5 +103,5 @@ this.chartData.push([i + 1, 6 + i ]);
     for (let i = 0; i < data.length; i++) {
       this.pieChartData.dataTable.push(data[i]);
     }
-}
+  }
 }
