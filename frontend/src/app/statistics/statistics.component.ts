@@ -32,12 +32,7 @@ export class StatisticsComponent implements OnInit {
   chartData = [
     ['Rendelések', 'Napra leosztott rendelések'],
     ['1.', 10],
-    ['2.', 20],
-    ['3.', 50],
-    ['4.', 30],
-    ['5.', 20],
-    ['6.', 15],
-
+    
   ];
 
   pieChartData: any = {
@@ -94,7 +89,7 @@ export class StatisticsComponent implements OnInit {
           this.ordersofoneday += adat[i].products[j].quantity;
           
         }
-        // this.chartData.push(['nap', 6 + i]);
+        this.chartData.push(['nap', 6 + i]);
       }
       this.sumsoldstuff += sumsold;
       this.income += sumprice;
