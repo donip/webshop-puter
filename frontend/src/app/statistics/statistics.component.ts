@@ -22,15 +22,22 @@ export class StatisticsComponent implements OnInit {
   allusers: any;
   allorders: any;
   options = new RequestOptions({ withCredentials: true });
-  income: number;
-  sumuser: number;
-  sumbuyer: number;
-  sumsoldstuff: number;
+  income: any;
+  sumuser: any;
+  sumbuyer: any;
+  sumsoldstuff: any;
   currentdate = '2018-05-16T13:21:04.430Z';
   ordersofoneday = 0;
- 
-  chartData: any = [
-    ['1', '1'],
+
+  chartData = [
+    ['Rendelések', 'Napra leosztott rendelések'],
+    ['1.', 10],
+    ['2.', 20],
+    ['3.', 50],
+    ['4.', 30],
+    ['5.', 20],
+    ['6.', 15],
+
   ];
 
   pieChartData: any = {
@@ -64,12 +71,12 @@ export class StatisticsComponent implements OnInit {
 
   getOrders() {
     this.http.get('http://localhost:8080/order', this.options)
-  .subscribe(getOrders => {
-    this.allorders = JSON.parse(getOrders['_body']);
-  this.Income(this.allorders);
-  console.log(this.allorders);
-  });
-}
+      .subscribe(getOrders => {
+        this.allorders = JSON.parse(getOrders['_body']);
+        this.Income(this.allorders);
+        console.log(this.allorders);
+      });
+  }
 
   Income(adat) {
     this.income = 0;
@@ -81,15 +88,13 @@ export class StatisticsComponent implements OnInit {
       for (let j = 0; j < adat[i].products.length; j++) {
         sumprice += adat[i].products[j].product.price * adat[i].products[j].quantity;
         sumsold += adat[i].products[j].quantity;
-        this.chartData.push = [i + 1, 6 + i];
           
         this.newDate = new Date(adat[i].createdAt);
         if (this.newDate.getMonth() === this.currentmonth) {
           this.ordersofoneday += adat[i].products[j].quantity;
           
         }
-        
-
+        // this.chartData.push(['nap', 6 + i]);
       }
       this.sumsoldstuff += sumsold;
       this.income += sumprice;
@@ -103,5 +108,5 @@ export class StatisticsComponent implements OnInit {
     for (let i = 0; i < data.length; i++) {
       this.pieChartData.dataTable.push(data[i]);
     }
-}
+  }
 }
