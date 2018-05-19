@@ -163,7 +163,6 @@ export class StatisticsComponent {
           this.ordersofoneday += adat[i].products[j].quantity;
 
         }
-        this.chartData.push(['nap', 6 + i]);
       }
       this.sumsoldstuff += sumsold;
       this.income += sumprice;
