@@ -6,7 +6,9 @@
         "test": "mocha"
     },
     "nodemonConfig": {
-        "ignore": ["db/*"],
+        "ignore": [
+            "db/*"
+        ],
         "delay": "1000"
     },
     "dependencies": {

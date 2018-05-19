@@ -29,8 +29,8 @@ export class StatisticsComponent implements OnInit {
   currentdate = '2018-05-16T13:21:04.430Z';
   ordersofoneday = 0;
 
-  chartData = [
-    ['Rendelések', 'Napra leosztott rendelések'],
+  chartData: any = [
+    ['0', 'Napra leosztott rendelések'],
     ['1.', 10],
     
   ];
@@ -62,6 +62,7 @@ export class StatisticsComponent implements OnInit {
         this.allusers = JSON.parse(getUsers['_body']);
         this.sumuser = this.Lengthening(this.allusers);
       });
+      console.log(typeof this.chartData);
   }
 
   getOrders() {
@@ -89,7 +90,7 @@ export class StatisticsComponent implements OnInit {
           this.ordersofoneday += adat[i].products[j].quantity;
           
         }
-        this.chartData.push(['nap', 6 + i]);
+        (this.chartData).push([`${i+1}`, 6 + i]);
       }
       this.sumsoldstuff += sumsold;
       this.income += sumprice;
