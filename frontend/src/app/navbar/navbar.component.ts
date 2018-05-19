@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Http, RequestOptions } from '@angular/http';
+import { Router } from '@angular/router';
 declare var $: any;
 declare var jquery: any;
 
@@ -32,7 +33,7 @@ export class NavbarComponent implements OnInit {
   userAdmin = 'false';
   loginError = false;
 
-  constructor(public http: Http) {
+  constructor(public http: Http, public router: Router) {
     this.profile();
   }
 /**
@@ -121,6 +122,11 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  reload() {
+    window.location.reload();
+    this.router.navigate(['/statistics']);
   }
 
 }
