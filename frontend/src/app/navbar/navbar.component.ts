@@ -17,7 +17,8 @@ export class NavbarComponent implements OnInit {
     { label: 'Felhasználók', url: '/users' },
     { label: 'Termékek', url: '/products' },
     { label: 'Rendelések', url: '/orders' },
-    { label: 'Statisztika', url: '/statistics' }
+    { label: 'Statisztika', url: '/statistics' },
+    { label: 'Kapcsolat', url: '/contact' }
   ];
   user: any = {
     username: 'a@b.c',

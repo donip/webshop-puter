@@ -40,10 +40,7 @@ export class StatisticsComponent {
   selectedMonth = '05';
   dataToPush: [String, Number];
 
-
   chartData = [];
-
-
 
   constructor(public http: Http) {
     this.getUsers();
@@ -166,7 +163,7 @@ export class StatisticsComponent {
           this.ordersofoneday += adat[i].products[j].quantity;
 
         }
-        // this.chartData.push(['nap', 6 + i]);
+        this.chartData.push(['nap', 6 + i]);
       }
       this.sumsoldstuff += sumsold;
       this.income += sumprice;

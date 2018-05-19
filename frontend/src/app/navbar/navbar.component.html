@@ -7,6 +7,8 @@
       <li *ngIf="userAdmin === 'true'" class="nav-item justify-content"><a class="nav-link text-center" routerLink="/products">Termékek</a></li>
       <li *ngIf="userAdmin === 'true'" class="nav-item justify-content"><a class="nav-link text-center" routerLink="/orders">Rendelések</a></li>
       <li *ngIf="userAdmin === 'true'" class="nav-item justify-content"><a class="nav-link text-center" (click)="reload()">Statisztika</a></li>
+      <li class="nav-item justify-content"><a class="nav-link text-center" routerLink="/contact">Kapcsolat</a></li>
+
     </ul>
     <div class="ml-auto">
     <button *ngIf="userName === 'none'" class="btn btn-success"  (click)="showLoginModal()">Bejelentkezés</button>
