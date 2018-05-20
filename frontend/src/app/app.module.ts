@@ -61,7 +61,7 @@ const routes: Routes = [
     Ng2GoogleChartsModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [NavbarComponent],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

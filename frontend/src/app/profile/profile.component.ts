@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { NavbarComponent } from '../navbar/navbar.component';
 import { Http, RequestOptions } from '@angular/http';
 
 @Component({
