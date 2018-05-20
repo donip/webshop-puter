@@ -20,7 +20,8 @@ export class StatisticsComponent {
     options: {
       'title': 'Havi bevétel napokra leosztva',
       is3D: true,
-      legend: 'none'
+      legend: 'none',
+      height: 500
     },
   };
   d = new Date();
@@ -39,6 +40,8 @@ export class StatisticsComponent {
   selectedYear = '2018';
   selectedMonth = '05';
   dataToPush: [String, Number];
+  displayChart: Boolean = false;
+
   chartData = [];
 
   constructor(public http: Http) {
@@ -133,6 +136,7 @@ export class StatisticsComponent {
     }
     const clone = JSON.parse(JSON.stringify(this.pieChartData));
     this.pieChartData = clone;
+    this.displayChart = true;
   }
   /**
    * Visszaadja adot év adott hónapjában a napok számát

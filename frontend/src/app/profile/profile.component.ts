@@ -31,7 +31,10 @@ export class ProfileComponent {
   constructor(public http: Http) {
     this.profile();
   }
-
+/**
+ * Felhasználói profil lekérése
+ * A hiányzó mezők kiegészítése ngModel számára
+ */
   profile() {
     const checkKey = ['phone', 'delivery', 'invoice'];
     const completeKey = ['', { postcode: '', city: '', address: '' }, { postcode: '', city: '', address: '' }];
@@ -48,7 +51,10 @@ export class ProfileComponent {
         console.log(data);
       });
   }
-
+/**
+ * Profil módosítása input adatokkal
+ * Szerver válasza szerint üzenet megjelenítésének indítása
+ */
   updateProfile() {
     this.http.put(this.baseUrl + 'useradmin/' + this.profileData['_id'], this.profileData, this.options)
       .subscribe(data => {
@@ -57,7 +63,11 @@ export class ProfileComponent {
         } else { this.displayMessage('error'); }
       });
   }
-
+/**
+ * 6 másodpercre megváltoztatja userMesseage értékét true-ra
+ * HTML-ben ngIf figyeli a változót
+ * @param type String - success || error - üzenet típusa
+ */
   displayMessage(type) {
     this.userMessage = type;
     setTimeout(() => {
