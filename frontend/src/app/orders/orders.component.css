@@ -1,6 +1,13 @@
 .tr-customer {
-    background: linear-gradient( #d6d6d6 , rgb(243, 243, 243),white);
+  background: linear-gradient( #d6d6d6 , rgb(243, 243, 243),white);
 }
+
 .tr-head {
-    font-size: 60%;
+  font-size: 60%;
+}
+
+.jumbotron {
+  background: url("../../assets/order.jpg") center center no-repeat;
+  color: white;
+  text-shadow: 0px 0px 10px black;
 }

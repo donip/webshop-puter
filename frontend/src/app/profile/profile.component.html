@@ -1,11 +1,13 @@
-<div class="container">
-  <div *ngIf="userMessage.status === 'success'" class="messageBox alert alert-success col-12 text-center">{{userMessage.text}}</div>
-  <div *ngIf="userMessage.status === 'error'" class="messageBox alert alert-danger col-12 text-center">{{userMessage.text}}</div>
+<div class="container-fluid">
+    <div *ngIf="userMessage.status === 'success'" class="messageBox alert alert-success col-12 text-center">{{userMessage.text}}</div>
+    <div *ngIf="userMessage.status === 'error'" class="messageBox alert alert-danger col-12 text-center">{{userMessage.text}}</div>
   <div class="jumbotron jumbotron-fluid">
     <h1 class="display-2 text-center">Profil</h1>
   </div>
   <hr>
   <br>
+</div>
+<div class="container">
   <h3>Profil adatok szerkesztése</h3>
   <form #profileForm="ngForm">
 
