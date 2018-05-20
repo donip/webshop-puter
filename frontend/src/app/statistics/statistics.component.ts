@@ -59,6 +59,7 @@ export class StatisticsComponent {
         this.allusers = JSON.parse(getUsers['_body']);
         this.sumuser = this.Lengthening(this.allusers);
       });
+      console.log(typeof this.chartData);
   }
   /**
    * Rendelési adatok lekérése és betöltése
