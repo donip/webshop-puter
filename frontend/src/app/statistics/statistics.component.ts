@@ -109,7 +109,6 @@ export class StatisticsComponent {
       this.generateChartData(i, sum);
     }
     this.populateChart(this.chartData);
-    console.log(this.chartData);
   }
   /**
    * Nap és bevétel adat dataToPush tömb értékadása
@@ -125,12 +124,15 @@ export class StatisticsComponent {
   }
   /**
    * Feltölti a Google Chart-ot a kigyűjtött adatokkal
+   * Ha kész újra assign-olja a pieChartData objektumot, hogy az Angular frissítse a chartot
    * @param data : Array - Grafikon összegyűjtött előzetes adatai
    */
   populateChart(data) {
     for (let i = 0; i < data.length; i++) {
       this.pieChartData.dataTable.push(data[i]);
     }
+    const clone = JSON.parse(JSON.stringify(this.pieChartData));
+    this.pieChartData = clone;
   }
   /**
    * Visszaadja adot év adott hónapjában a napok számát

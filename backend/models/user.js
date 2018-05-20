@@ -11,6 +11,31 @@ const userSchema = mongoose.Schema({
     required: true,
     unique: true,
   },
+  phone: {
+    type: String,
+  },
+  invoice: {
+    city: {
+      type: String,
+    },
+    address: {
+      type: String,
+    },
+    postcode: {
+      type: Number,
+    },
+  },
+  delivery: {
+    city: {
+      type: String,
+    },
+    address: {
+      type: String,
+    },
+    postcode: {
+      type: Number,
+    },
+  },
   isAdmin: {
     type: String,
     required: true,
