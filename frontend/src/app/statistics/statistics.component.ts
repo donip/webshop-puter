@@ -36,29 +36,9 @@ export class StatisticsComponent {
   currentdate = '2018-05-16T13:21:04.430Z';
   ordersofoneday = 0;
 
-<<<<<<< HEAD
-  chartData: any = [
-    ['0', 'Napra leosztott rendelések'],
-    ['1.', 10],
-    
-  ];
-
-  pieChartData: any = {
-    chartType: 'ColumnChart',
-    dataTable:
-      this.chartData,
-    options: {
-      'title': 'Havi rendelések',
-      hAxis: {title: "Time"},
-      legend: 'none'
-    },
-  };
-=======
   selectedYear = '2018';
   selectedMonth = '05';
   dataToPush: [String, Number];
->>>>>>> 6bc246e395287b50849b7d6c445d9690802fbd80
-
   chartData = [];
 
   constructor(public http: Http) {
@@ -183,10 +163,6 @@ export class StatisticsComponent {
           this.ordersofoneday += adat[i].products[j].quantity;
 
         }
-<<<<<<< HEAD
-        (this.chartData).push([`${i+1}`, 6 + i]);
-=======
->>>>>>> 6bc246e395287b50849b7d6c445d9690802fbd80
       }
       this.sumsoldstuff += sumsold;
       this.income += sumprice;
