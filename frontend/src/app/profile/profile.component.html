@@ -1,26 +1,43 @@
 <div class="container">
-    <div *ngIf="userMessage.status === 'success'" class="messageBox alert alert-success col-12 text-center">{{userMessage.text}}</div>
-    <div *ngIf="userMessage.status === 'error'" class="messageBox alert alert-danger col-12 text-center">{{userMessage.text}}</div>
+  <div *ngIf="userMessage.status === 'success'" class="messageBox alert alert-success col-12 text-center">{{userMessage.text}}</div>
+  <div *ngIf="userMessage.status === 'error'" class="messageBox alert alert-danger col-12 text-center">{{userMessage.text}}</div>
   <div class="jumbotron jumbotron-fluid">
     <h1 class="display-2 text-center">Profil</h1>
   </div>
   <hr>
   <br>
   <h3>Profil adatok szerkesztése</h3>
-  <form>
+  <form #profileForm="ngForm">
+
     <div class="form-group">
       <label>Név</label>
       <input type="text" name="username" class="form-control" [(ngModel)]="profileData.username">
     </div>
+
     <div class="form-group">
       <hr>
       <label>Email</label>
-      <input type="email" name="email" class="form-control" [(ngModel)]="profileData.email">
+      <input type="email" name="email" class="form-control" [(ngModel)]="profileData.email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+        required #email="ngModel">
+      <div [hidden]="email.valid || email.pristine" class="alert alert-danger">
+        <div [hidden]="!email.hasError('required')">Kötelező kitölteni.</div>
+        <div [hidden]="!email.hasError('pattern')">Email formátum. Pl.:
+          <small>
+            <b>kisjozsi@abc.hu</b>
+          </small>
+        </div>
+      </div>
     </div>
+
     <div class="form-group">
       <hr>
       <label>Telefonszám</label>
-      <input type="text" name="phone" class="form-control" placeholder="+36..." [(ngModel)]="profileData.phone">
+      <input type="text" name="phone" class="form-control" placeholder="+36..." [(ngModel)]="profileData.phone" pattern="[0-9]*"
+        minlength="8" maxlength="8" #phone="ngModel">
+      <div [hidden]="phone.valid || phone.pristine" class="alert alert-danger">
+        <div [hidden]="!phone.hasError('minlength')">8 jegyű telefonszám formátum. Pl.: 30234333</div>
+        <div [hidden]="!phone.hasError('pattern')">A telefonszám csak számokat tartalmazhat. Pl.: 30234333</div>
+      </div>
     </div>
     <hr>
     <div class="form-group">
@@ -46,26 +63,29 @@
       </div>
       <input type="text" name="addressI" class="form-control" placeholder="Cím" [(ngModel)]="profileData.invoice.address">
     </div>
+    <button class="btn btn-success" [disabled]="!profileForm.form.valid" (click)="updateProfile()">Módosítások mentése</button>
   </form>
-  <button class="btn btn-success" (click)="updateProfile()">Módosítások mentése</button>
 </div>
 <br>
 <hr>
 <br>
 <div class="container">
   <h3>Jelszómódosítás</h3>
-  <form>
-    <div class="form-group">
-      <input type="password" name="old" class="form-control" placeholder="Régi jelszó" [(ngModel)]="setPassword.oldPassword" required>
+  <form #pwForm="ngForm">
+    <div class=" form-group ">
+      <input type="password " name="old " class="form-control " placeholder="Régi jelszó " [(ngModel)]="setPassword.oldPassword "
+        required>
     </div>
     <hr>
-    <div class="form-group">
-      <input type="password" name="new1" class="form-control" placeholder="Új jelszó" [(ngModel)]="setPassword.newPassword" required>
+    <div class="form-group ">
+      <input type="password " name="new1 " class="form-control " placeholder="Új jelszó " [(ngModel)]="setPassword.newPassword "
+        required>
     </div>
-    <div class="form-group">
-      <input type="password" name="new2" class="form-control" placeholder="Új jelszó megerősítése" [(ngModel)]="setPassword.newPassword2" required>
+    <div class="form-group ">
+      <input type="password " name="new2 " class="form-control " placeholder="Új jelszó megerősítése " [(ngModel)]="setPassword.newPassword2 "
+        required>
     </div>
+    <button class="btn btn-success " [disabled]="!pwForm.form.valid " (click)="updatePassword() ">Új jelszó mentése</button>
   </form>
-  <button class="btn btn-success" (click)="updatePassword()">Új jelszó mentése</button>
 </div>
-<div style="height: 500px"></div>
+<div style="height: 500px "></div>
