@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { AgmCoreModule } from '@agm/core';
 declare const google: any;
 
@@ -14,7 +15,9 @@ export class ContactComponent implements OnInit {
 
   constructor() { }
 
+
   ngOnInit() {
   }
 
 }
+

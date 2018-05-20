@@ -32,17 +32,16 @@
     </div>
     <br>
     <div class="col-md-5">
-      <form>
+      <form method="POST" action="send" >
         <div class="form-group">
           <H5>Írjon nekünk!</H5>
           <hr>
-          <input type="email" class="form-control" id="InputEmail1" aria-describedby="emailHelp" placeholder="az Ön email címe">
+          <input class="form-control" type="email" name="email" placeholder="az Ön email címe">
         </div>
         <div class="form-group">
-          <textarea class="form-control" id="Textarea" rows="5" placeholder="az Ön észrevételei"></textarea>
+          <textarea class="form-control" name="message" rows="5" placeholder="az Ön észrevételei"></textarea>
         </div>
-
-        <button type="submit" class="btn btn-block btn-outline-dark">Submit</button>
+        <button class="btn btn-block btn-outline-dark" type="submit">Submit</button>
       </form>
       <br>
     </div>
