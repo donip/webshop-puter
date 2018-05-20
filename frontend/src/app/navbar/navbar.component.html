@@ -6,15 +6,16 @@
       <li *ngIf="userAdmin === 'true'" class="nav-item justify-content"><a class="nav-link text-center" routerLink="/users">Felhasználók</a></li>
       <li *ngIf="userAdmin === 'true'" class="nav-item justify-content"><a class="nav-link text-center" routerLink="/products">Termékek</a></li>
       <li *ngIf="userAdmin === 'true'" class="nav-item justify-content"><a class="nav-link text-center" routerLink="/orders">Rendelések</a></li>
-      <li *ngIf="userAdmin === 'true'" class="nav-item justify-content"><a class="nav-link text-center" routerLink="/statistics">Statisztika</a></li>
+      <li *ngIf="userAdmin === 'true'" class="nav-item justify-content"><a class="nav-link text-center" (click)="reload()">Statisztika</a></li>
       <li class="nav-item justify-content"><a class="nav-link text-center" routerLink="/contact">Kapcsolat</a></li>
+
     </ul>
     <div class="ml-auto">
-    <button *ngIf="userName === 'none'" class="btn btn-success" href="#" (click)="showLoginModal()">Bejelentkezés</button>
-    <button *ngIf="userName === 'none'" class="btn btn-primary" href="#" routerLink="/register">Regisztráció</button>
-    <button *ngIf="userName !== 'none' && userAdmin === 'false'" class="btn btn-success" href="#" routerLink="/profile" >{{userName}}</button>
-    <button *ngIf="userAdmin === 'true'" class="btn btn-success" href="#" routerLink="/statistics" >ADMIN: {{userName}}</button>
-    <button *ngIf="userName !=='none'" class="btn btn-danger" href="#" routerLink="/main" (click)="logout()" >Kijelentkezés</button>
+    <button *ngIf="userName === 'none'" class="btn btn-success"  (click)="showLoginModal()">Bejelentkezés</button>
+    <button *ngIf="userName === 'none'" class="btn btn-primary" routerLink="/register">Regisztráció</button>
+    <button *ngIf="userName !== 'none' && userAdmin === 'false'" class="btn btn-success" routerLink="/profile" >{{userName}}</button>
+    <button *ngIf="userAdmin === 'true'" class="btn btn-success" (click)="reload()" >ADMIN: {{userName}}</button>
+    <button *ngIf="userName !=='none'" class="btn btn-danger" routerLink="/main" (click)="logout()" >Kijelentkezés</button>
   </div>
   </div>
 </nav>
