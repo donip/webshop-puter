@@ -19,7 +19,6 @@ const nodemailer = require('nodemailer');
 
 const orderRouter = require('./route/order.route');
 const useradminRouter = require('./route/useradmin.route');
-const Contact = require('./models/contact');
 // const contactRouter = require('./route/contact.route');
 
 const logDirectory = path.join(__dirname, 'log');
@@ -103,16 +102,7 @@ app.listen(port);
 
 app.use('/uploads', express.static('./uploads'));
 
-/**
- * @todo külön alkalmazásban már működik, itt még a clg(req.body) sem látszik
- */
-
-app.post('/contact/register', (req, res) => {
-  const output = `
-    <p>incoming message from a client</p>
-    <p>Email: ${req.body.email}</p>
-    <p>Email: ${req.body.message}</p>
-    `;
+app.post('/contact/sendClientMsg', (req, res) => {
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
@@ -123,25 +113,14 @@ app.post('/contact/register', (req, res) => {
   const mailOptions = {
     from: 'youremail@gmail.com', // X-Google-Original-From:
     to: 'pjutoersmitt@gmail.com',
-    subject: 'Sending Email using Node.js',
-    text: 'That was not easy!',
-    html: output,
+    subject: `Ügyfél észrevétel From: ${req.body.email}`,
+    text: req.body.coreMsg,
   };
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
       console.log(error);
     } else {
-      console.log(`Email sent: ${  info.response}`);
-      res.render('contact', { msg: 'Email has been sent' });
+      res.json({ success: `Email sent: ${info.response}` });
     }
   });
-  Contact.register(new Contact({
-    username: req.body.username,
-    email: req.body.email,
-    isAdmin: req.body.isAdmin,
-  }), req.body.password)
-    .then(() => res.json({
-      success: 'Sikeres regisztráció a server útvonalon',
-    }))
-    .catch(err => res.send(err));
 });

@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Http, RequestOptions } from '@angular/http';
 import { Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { AgmCoreModule } from '@agm/core';
+declare const google: any;
 
 @Component({
     selector: 'app-contact',
@@ -8,32 +11,20 @@ import { Router } from '@angular/router';
     styleUrls: ['./contact.component.css']
 })
 export class ContactComponent implements OnInit {
-
-  user: any = {
-    username: '',
+  lat = 47.4977973;
+  lng = 19.0403225;
+  msg: any = {
     email: '',
-    password: '',
-    isAdmin: 'false'
+    coreMsg: '',
   };
-  passwordConf: '';
 
-
-  options = new RequestOptions({ withCredentials: true });
   baseUrl = 'http://localhost:8080/contact/';
 
   constructor(public http: Http,
               public router: Router) { }
 
-  validation() {
-    if (this.user.password !== this.passwordConf) {
-      return alert('Jelszó nem egyezik.');
-    } else {
-      this.register();
-    }
-  }
-
-  register() {
-    this.http.post(this.baseUrl + 'register', this.user, this.options)
+  sendMsg() {
+    this.http.post(this.baseUrl + 'sendClientMsg', this.msg)
       .subscribe(data => {
         console.log(data['_body']);
       });
