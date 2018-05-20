@@ -1,49 +1,75 @@
-<!-- this creates a google map on the page with the given lat/lng from -->
-<!-- the component as the initial center of the map: -->
-
-<agm-map [latitude]="lat" [longitude]="lng">
-  <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
-</agm-map>
-<br>
+<div class="container-fluid">
+    <div class="jumbotron jumbotron-fluid">
+      <h1 class="display-2 text-center">TudakozóPanasz</h1>
+    </div>
+    <hr>
+    <br>
+</div>
 <div class="container">
   <div class="row">
-    <div class="col-md-5 offset-md-1">
-      <h5>ELÉRHETŐSÉGEINK</h5>
-      <hr>
-      <div>
-        <strong>Bemutatóterem:</strong>
-        3210-Acélváros, Gagarin utca 101/B.</div>
-      <div>
-        <strong>Tel:</strong>
-        +19/ 841-9841</div>
-      <div>
-        <strong>Fax:</strong>
-        +84/ 198-4198</div>
-      <div>
-        <strong>Email:</strong>
-        pjutoersmitt@gmail.com</div>
-      <br>
-      <div>
-        <strong>H-P: </strong>
-        10:00 - 21:00</div>
-      <div>
-        <strong>Szo-Va: </strong>
-        12:00 - 16:00</div>
-    </div>
-    <br>
-    <div class="col-md-5">
-      <form method="POST" action="send" >
-        <div class="form-group">
-          <H5>Írjon nekünk!</H5>
-          <hr>
-          <input class="form-control" type="email" name="email" placeholder="az Ön email címe">
+    <div class="col-md-6 offset-md-3">
+      <label for="name">Név</label>
+      <input class="form-control" type="text" id="name" [(ngModel)]="user.username" required #name="ngModel">
+      <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
+        <div *ngIf="name.errors.required">
+          Kötelező kitölteni.
         </div>
-        <div class="form-group">
-          <textarea class="form-control" name="message" rows="5" placeholder="az Ön észrevételei"></textarea>
+      </div>
+
+      <label for="email">Email</label>
+      <input class="form-control" type="email" id="email" [(ngModel)]="user.email" required #email="ngModel">
+      <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
+        <div *ngIf="email.errors.required">
+          Kötelező kitölteni.
         </div>
-        <button class="btn btn-block btn-outline-dark" type="submit">Submit</button>
-      </form>
-      <br>
+      </div>
+
+      <label for="password">Jelszó</label>
+      <div class="form-group has-danger">
+        <div class="input-group">
+
+          <input type="password" name="password" class="form-control" id="passwordReg" minlength="8" required [(ngModel)]="user.password"
+            #password="ngModel">
+        </div>
+      </div>
+
+      <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert-danger">
+        <div *ngIf="password.errors.required">
+            Kötelező kitölteni.
+        </div>
+        <div *ngIf="password.errors.minlength">
+          Minimum 8 karakter
+        </div>
+      </div>
+
+      <label for="password2">Jelszó megerősítése</label>
+      <div class="form-group">
+        <div class="input-group">
+          <input type="password" name="passwordConfirmation" class="form-control" id="passwordConfirm" required [(ngModel)]="passwordConf">
+        </div>
+      </div>
+
+
+      <input type="button" class="btn btn-success" value="Panasz beküldése" (click)="validation()">
     </div>
   </div>
 </div>
+
+
+
+<!--
+    <label for="password">Password</label>
+<input class="form-control" type="password" id="password" minlength="8" required [(ngModel)]="user.password" #password="ngModel">
+
+<div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert-danger">
+    <div *ngIf="password.errors.required">
+        Password is required.
+      </div>
+    <div *ngIf="password.errors.minlength">
+        Password must be at least 8 characters long.
+    </div>
+</div>
+
+<label for="password">Confirm Password</label>
+
+-->

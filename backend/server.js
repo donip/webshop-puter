@@ -19,6 +19,8 @@ const nodemailer = require('nodemailer');
 
 const orderRouter = require('./route/order.route');
 const useradminRouter = require('./route/useradmin.route');
+const Contact = require('./models/contact');
+// const contactRouter = require('./route/contact.route');
 
 const logDirectory = path.join(__dirname, 'log');
 const port = process.env.PORT || 8080;
@@ -92,6 +94,10 @@ app.use('/order/', orderRouter);
 // useradmin router
 app.use('/useradmin/', useradminRouter);
 
+// contact router
+// app.use('/contact/', contactRouter);
+
+
 // Start server
 app.listen(port);
 
@@ -100,14 +106,13 @@ app.use('/uploads', express.static('./uploads'));
 /**
  * @todo külön alkalmazásban már működik, itt még a clg(req.body) sem látszik
  */
-app.post('/send', (req, res) => {
-  const output = `
-  <p>incoming message from a client</p>
-  <p>Email: ${req.body.email}</p>
-  <p>Email: ${req.body.message}</p>
-  `;
-  console.log(req.body);
 
+app.post('/contact/register', (req, res) => {
+  const output = `
+    <p>incoming message from a client</p>
+    <p>Email: ${req.body.email}</p>
+    <p>Email: ${req.body.message}</p>
+    `;
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
@@ -115,7 +120,6 @@ app.post('/send', (req, res) => {
       pass: 'kiafaszagyerek',
     },
   });
-
   const mailOptions = {
     from: 'youremail@gmail.com', // X-Google-Original-From:
     to: 'pjutoersmitt@gmail.com',
@@ -123,13 +127,21 @@ app.post('/send', (req, res) => {
     text: 'That was not easy!',
     html: output,
   };
-
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
       console.log(error);
     } else {
-      console.log(`Email sent: ${info.response}`);
+      console.log(`Email sent: ${  info.response}`);
       res.render('contact', { msg: 'Email has been sent' });
     }
   });
+  Contact.register(new Contact({
+    username: req.body.username,
+    email: req.body.email,
+    isAdmin: req.body.isAdmin,
+  }), req.body.password)
+    .then(() => res.json({
+      success: 'Sikeres regisztráció a server útvonalon',
+    }))
+    .catch(err => res.send(err));
 });
