@@ -54,13 +54,14 @@ module.exports = {
    * Feltétele, hogy a felhasználó be legyen jelentkezve, és helyesen adja meg a régi jelszót.
    * @param {Object} req - HTTP request objektum
    * @param {Object} res - HTTP response objektum
-   * @returns {Object} - sikeres jelszóváltoztatás esetén success tulajdonságú objektumot ad vissza, hiba esetén err tulajdonságú objektumot küld
+   * @returns {Object} - sikeres jelszóváltoztatás esetén success tulajdonságú objektumot ad vissza,
+   * hiba esetén err tulajdonságú objektumot küld
    */
   changePass: (req, res) => {
     if (req.user) {
       if (req.user['_id'] == req.params.id) {
         User.findById(req.params.id).then((user) => {
-          user.changePassword(req.body.password, req.body.newPassword, (passwordErr) => {
+          user.changePassword(req.body.oldPassword, req.body.newPassword, (passwordErr) => {
             if (passwordErr) {
               res.status(401).json({ err: 'Rossz jelszó' });
             } else {
