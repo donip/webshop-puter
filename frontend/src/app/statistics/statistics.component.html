@@ -2,24 +2,26 @@
   <table class="table">
     <thead>
       <tr class="text-center">
-          <th scope="col">Átlagos kosárérték</th>
-          <th scope="col">Termék / rendelés </th>
-          <th scope="col">Eladott termékek</th>
-          <th scope="col">Rendelések száma</th>
-          <th scope="col">Bevétel</th>
-          <th scope="col">Felhasználók</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr class="text-center">
-            <td>{{(income/sumbuyer) | number:'1.0-2'}} Ft</td>
-            <td>{{(sumsoldstuff/sumbuyer).toFixed(0)}}</td>
-            <td>{{sumsoldstuff}}</td>
-            <td>{{sumbuyer}}</td>
-            <td>{{income | number:'1.0-2'}} Ft</td>
-            <td>{{sumuser}} Fő</td>
-        </tr>
-      </tbody>
-    </table>
-  <google-chart [data]="pieChartData"></google-chart>
+        <th scope="col">Átlagos kosárérték</th>
+        <th scope="col">Termék / rendelés </th>
+        <th scope="col">Eladott termékek</th>
+        <th scope="col">Rendelések száma</th>
+        <th scope="col">Bevétel</th>
+        <th scope="col">Felhasználók</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="text-center">
+        <td>{{(income/sumbuyer) | number:'1.0-2'}} Ft</td>
+        <td>{{(sumsoldstuff/sumbuyer).toFixed(0)}}</td>
+        <td>{{sumsoldstuff}}</td>
+        <td>{{sumbuyer}}</td>
+        <td>{{income | number:'1.0-2'}} Ft</td>
+        <td>{{sumuser}} Fő</td>
+      </tr>
+    </tbody>
+  </table>
+  <div *ngIf="displayChart">
+    <google-chart style="height: 500px" [data]="pieChartData"></google-chart>
+  </div>
 </div>
