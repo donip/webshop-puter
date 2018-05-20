@@ -1,0 +1,29 @@
+<div class="container">
+    <h3>Profil adatok szerkesztése</h3>
+    <form>
+      <div class="form-group">
+        <label>Név</label>
+        <input type="text" name="username" class="form-control" [(ngModel)]="profileData.username">
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" name="email" class="form-control" [(ngModel)]="profileData.email">
+      </div>
+      <div class="form-group">
+        <label>Telefonszám</label>
+        <input type="text" name="phone" class="form-control" placeholder="+36...">
+      </div>
+      <div class="form-group">
+        <label>Szállítási cím</label>
+        <input type="number" maxlength="4" minlength="4" name="postcodeD" class="form-control" placeholder="Irányítószám">
+        <input type="text" name="cityD" class="form-control" placeholder="Város">
+        <input type="text" name="addressD" class="form-control" placeholder="Cím">
+      </div>
+      <div class="form-group">
+        <label>Számlázási cím</label>
+        <input type="number" maxlength="4" minlength="4" name="postcodeI" class="form-control" placeholder="Irányítószám">
+        <input type="text" name="cityI" class="form-control" placeholder="Város">
+        <input type="text" name="addressI" class="form-control" placeholder="Cím">
+      </div>
+    </form>
+</div>
