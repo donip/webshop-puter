@@ -20,10 +20,13 @@ import { OrdersComponent } from './orders/orders.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ContactComponent } from './contact/contact.component';
 import { MainComponent } from './main/main.component';
+import { ProfileComponent } from './profile/profile.component';
+import { CartComponent } from './cart/cart.component';
 
 const routes: Routes = [
   { path: '', component: MainComponent, pathMatch: 'full' },
   { component: MainComponent, path: 'main' },
+  { component: ProfileComponent, path: 'profile' },
   { component: LoginComponent, path: 'login' },
   { component: RegisterComponent, path: 'register' },
   { component: ProductsComponent, path: 'products' },
@@ -45,7 +48,9 @@ const routes: Routes = [
     NavbarComponent,
     FileSelectDirective,
     ContactComponent,
-    MainComponent
+    MainComponent,
+    ProfileComponent,
+    CartComponent
   ],
   imports: [
     AgmCoreModule.forRoot({
