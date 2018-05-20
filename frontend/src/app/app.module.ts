@@ -21,6 +21,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { ContactComponent } from './contact/contact.component';
 import { MainComponent } from './main/main.component';
 import { ProfileComponent } from './profile/profile.component';
+import { CartComponent } from './cart/cart.component';
 
 const routes: Routes = [
   { path: '', component: MainComponent, pathMatch: 'full' },
@@ -48,7 +49,8 @@ const routes: Routes = [
     FileSelectDirective,
     ContactComponent,
     MainComponent,
-    ProfileComponent
+    ProfileComponent,
+    CartComponent
   ],
   imports: [
     AgmCoreModule.forRoot({
