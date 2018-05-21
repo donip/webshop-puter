@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { Http, RequestOptions } from '@angular/http';
+import { Http, Headers, Response, RequestOptions } from '@angular/http';
+
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -36,8 +38,26 @@ export class ProfileComponent {
   baseUrl: String = 'http://localhost:8080/';
   options = new RequestOptions({ withCredentials: true });
 
-  constructor(public http: Http) {
+  orders: any;
+  selectedOrder = {
+    customer: '',
+    products: [{
+      product: '',
+      quantity: '',
+    }],
+    status: '',
+  };
+  userData: any;
+  products: any;
+  doneOrders: any;
+  activeOrders: any;
+
+
+  constructor(public http: Http, public router: Router) {
     this.profile();
+    this.getOrders();
+    this.getUsers();
+    this.getProducts();
   }
   /**
    * Felhasználói profil lekérése
@@ -119,4 +139,56 @@ export class ProfileComponent {
       this.userMessage['status'] = 'none';
     }, 8000);
   }
+  getUsers() {
+    this.http.get('http://localhost:8080/useradmin/', this.options)
+      .subscribe(data => {
+        this.userData = JSON.parse(data['_body']);
+        console.log(this.userData);
+      });
+  }
+
+  getOrders() {
+    this.http.get('http://localhost:8080/order/', this.options)
+      .subscribe(data => {
+        const d = JSON.parse(data['_body']);
+        if (d.err) {
+          this.router.navigate(['/login']);
+        } else {
+          for (let i = 0; i < d.length; i++) {
+            for (let j = 0; j < d[i].products.length; j++) {
+              if (d[i].products[j]['product'] === null) {
+                d[i].products[j]['product'] = { productname: 'Termék törölve' };
+              }
+            }
+          }
+          this.orders = d;
+          this.listActiveOrders();
+          this.listDoneOrders();
+
+        }
+      });
+  }
+
+  getProducts() {
+    this.http.get('http://localhost:8080/product', this.options)
+      .subscribe(data => {
+        this.products = JSON.parse(data['_body']);
+      });
+  }
+
+  listDoneOrders() {
+    this.doneOrders = this.orders.filter(order => order.status === 'done');
+    this.doneOrders = this.orders.filter(order => order.customer._id === this.profileData['_id']);
+    console.log(this.profileData['_id']);
+  }
+
+  listActiveOrders() {
+    this.activeOrders = this.orders.filter(order => order.status === 'active');
+    this.activeOrders = this.orders.filter(order => order.customer._id === this.profileData['_id']);
+  }
+
+  getMyOrders() {
+
+  }
+
 }
