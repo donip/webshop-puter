@@ -1,6 +1,6 @@
 <div class="container-fluid">
-    <div *ngIf="userMessage.status === 'success'" class="messageBox alert alert-success col-12 text-center">{{userMessage.text}}</div>
-    <div *ngIf="userMessage.status === 'error'" class="messageBox alert alert-danger col-12 text-center">{{userMessage.text}}</div>
+  <div *ngIf="userMessage.status === 'success'" class="messageBox alert alert-success col-12 text-center">{{userMessage.text}}</div>
+  <div *ngIf="userMessage.status === 'error'" class="messageBox alert alert-danger col-12 text-center">{{userMessage.text}}</div>
   <div class="jumbotron jumbotron-fluid">
     <h1 class="display-2 text-center">Profil</h1>
   </div>
@@ -75,19 +75,122 @@
   <h3>Jelszómódosítás</h3>
   <form #pwForm="ngForm">
     <div class=" form-group ">
-      <input type="password " name="old " class="form-control " placeholder="Régi jelszó " [(ngModel)]="setPassword.oldPassword "
-        required>
+      <input type="password" name="old" class="form-control" placeholder="Régi jelszó" [(ngModel)]="setPassword.oldPassword" required>
     </div>
     <hr>
     <div class="form-group ">
-      <input type="password " name="new1 " class="form-control " placeholder="Új jelszó " [(ngModel)]="setPassword.newPassword "
+      <input type="password" name="new1" class="form-control" placeholder="Új jelszó" [(ngModel)]="setPassword.newPassword" required>
+    </div>
+    <div class="form-group">
+      <input type="password" name="new2" class="form-control" placeholder="Új jelszó megerősítése" [(ngModel)]="setPassword.newPassword2"
         required>
     </div>
-    <div class="form-group ">
-      <input type="password " name="new2 " class="form-control " placeholder="Új jelszó megerősítése " [(ngModel)]="setPassword.newPassword2 "
-        required>
-    </div>
-    <button class="btn btn-success " [disabled]="!pwForm.form.valid " (click)="updatePassword() ">Új jelszó mentése</button>
+    <button class="btn btn-success" [disabled]="!pwForm.form.valid" (click)="updatePassword()">Új jelszó mentése</button>
   </form>
 </div>
-<div style="height: 500px "></div>
+<br>
+<hr>
+<br>
+<div class="container">
+  <!-- (click)="getMyOrders()" -->
+  <button class="btn btn-success" data-toggle="modal" data-target="#exampleModal">Rendeléseim</button>
+</div>
+<div style="height: 50px "></div>
+<!-- ************************************** INNEN KEZDŐDIK A BOOGIE ************************************************************ -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Rendeléseim</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <div class="container">
+          <h3 class="text-center">Folyamatban lévő</h3>
+          <br>
+          <table class="table">
+            <tbody *ngFor="let order of activeOrders; let i = index">
+              <tr class="tr-customer">
+                <td>{{i+1}}</td>
+                <td>
+                  {{order.customer.username}}
+                </td>
+                <td>
+                  {{order.customer.email}}
+                </td>
+                <td>
+                  {{order.createdAt | date : 'yyyy.MM.dd HH:mm'}}
+                </td>
+                <td>{{order.status}}</td>
+              </tr>
+              <tr class="tr-head">
+                <td></td>
+                <td>Termék</td>
+                <td>Mennyiség</td>
+                <td>Összesen</td>
+                <td></td>
+              </tr>
+              <tr *ngFor="let pr of order.products">
+                <td></td>
+                <td>
+                  {{pr.product.productname}}
+                </td>
+                <td>
+                  {{pr.quantity}}
+                </td>
+                <td>{{pr.product.price*pr.quantity}}</td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <br>
+          <h2 class="text-center">Lezárult</h2>
+          <br>
+          <table class="table">
+            <tbody *ngFor="let order of doneOrders; let i = index">
+              <tr class="tr-customer">
+                <td>{{i+1}}</td>
+                <td>
+                  {{order.customer.username}}
+                </td>
+                <td>
+                  {{order.customer.email}}
+                </td>
+                <td>
+                  {{order.createdAt | date : 'yyyy.MM.dd HH:mm'}}
+                </td>
+                <td>{{order.status}}</td>
+              </tr>
+              <tr class="tr-head">
+                <td></td>
+                <td>Termék</td>
+                <td>Mennyiség</td>
+                <td>Összesen</td>
+                <td></td>
+              </tr>
+              <tr *ngFor="let pr of order.products">
+                <td></td>
+                <td>
+                  {{pr.product.productname}}
+                </td>
+                <td>
+                  {{pr.quantity}}
+                </td>
+                <td>{{pr.product.price*pr.quantity}}</td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
