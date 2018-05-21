@@ -1,0 +1,5 @@
+.modal .jumbotron {
+  background: url("../../assets/pewpew.jpg") no-repeat, grey;
+  color: white;
+  text-shadow: 0px 0px 10px black;
+}
