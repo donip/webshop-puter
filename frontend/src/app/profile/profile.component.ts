@@ -56,8 +56,6 @@ export class ProfileComponent {
   constructor(public http: Http, public router: Router) {
     this.profile();
     this.getMyOrders();
-    this.getUsers();
-    this.getProducts();
   }
   /**
    * Felhasználói profil lekérése
@@ -139,14 +137,10 @@ export class ProfileComponent {
       this.userMessage['status'] = 'none';
     }, 8000);
   }
-  getUsers() {
-    this.http.get('http://localhost:8080/useradmin/', this.options)
-      .subscribe(data => {
-        this.userData = JSON.parse(data['_body']);
-        console.log(this.userData);
-      });
-  }
 
+  /**
+   * @todo backendről már csak a customerId alapján szűrt adat jöjjön át
+   */
   getMyOrders() {
     this.http.get('http://localhost:8080/order/client', this.options)
       .subscribe(data => {
@@ -166,13 +160,6 @@ export class ProfileComponent {
           this.listMyDoneOrders();
 
         }
-      });
-  }
-
-  getProducts() {
-    this.http.get('http://localhost:8080/product', this.options)
-      .subscribe(data => {
-        this.products = JSON.parse(data['_body']);
       });
   }
 
