@@ -55,7 +55,7 @@ export class ProfileComponent {
 
   constructor(public http: Http, public router: Router) {
     this.profile();
-    this.getOrders();
+    this.getMyOrders();
     this.getUsers();
     this.getProducts();
   }
@@ -147,8 +147,8 @@ export class ProfileComponent {
       });
   }
 
-  getOrders() {
-    this.http.get('http://localhost:8080/order/', this.options)
+  getMyOrders() {
+    this.http.get('http://localhost:8080/order/client', this.options)
       .subscribe(data => {
         const d = JSON.parse(data['_body']);
         if (d.err) {
@@ -162,8 +162,8 @@ export class ProfileComponent {
             }
           }
           this.orders = d;
-          this.listActiveOrders();
-          this.listDoneOrders();
+          this.listMyActiveOrders();
+          this.listMyDoneOrders();
 
         }
       });
@@ -176,19 +176,12 @@ export class ProfileComponent {
       });
   }
 
-  listDoneOrders() {
-    this.doneOrders = this.orders.filter(order => order.status === 'done');
-    this.doneOrders = this.orders.filter(order => order.customer._id === this.profileData['_id']);
-    console.log(this.profileData['_id']);
+  listMyDoneOrders() {
+    this.doneOrders = this.orders.filter(order => order.status === 'done' && order.customer._id === this.profileData['_id']);
   }
 
-  listActiveOrders() {
-    this.activeOrders = this.orders.filter(order => order.status === 'active');
-    this.activeOrders = this.orders.filter(order => order.customer._id === this.profileData['_id']);
-  }
-
-  getMyOrders() {
-
+  listMyActiveOrders() {
+    this.activeOrders = this.orders.filter(order => order.status === 'active' && order.customer._id === this.profileData['_id']);
   }
 
 }

@@ -11,4 +11,7 @@ orderRouter.route('/:id')
   .put(OrderController.update)
   .delete(OrderController.remove);
 
+orderRouter.route('/client')
+  .get(OrderController.clientList);
+
 module.exports = orderRouter;
