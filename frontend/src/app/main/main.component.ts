@@ -57,7 +57,7 @@ export class MainComponent implements OnInit {
       });
   }
   /**
-   * szűri az utolsó 10 legfrissebb productra a módosítás szerint
+   * szűri a productokat az első 10 (legfeljebb!) legfrissebb productra a módosítás szerint
    */
   filterProducts() {
     this.lastTenProducts.sort((a, b) => {
@@ -72,8 +72,10 @@ export class MainComponent implements OnInit {
       // a-nak egyenlőnek kell lennie b-vel
       return 0;
     });
-  this.lastTenProducts.length = 10;
-  console.log(this.lastTenProducts)
+  if (this.lastTenProducts.length >= 10) {
+    this.lastTenProducts.length = 10;
+  }
+  console.log(this.lastTenProducts);
   }
 
   creator() {
