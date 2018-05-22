@@ -12,6 +12,7 @@ export class CartComponent implements OnInit {
   baseUrl = 'http://localhost:8080/order/';
   myCart: any;
   productsData: any;
+  userId: any;
   democart = {
     customer: '123c',
     products: [
@@ -24,14 +25,23 @@ export class CartComponent implements OnInit {
   };
   constructor(public http: Http) {
     this.getOrder();
-    this.getAll();
+    this.profile();
   }
 
   ngOnInit() {
   }
   getOrder() {
-    this.myCart = JSON.parse(localStorage.getItem('cart'));
-    console.log(this.myCart);
+    if (this.userId === JSON.parse(localStorage.getItem('cart')).customer) {
+      this.myCart = JSON.parse(localStorage.getItem('cart'));
+      console.log(this.myCart);
+    } else {
+      this.myCart = {
+        customer: '',
+        products: [
+          { productname: 'Üres a kosár', price: 0, quantity: 0 },
+        ],
+      };
+    }
   }
   setCart() {
     localStorage.setItem('cart', JSON.stringify(this.democart));
@@ -47,7 +57,12 @@ export class CartComponent implements OnInit {
     this.http.get('http://localhost:8080/product', this.options).subscribe(
       data => {
         this.productsData = JSON.parse(data['_body']);
-        console.log(this.productsData);
+      });
+  }
+  profile() {
+    this.http.get('http://localhost:8080/user/profile', this.options)
+      .subscribe(data => {
+        this.userId = JSON.parse(data['_body'])._id;
       });
   }
 }
