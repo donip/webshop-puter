@@ -1,3 +1,21 @@
-<p>
-  cart works!
-</p>
+<div id="Cart">
+<div class="jumbotron jumbotron-fluid">
+  <h1 class="display-2 text-center">Kosár tartalma:</h1>
+</div>
+  <div class="d-flex" *ngFor="let product of myCart.products">
+    <div class="mr-auto">
+      <p class="">Terméknév: {{product.productname}}</p>
+      <img *ngIf="product.imageurl" src="{{product.imageurl}}" alt="{{product.productname}}">
+      <img *ngIf="!product.imageurl" src="http://localhost:8080/uploads/error.png" alt="feltoltes-alatt">
+    </div>
+    <div class="ml-auto">
+      <p class="">Darabár: {{product.price}}</p>
+      <p class="">Fizetendő összeg: {{product.price*product.quantity}}</p>
+      <input type="number" name="quantity" [(ngModel)]="product.quantity">
+    </div>
+  </div>
+  <div class="btn-group" role="group" aria-label="Basic example">
+    <button class="btn btn-primary" (click)="setCart()">Próbarendelés</button>
+    <button class="btn btn-success" (click)="createOrder()">Rendelés leadás</button>
+  </div>
+</div>

@@ -83,4 +83,28 @@ describe('order.controller functions', () => {
         });
     });
   });
+  describe('clientList()', () => {
+    it('auth lsiting: response statusCode equal to 200 and object in res', (done) => {
+      chai.request(baseUrl)
+        .get('/client')
+        .end((err, res) => {
+          expect(res).to.have.status(200);
+          expect(res).to.be.an('object');
+          // console.log(res);
+          expect(JSON.parse(res.text)).to.have.property('err');
+          done();
+        });
+    });
+    it('unauth listing: response statusCode equal to 200 and object in res', (done) => {
+      chai.request(baseUrl)
+        .get('/client')
+        .end((err, res) => {
+          expect(res).to.have.status(200);
+          expect(res).to.be.an('object');
+          // console.log(res);
+          expect(JSON.parse(res.text)).to.have.property('err');
+          done();
+        });
+    });
+  });
 });

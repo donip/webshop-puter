@@ -23,16 +23,26 @@ describe('user.controller functions', () => {
     });
   });
   describe('login()', () => {
-    it('response statusCode equal to 200', (done) => {
+    it('auth. login: response statusCode equal to 200', (done) => {
       chai.request(baseUrl)
         .post('/login')
-        .send({ username: 'Peter@gmail.com', password: 'Peter' })
+        .send({ username: 'Peter@gmail.com', password: 'qwertz123' })
         .end((err, res) => {
           expect(res).to.have.status(200);
           done();
         });
     });
+    it('unauth. login: response statusCode equal to 401', (done) => {
+      chai.request(baseUrl)
+        .post('/login')
+        .send({ username: 'Peter@gmail.com', password: 'oldPw' })
+        .end((err, res) => {
+          expect(res).to.have.status(401);
+          done();
+        });
+    });
   });
+
   describe('register()', () => {
     it('response statusCode equal to 200', (done) => {
       chai.request(baseUrl)

@@ -1,0 +1,21 @@
+.jumbotron {
+    background: url("../../assets/profile.jpg") center center no-repeat;
+    color: white;
+    text-shadow: 0px 0px 10px black;
+  }
+
+  #Cart {
+      background-color: grey;
+  }
+
+  .mr-auto {
+      padding-left: 5%;
+  }
+
+  .ml-auto {
+    padding-right: 5%;
+  }
+
+  .btn-group{
+    padding-top: 50px;
+  }
