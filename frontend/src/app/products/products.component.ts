@@ -186,7 +186,7 @@ export class ProductsComponent implements OnInit {
   */
   createFakeProduct() {
     this.adat.brand = this.brands[Math.floor(Math.random() * this.brands.length)];
-    this.adat.category._id = '5b03eafd02ec481b405812d7'; //this.categories[Math.floor(Math.random() * this.categories .length)];
+    this.adat.category._id = '5b03eafd02ec481b405812d7'; // this.categories[Math.floor(Math.random() * this.categories .length)];
     this.adat.productname = 'def'; // this.adat.brand.split('')[0] + this.adat.category.split('')[0] + Math.ceil(Math.random() * 10) * 100;
     this.adat.price = (faker.commerce.price().toString());
     console.log(this.adat.productname);
@@ -194,12 +194,10 @@ export class ProductsComponent implements OnInit {
   }
   /**
    * Comment írás termékhez (abban az esetben jogosult erre a felhasználó, ha már rendelt)
-   * @param product Maga a frissítendő termék.
    */
   comment(product) {
-    this.selectedProduct = product;
-    const body = {'brand': 'EGYEDI'};
-      this.http.patch('http://localhost:8080/product/' + this.selectedProduct['_id'], body, this.options).subscribe(
+      const body = {'productname': 'újnév'};
+      this.http.patch('http://localhost:8080/product/5b04758301bc500fa4e3267e', body, this.options).subscribe(
         data => {
           console.log(data);
           this.getAll();
