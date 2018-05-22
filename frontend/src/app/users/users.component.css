@@ -1,5 +1,6 @@
 .jumbotron {
-  background: url("../../assets/users-magic.jpg") center center no-repeat;
+  background: url("../../assets/users-magic-prob.jpg") center center no-repeat;
+  background-size: 100% 100%;
   color: white;
   text-shadow: 0px 0px 10px black;
 }
