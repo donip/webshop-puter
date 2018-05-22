@@ -15,6 +15,7 @@ const User = require('./models/user');
 const userRouter = require('./route/user.route');
 const blogpostRouter = require('./route/blogpost.route');
 const productRouter = require('./route/product.route');
+const categoryRouter = require('./route/category.route');
 const nodemailer = require('nodemailer');
 
 const orderRouter = require('./route/order.route');
@@ -86,6 +87,9 @@ app.use('/blogpost/', blogpostRouter);
 
 // product router
 app.use('/product/', productRouter);
+
+// category router
+app.use('/category/', categoryRouter);
 
 // order router
 app.use('/order/', orderRouter);
