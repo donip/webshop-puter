@@ -22,6 +22,7 @@ import { ContactComponent } from './contact/contact.component';
 import { MainComponent } from './main/main.component';
 import { ProfileComponent } from './profile/profile.component';
 import { CartComponent } from './cart/cart.component';
+import { CategoryComponent } from './category/category.component';
 
 const routes: Routes = [
   { path: '', component: MainComponent, pathMatch: 'full' },
@@ -34,7 +35,8 @@ const routes: Routes = [
   { component: OrdersComponent, path: 'orders' },
   { component: StatisticsComponent, path: 'statistics' },
   { component: ContactComponent, path: 'contact' },
-  { component: CartComponent, path: 'cart' }
+  { component: CartComponent, path: 'cart' },
+  { component: CategoryComponent, path: 'category' }
 ];
 
 @NgModule({
@@ -51,7 +53,8 @@ const routes: Routes = [
     ContactComponent,
     MainComponent,
     ProfileComponent,
-    CartComponent
+    CartComponent,
+    CategoryComponent
   ],
   imports: [
     AgmCoreModule.forRoot({
