@@ -1,3 +1,45 @@
+<div class="container-fluid last-ten-products">
+  <table class="table table-fluid table-hover table-borderless">
+    <thead>
+      <tr>
+        <th>Kép</th>
+        <th>ID</th>
+        <th>Termék Név</th>
+        <th>Márka</th>
+        <th>Ár</th>
+        <th>Kategória</th>
+        <th>Utoljára fríssítve</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of lastTenProducts">
+        <td class="align-middle">
+          <img *ngIf="data.imgurl" src="{{ data.imgurl }}" alt="{{ data.productname }}" width="150" height="150">
+          <img *ngIf="!data.imgurl" src="http://localhost:8080/uploads/feltoltes_alatt.jpg" alt="feltoltes-alatt" width="150" height="150">
+        </td>
+        <td class="align-middle">
+          {{data['_id']}}
+        </td>
+        <td class="align-middle">
+          {{data.productname}}
+        </td>
+        <td class="align-middle">
+          {{data.brand}}
+        </td>
+        <td class="align-middle">
+          {{data.price}} Ft
+        </td>
+        <td class="align-middle">
+          {{data.category}}
+        </td>
+        <td class="align-middle">
+          {{data.updatedAt | date:'yyyy-MM-dd HH:mm':'+0200'}}
+        </td>
+                        
+      </tr>
+    </tbody>
+  </table>
+</div>
 <div class="container-fluid">
     <div class="row">
         <div class="col-4">
