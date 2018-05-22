@@ -100,7 +100,7 @@ export class ProductsComponent implements OnInit {
   bodyCreator(param) {
     const body = new FormData();
     body.append('productname', param.productname);
-    body.append('category', param.category);
+    body.append('category', param.category['_id']);
     body.append('price', param.price);
     body.append('brand', param.brand);
     if (this.uploadFile) {
