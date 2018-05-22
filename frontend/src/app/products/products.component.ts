@@ -22,6 +22,8 @@ export class ProductsComponent implements OnInit {
   uploadFile: File = null;
   checker: any;
   datas: any;
+  cats: any;
+  catData: any;
   selectedProduct: any;
   options = new RequestOptions({ withCredentials: true });
   constructor(public http: Http) {
@@ -40,6 +42,7 @@ export class ProductsComponent implements OnInit {
       console.error('API error:' + res.error);
     } else {
       this.datas = res;
+      console.log(this.datas);
     }
   }
   /**
@@ -50,6 +53,15 @@ export class ProductsComponent implements OnInit {
       data => {
         this.errorHandling(data);
       });
+  }
+
+  getCategory() {
+    this.http.get('http://localhost:8080/category', this.options).subscribe(
+      data => {
+        this.catData = JSON.parse(data['_body']);
+        console.log(this.catData);
+      }
+    );
   }
   /**
    * Egy adott lekért adatot ad vissza, későbbiekben szükséges lesz.

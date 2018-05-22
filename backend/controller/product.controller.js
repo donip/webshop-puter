@@ -47,6 +47,7 @@ module.exports = {
    */
   list: (req, res) => {
     Product.find({})
+      .populate('category', 'title')
       .then(product => res.json(product))
       .catch(err => res.send(err));
   },

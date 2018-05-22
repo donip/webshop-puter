@@ -12,10 +12,12 @@ export class MainComponent implements OnInit {
     rank: ''
   };
   datas: any;
+  lastTenProducts: any;
   selectedCategory: any;
   options = new RequestOptions({ withCredentials: true });
   constructor(public http: Http) {
     this.getAllC();
+    this.getAllProducts();
   }
 
   ngOnInit() {
@@ -29,12 +31,51 @@ export class MainComponent implements OnInit {
       this.datas = res;
     }
   }
+  productErrorHandling(res) {
+    res = JSON.parse(res['_body']);
+    if (res.error) {
+      console.error('API error:' + res.error);
+    } else {
+      this.lastTenProducts = res;
+      this.filterProducts();
+    }
+  }
 
   getAllC() {
     this.http.get('http://localhost:8080/category', this.options).subscribe(
       data => {
         this.errorHandling(data);
       });
+  }
+  /**
+   * Lekéri a termékeket
+   */
+  getAllProducts() {
+    this.http.get('http://localhost:8080/product', this.options).subscribe(
+      data => {
+        this.productErrorHandling(data);
+      });
+  }
+  /**
+   * szűri a productokat az első 10 (legfeljebb!) legfrissebb productra a módosítás szerint
+   */
+  filterProducts() {
+    this.lastTenProducts.sort((a, b) => {
+      const dateA = new Date(a.updatedAt);
+      const dateB = new Date(b.updatedAt);
+      if (dateA < dateB) {
+        return 1;
+      }
+      if (dateA > dateB) {
+        return -1;
+      }
+      // a-nak egyenlőnek kell lennie b-vel
+      return 0;
+    });
+  if (this.lastTenProducts.length >= 10) {
+    this.lastTenProducts.length = 10;
+  }
+  console.log(this.lastTenProducts);
   }
 
   creator() {

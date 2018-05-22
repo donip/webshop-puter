@@ -121,11 +121,10 @@
                 </div>
               </td>
               <td class="align-middle">
-                <!-- <input id="category" list="categories" class="form-control tableinput text-center" name="myCategories" type="text" placeholder="Kategória kiválasztása"
-                  [(ngModel)]=".category">
-                <datalist id="categories">
-                  <option *ngFor="let category of datas" value="{{category['_id']}}">{{ category.title }}</option>
-                </datalist> -->
+                <select *ngFor="let y of catData">
+                  <option value="{{y.rank}}">{{y.title}}</option>
+                </select>
+                <!-- <input type="text" class="form-control" [(ngModel)]="x.category.title" readonly> -->
               </td>
               <td class="align-middle">
                 <div class="btn-group-vertical btn-group-block">

@@ -102,6 +102,7 @@ export class StatisticsComponent {
     // this.pieChartData.dataTable = [['Rendelések', 'Napra leosztott rendelések']];
     for (let i = 1; i <= days; i++) {
       sum = 0;
+      // tslint:disable-next-line:triple-equals
       const oneDay = filteredOrders.filter(order => order['createdAt'].substring(8, 10) == i);
       if (oneDay.length > 0) {
         for (let j = 0; j < oneDay.length; j++) {
