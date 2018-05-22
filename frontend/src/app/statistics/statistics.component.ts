@@ -18,6 +18,7 @@ import { Ng2GoogleChartsModule } from 'ng2-google-charts';
 export class StatisticsComponent implements OnInit {
   d = new Date();
   currentmonth = this.d.getMonth();
+  equalday;
   newDate: any;
   allusers: any;
   allorders: any;
@@ -37,10 +38,9 @@ export class StatisticsComponent implements OnInit {
     chartType: 'ColumnChart',
     dataTable:
       this.chartData,
-    options: {
-      'title': 'Havi rendelések',
-      legend: 'none'
-    },
+      options: {
+        legend: 'none',
+          }
   };
 
 
