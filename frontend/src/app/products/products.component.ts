@@ -52,6 +52,7 @@ export class ProductsComponent implements OnInit {
     this.http.get('http://localhost:8080/product', this.options).subscribe(
       data => {
         this.errorHandling(data);
+        this.getCategory();
       });
   }
 
@@ -123,6 +124,15 @@ export class ProductsComponent implements OnInit {
         }
       });
   }
+
+  // catUpdater(product) {
+  //   this.http.put('http://localhost:8080/product/' + product['_id'], product, this.options).subscribe(
+  //     data => {
+  //       console.log(data);
+  //     }
+  //   );
+  // }
+
   /**
    * Meglévő terméket frissít.
    * @param product Maga a frissítendő termék.
@@ -136,6 +146,7 @@ export class ProductsComponent implements OnInit {
         data => {
           console.log(data);
           this.getAll();
+          // this.catUpdater(this.selectedProduct);
           alert('A termék sikeresen frissítve.');
         });
     } else {
@@ -178,4 +189,18 @@ export class ProductsComponent implements OnInit {
     console.log(this.adat.productname);
     this.creator();
   }
+  /**
+   * Comment írás termékhez (abban az esetben jogosult erre a felhasználó, ha már rendelt)
+   * @param product Maga a frissítendő termék.
+   */
+  comment(product) {
+    this.selectedProduct = product;
+    const body = {'brand': 'EGYEDI'};
+      this.http.patch('http://localhost:8080/product/' + this.selectedProduct['_id'], body, this.options).subscribe(
+        data => {
+          console.log(data);
+          this.getAll();
+          alert('Patch ok');
+        });
+    }
 }

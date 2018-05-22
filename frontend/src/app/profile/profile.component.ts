@@ -145,6 +145,7 @@ export class ProfileComponent {
     this.http.get('http://localhost:8080/order/client', this.options)
       .subscribe(data => {
         const d = JSON.parse(data['_body']);
+        console.log(d);
         if (d.err) {
           this.router.navigate(['/login']);
         } else {

@@ -121,8 +121,8 @@
                 </div>
               </td>
               <td class="align-middle">
-                <select *ngFor="let y of catData">
-                  <option value="{{y.rank}}">{{y.title}}</option>
+                <select class="form-control">
+                  <option *ngFor="let y of catData" value="y.['_id']">{{ y.title }}</option>
                 </select>
                 <!-- <input type="text" class="form-control" [(ngModel)]="x.category.title" readonly> -->
               </td>
@@ -131,6 +131,7 @@
                   <button class="btn btn-outline-dark" type="button" (click)="navigate(x)" disabled>Részletek</button>
                   <button class="btn btn-outline-primary" type="button" (click)="updater(x)">Frissítés</button>
                   <button class="btn btn-outline-danger" type="button" (click)="rowDeleter(x)">Törlés</button>
+                  <button class="btn btn-outline-danger" type="button" (click)="comment(x)">Comment</button>
                 </div>
               </td>
             </tr>
