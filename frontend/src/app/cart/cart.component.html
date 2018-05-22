@@ -1,3 +1,14 @@
-<p>
-  cart works!
-</p>
+<div class="col-ms col-md" id="Cart">
+  <H1>Kosár tartalma:</H1>
+
+  <div *ngFor="let product of myCart.products">
+    <p>Terméknév: {{product.product}}</p>
+    <p>Darabár: {{product.price}}</p>
+    <p>Fizetendő összeg: {{product.price*product.quantity}}</p>
+    <input type="number" name="quantity" [(ngModel)]="product.quantity"> 
+  </div>
+
+  <button (click)="setCart()">Próbarendelés</button>
+
+  <button (click)="createOrder()">Rendelés leadás</button>
+</div>
