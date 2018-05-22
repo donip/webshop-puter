@@ -19,6 +19,7 @@ const productSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  comments: [{ body: String, date: Date }],
   price: {
     type: Number,
     required: true,

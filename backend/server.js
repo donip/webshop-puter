@@ -106,6 +106,7 @@ app.listen(port);
 
 app.use('/uploads', express.static('./uploads'));
 
+// nodemailer
 app.post('/contact/sendClientMsg', (req, res) => {
   const transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -118,7 +119,7 @@ app.post('/contact/sendClientMsg', (req, res) => {
     from: 'youremail@gmail.com', // X-Google-Original-From:
     to: 'pjutoersmitt@gmail.com',
     subject: `Ügyfél észrevétel From: ${req.body.email}`,
-    text: req.body.coreMsg,
+    text: `\n\rFrom: ${req.body.email}\n\rMsg:  ${req.body.coreMsg}`,
   };
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
