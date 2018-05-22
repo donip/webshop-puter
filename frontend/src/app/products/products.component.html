@@ -121,7 +121,10 @@
                 </div>
               </td>
               <td class="align-middle">
-                <input type="text" class="form-control" [(ngModel)]="x.category">
+                <select class="form-control">
+                  <option *ngFor="let y of catData" value="y.['_id']">{{ y.title }}</option>
+                </select>
+                <!-- <input type="text" class="form-control" [(ngModel)]="x.category.title" readonly> -->
               </td>
               <td class="align-middle">
                 <div class="btn-group-vertical btn-group-block">
