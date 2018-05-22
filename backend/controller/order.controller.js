@@ -90,9 +90,15 @@ module.exports = {
   //   } return { err: 'Nincs bejelentkezve!' };
   // },
 
+  /**
+   * Ellenőrzi hogy be van-e jelentkezve a felhasználó, és visszaadja a saját rendeléseit
+   * @param {Object} req - HTTP request objektum
+   * @param {Object} res - HTTP response objektum
+   * @return {Object} - a bejelentkezett felhasználó megrendeléseinek objektumát küldi vissza
+   */
   clientList: (req, res) => {
     if (req.user) {
-      Order.find({})
+      Order.find({ customer: req.user['_id'] })
         .populate('customer', 'username email')
         .populate('products.product', 'productname brand price category')
         .then(order => res.json(order))

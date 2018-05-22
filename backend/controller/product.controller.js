@@ -162,4 +162,26 @@ module.exports = {
       res.send({ err: 'You are not an admin!' });
     }
   },
+  addComment: (req, res) => {
+    req.user = JSON.stringify(req.user);
+    req.user = JSON.parse(req.user);
+    if (req.user) {
+      Product.findByIdAndUpdate(req.params.id, req.body)
+        .then((product) => {
+          if (product.imgurl !== '') {
+            const imgpath = `./${product.imgurl.substring(22)}`;
+            fs.unlink(imgpath, (err) => {
+              if (err) {
+                throw err;
+              }
+              console.log('img file was deleted');
+            });
+          }
+          res.json(product);
+        })
+        .catch(err => res.send(err));
+    } else {
+      res.send({ err: 'You are not an admin!' });
+    }
+  },
 };

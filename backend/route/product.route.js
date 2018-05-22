@@ -50,6 +50,7 @@ productRouter.route('/')
 productRouter.route('/:id')
   .get(productController.find)
   .put(loggedIn, upload.single('uploadimg'), productController.update)
+  .patch(loggedIn, upload.single('uploadimg'), productController.update)
   .delete(loggedIn, productController.remove);
 
 productRouter.route('/url/:producturl').get(productController.findByUrl);

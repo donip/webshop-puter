@@ -22,6 +22,7 @@ import { ContactComponent } from './contact/contact.component';
 import { MainComponent } from './main/main.component';
 import { ProfileComponent } from './profile/profile.component';
 import { CartComponent } from './cart/cart.component';
+import { CartService } from './cart.service';
 import { CategoryComponent } from './category/category.component';
 
 const routes: Routes = [
@@ -67,7 +68,7 @@ const routes: Routes = [
     Ng2GoogleChartsModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [],
+  providers: [CartService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

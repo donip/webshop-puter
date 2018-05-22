@@ -189,4 +189,18 @@ export class ProductsComponent implements OnInit {
     console.log(this.adat.productname);
     this.creator();
   }
+  /**
+   * Comment írás termékhez (abban az esetben jogosult erre a felhasználó, ha már rendelt)
+   * @param product Maga a frissítendő termék.
+   */
+  comment(product) {
+    this.selectedProduct = product;
+    const body = {'brand': 'EGYEDI'};
+      this.http.patch('http://localhost:8080/product/' + this.selectedProduct['_id'], body, this.options).subscribe(
+        data => {
+          console.log(data);
+          this.getAll();
+          alert('Patch ok');
+        });
+    }
 }
