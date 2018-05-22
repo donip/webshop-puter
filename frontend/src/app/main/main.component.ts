@@ -54,6 +54,7 @@ export class MainComponent implements OnInit {
     this.http.get('http://localhost:8080/product', this.options).subscribe(
       data => {
         this.productErrorHandling(data);
+        console.log(data)
       });
   }
   /**
