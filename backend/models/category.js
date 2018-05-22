@@ -6,6 +6,11 @@ const CategorySchema = mongoose.Schema({
     required: true,
     unique: true,
   },
+  rank: {
+    type: Number,
+    required: true,
+    unique: true,
+  },
 }, {
   timestamps: true,
 });
