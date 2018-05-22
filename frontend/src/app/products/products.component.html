@@ -1,5 +1,5 @@
 <div class="container-fluid">
-    <div class="jumbotron jumbotron-fluid">
+    <div class="jumbotron jumbotron-fluid img-fluid">
       <h1 class="display-2 text-center">Termékek</h1>
     </div>
     <hr>
@@ -15,6 +15,7 @@
               <form name="myForm">
                 <input type="text" class="form-control" name="productname" [(ngModel)]="adat.productname" placeholder="Név" required #productname="ngModel">
               </form>
+            </td>
             <td>
               <form name="myForm2">
                 <input type="text" class="form-control" name="brand" [(ngModel)]="adat.brand" placeholder="Márka" required #brand="ngModel">
@@ -82,10 +83,10 @@
           <thead>
             <tr>
               <th></th>
+              <th>Kép</th>
               <th>ID</th>
               <th>Termék Név</th>
               <th>Termék URL</th>
-              <th>Kép</th>
               <th>Márka</th>
               <th>Ár</th>
               <th>Kategória</th>
@@ -96,6 +97,10 @@
             <tr *ngFor="let x of datas">
               <td></td>
               <td class="align-middle">
+                <img *ngIf="x.imgurl" src="{{ x.imgurl }}" alt="{{ x.productname }}" width="150" height="150">
+                <img *ngIf="!x.imgurl" src="http://localhost:8080/uploads/feltoltes_alatt.jpg" alt="feltoltes-alatt" width="150" height="150">
+              </td>
+              <td class="align-middle">
                 <input type="text" class="form-control" [(ngModel)]="x['_id']" readonly>
               </td>
               <td class="align-middle">
@@ -103,10 +108,6 @@
               </td>
               <td class="align-middle">
                 <input type="text" class="form-control" [(ngModel)]="x.producturl" readonly>
-              </td>
-              <td class="align-middle">
-                <img *ngIf="x.imgurl" src="{{ x.imgurl }}" alt="{{ x.productname }}" width="150" height="150">
-                <img *ngIf="!x.imgurl" src="http://localhost:8080/uploads/feltoltes_alatt.jpg" alt="feltoltes-alatt" width="150" height="150">
               </td>
               <td class="align-middle">
                 <input type="text" class="form-control" [(ngModel)]="x.brand">
