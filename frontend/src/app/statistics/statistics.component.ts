@@ -26,6 +26,7 @@ export class StatisticsComponent {
   };
   d = new Date();
   currentmonth = this.d.getMonth();
+  equalday;
   newDate: any;
   allusers: any;
   allorders: Array<Object>;
