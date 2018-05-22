@@ -1,0 +1,48 @@
+<agm-map [latitude]="lat" [longitude]="lng">
+  <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+</agm-map>
+<br>
+<div class="container">
+  <div class="row">
+    <div class="col-md-5 offset-md-1">
+      <h5>ELÉRHETŐSÉGEINK</h5>
+      <hr>
+      <div>
+        <strong>Bemutatóterem:</strong>
+        3210-Acélváros, Gagarin utca 101/B.</div>
+      <div>
+        <strong>Tel:</strong>
+        +19/ 841-9841</div>
+      <div>
+        <strong>Fax:</strong>
+        +84/ 198-4198</div>
+      <div>
+        <strong>Email:</strong>
+        pjutoersmitt@gmail.com</div>
+      <br>
+      <div>
+        <strong>H-P: </strong>
+        10:00 - 21:00</div>
+      <div>
+        <strong>Szo-Va: </strong>
+        12:00 - 16:00</div>
+    </div>
+    <br>
+    <div class="col-md-5">
+      <!-- method="POST" action="send" (ngSubmit)="onSubmit()"-->
+      <form  #f="ngForm">
+        <div class="form-group">
+          <H5>Írjon nekünk!</H5>
+          <hr>
+          <input class="form-control" type="email" name="email" placeholder="az Ön email címe" [(ngModel)]="msg.email" required #email="ngModel">
+        </div>
+        <div class="form-group">
+          <textarea class="form-control" name="coreMsg" rows="5" placeholder="az Ön észrevételei" [(ngModel)]="msg.coreMsg" required #coreMsg="ngModel"></textarea>
+        </div>
+        <input type="button" class="btn btn-success" value="Észrevételek beküldése" (click)="sendMsg()">
+      </form>
+      <br>
+    </div>
+  </div>
+</div>
+

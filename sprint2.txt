@@ -1,0 +1,18 @@
+Back-end kieg, + publikus oldal fő, termék
+ha user Profile
+ha admin dashboard
+
+
+...
+
+aside nav: kategoriák, 10 legfrissebb termék
+
+Termék oldal: itt lehessen berakni kosárba
+
+Kosár nézet: benne levő cuccok, módosítható módon
+
+Profile page: saját adatait szerkesztheti, látja a megrendeléseit, de nem módosíthatja
+
+Kapcsolat oldal: lehessen emailt küldeni form segítségével beégetett emailre Nodemailer
+
+Bonus : TsDoc és protactor test

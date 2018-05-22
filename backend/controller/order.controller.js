@@ -90,4 +90,14 @@ module.exports = {
   //   } return { err: 'Nincs bejelentkezve!' };
   // },
 
+  clientList: (req, res) => {
+    if (req.user) {
+      Order.find({})
+        .populate('customer', 'username email')
+        .populate('products.product', 'productname brand price category')
+        .then(order => res.json(order))
+        .catch(err => res.send(err));
+    } else { res.json({ err: 'Nincs bejelentkezve!' }); }
+  },
+
 };

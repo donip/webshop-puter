@@ -27,7 +27,7 @@ module.exports = {
    */
   editUser: (req, res) => {
     if (req.user) {
-      if (req.user.isAdmin === 'true') {
+      if (req.user.isAdmin === 'true' || req.user['_id'] == req.params.id) {
         User.findByIdAndUpdate(req.params.id, req.body)
           .then(user => res.json(user))
           .catch(err => res.send(err));
