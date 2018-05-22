@@ -16,7 +16,8 @@ export class ProductsComponent implements OnInit {
   adat = {
     productname: '',
     brand: '',
-    price: ''
+    price: '',
+    category: ''
   };
   uploadFile: File = null;
   checker: any;
@@ -41,6 +42,7 @@ export class ProductsComponent implements OnInit {
       console.error('API error:' + res.error);
     } else {
       this.datas = res;
+      console.log(this.datas);
     }
   }
   /**
