@@ -15,11 +15,11 @@ export class CartComponent implements OnInit {
   democart = {
     customer: '123c',
     products: [
-      { product: 'flyingpigs', price: 1000, quantity: 4 },
-      { product: 'porg01', price: 5000, quantity: 10 },
-      { product: 'pancreas', price: 10000, quantity: 1 },
-      { product: 'etiopianorphan', price: 10, quantity: 300 },
-      { product: 'kikkoman', price: 6000, quantity: 7 },
+      { productname: 'E-Hoover', price: 1000, quantity: 4 },
+      { productname: 'Cleaner-Stix', price: 5000, quantity: 10 },
+      { productname: 'Dryer-300', price: 10000, quantity: 1 },
+      { productname: 'Clean-Rag', price: 10, quantity: 300 },
+      { productname: 'Kikkoman', price: 6000, quantity: 7 },
     ],
   };
   constructor(public http: Http) {
