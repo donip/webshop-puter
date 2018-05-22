@@ -3,6 +3,7 @@ import { Http, Headers, Response, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import * as faker from 'faker';
 import { validateConfig } from '@angular/router/src/config';
+import { Body } from '@angular/http/src/body';
 
 @Component({
   selector: 'app-products',
@@ -17,7 +18,7 @@ export class ProductsComponent implements OnInit {
     productname: '',
     brand: '',
     price: '',
-    category: ''
+    category: {_id: '', title: ''},
   };
   uploadFile: File = null;
   checker: any;
@@ -100,12 +101,13 @@ export class ProductsComponent implements OnInit {
   bodyCreator(param) {
     const body = new FormData();
     body.append('productname', param.productname);
-    body.append('category', param.category['_id']);
+    body.append('category', param.category);
     body.append('price', param.price);
     body.append('brand', param.brand);
     if (this.uploadFile) {
       body.append('uploadimg', this.uploadFile, this.uploadFile.name);
     }
+    console.log(param.category['_id']);
     return body;
   }
   /**
@@ -113,6 +115,7 @@ export class ProductsComponent implements OnInit {
    */
   creator() {
     const body = this.bodyCreator(this.adat);
+    console.log(this.adat);
     this.http.post('http://localhost:8080/product', body, this.options).subscribe(
       data => {
         console.log(data);
