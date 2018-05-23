@@ -14,6 +14,7 @@
           <br>
         </div>
       </div>
+      <br>
     </div>
     <div class="col-md-3">
       <div class="row">
@@ -77,9 +78,9 @@
         </div>
       </div>
     </div>
-
+    <br>
   </div>
-  <div *ngIf="displayChart">
-    <google-chart style="height: 500px" [data]="pieChartData"></google-chart>
+  <div *ngIf="displayChart" style="width: 97%;">
+    <google-chart [data]="pieChartData"></google-chart>
   </div>
 </div>
