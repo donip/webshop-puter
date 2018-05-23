@@ -35,6 +35,7 @@ module.exports = {
    * @return létrehozott category object-jét küldi vissza
    */
   create: (req, res) => {
+    req.body.title=req.body.title.toLocaleLowerCase()
     Category.create(req.body)
       .then(cat => res.send(cat))
       .catch(err => res.send(err));
@@ -48,6 +49,7 @@ module.exports = {
    * @return {Object} - az update-d category régi értékével tér vissza
    */
   update: (req, res) => {
+    req.body.title=req.body.title.toLocaleLowerCase()
     Category.findByIdAndUpdate(req.params.id, req.body)
       .then((product) => {
         res.json(product);
