@@ -12,12 +12,15 @@ export class MainComponent implements OnInit {
     rank: ''
   };
   datas: any;
+  datasForReal: any;
+  dataHelper = [];
   lastTenProducts: any;
   selectedCategory: any;
   options = new RequestOptions({ withCredentials: true });
   constructor(public http: Http) {
     this.getAllC();
     this.getAllProducts();
+    this.getAllProductsForReal();
   }
 
   ngOnInit() {
@@ -29,6 +32,16 @@ export class MainComponent implements OnInit {
       console.error('API error:' + res.error);
     } else {
       this.datas = res;
+      this.datasForReal = res;
+    }
+  }
+  errorHandlingForReal(res) {
+    res = JSON.parse(res['_body']);
+    if (res.error) {
+      console.error('API error:' + res.error);
+    } else {
+      this.datasForReal = res;
+      return this.datasForReal;
     }
   }
   productErrorHandling(res) {
@@ -40,12 +53,30 @@ export class MainComponent implements OnInit {
       this.filterProducts();
     }
   }
-
   getAllC() {
     this.http.get('http://localhost:8080/category', this.options).subscribe(
       data => {
         this.errorHandling(data);
       });
+  }
+  getAllProductsForReal() {
+    this.http.get('http://localhost:8080/product', this.options).subscribe(
+      data => {
+        this.errorHandlingForReal(data);
+        console.log(data);
+      });
+  }
+  getByCat(category) {
+    this.getAllProductsForReal();
+    this.dataHelper = [];
+    this.selectedCategory = category;
+    console.log(this.selectedCategory, this.datasForReal);
+    for (let i = 0; i < this.datasForReal.length; i++) {
+      if (this.datasForReal[i].category['_id'] === this.selectedCategory['_id']) {
+        this.dataHelper.push(this.datasForReal[i]);
+      }
+    }
+    console.log(this.dataHelper);
   }
   /**
    * Lekéri a termékeket
@@ -54,7 +85,7 @@ export class MainComponent implements OnInit {
     this.http.get('http://localhost:8080/product', this.options).subscribe(
       data => {
         this.productErrorHandling(data);
-        console.log(data)
+        console.log(data);
       });
   }
   /**
