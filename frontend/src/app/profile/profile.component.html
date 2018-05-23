@@ -34,10 +34,10 @@
     <div class="form-group">
       <hr>
       <label>Telefonszám</label>
-      <input type="text" name="phone" class="form-control" placeholder="+36..." [(ngModel)]="profileData.phone" pattern="[0-9]*"
-        minlength="8" maxlength="8" #phone="ngModel">
+      <input type="text" name="phone" class="form-control" placeholder="94100100" [(ngModel)]="profileData.phone" pattern="[0-9]*"
+        minlength="8" maxlength="9" #phone="ngModel">
       <div [hidden]="phone.valid || phone.pristine" class="alert alert-danger">
-        <div [hidden]="!phone.hasError('minlength')">8 jegyű telefonszám formátum. Pl.: 30234333</div>
+        <div [hidden]="!phone.hasError('minlength')">min 8 jegyű telefonszám formátum. Pl.: 94100100</div>
         <div [hidden]="!phone.hasError('pattern')">A telefonszám csak számokat tartalmazhat. Pl.: 30234333</div>
       </div>
     </div>

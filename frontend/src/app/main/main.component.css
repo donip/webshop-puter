@@ -1,5 +1,6 @@
 .btn-group-vertical {
   margin-top: 20px;
+  position: fixed;
 }
 
 .btn-group-vertical .btn {
@@ -9,4 +10,8 @@
 .card {
   box-shadow: 0px 0px 10px 5px #888888;
   margin-top: 20px;
+}
+
+img {
+  padding-top: 5px;
 }

@@ -1,3 +1,4 @@
+import { CartService } from './../cart.service';
 import { Component, OnInit } from '@angular/core';
 import { Http, Headers, Response, RequestOptions } from '@angular/http';
 
@@ -33,11 +34,11 @@ export class OrdersComponent {
   doneOrders: any;
   activeOrders: any;
 
-  constructor(public http: Http, public router: Router) {
+  constructor(public http: Http, public router: Router, public cart: CartService) {
     this.getOrders();
     this.getUsers();
     this.getProducts();
-
+    this.cart.getQuantity();
   }
 
   addRow() {
