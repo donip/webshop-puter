@@ -14,18 +14,25 @@
               <th></th>
               <th>Márka</th>
               <th>Ár</th>
-              <!-- <th>Kategória</th> -->
+              <th>Kategória</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>
+            <tr class="text-center">
+              <td rowspan="2">
                 <img *ngIf="productData.imgurl" src="{{productData.imgurl}}" alt="{{productData.imgurl}}" height="300" width="300"> 
                 <img *ngIf="!productData.imgurl" src="http://localhost:8080/uploads/feltoltes_alatt.jpg" alt="feltoltes-alatt" height="300" width="300">
               </td>
               <td>{{productData.brand}}</td>
               <td>{{productData.price}} Ft</td>
-              <!-- <td>{{productData.category}}</td> -->
+              <td>{{chosenOne}}</td>
+            </tr>
+            <tr class="text-center">
+              <td>Hozzáadva:
+                <br>{{productData.createdAt | date:'yyyy. MM. dd. HH:mm'}}</td>
+              <td></td>
+              <td>Utoljára frissült:
+                <br>{{productData.updatedAt | date:'yyyy. MM. dd. HH:mm'}}</td>
             </tr>
           </tbody>
         </table>
