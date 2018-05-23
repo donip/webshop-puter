@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { getOrCreateNodeInjector } from '@angular/core/src/render3/instructions';
 import { Http, RequestOptions } from '@angular/http';
+declare var $: any;
+declare var jquery: any;
 
 @Component({
   selector: 'app-cart',
@@ -79,6 +81,7 @@ export class CartComponent implements OnInit {
         console.log(data['_body']);
         this.updateProfile();
         this.emptyCart();
+        $('#orderModal').modal('hide');
       }, error => {
         window.alert('Rendelés sikertelen');
       });
@@ -128,5 +131,10 @@ export class CartComponent implements OnInit {
       .subscribe(data => {
         console.log('Rendelés sikeres');
       });
+  }
+
+  copyAddress() {
+   const copy = JSON.stringify(this.userData['invoice']);
+  this.userData['delivery'] = JSON.parse(copy);
   }
 }

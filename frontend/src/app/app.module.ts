@@ -25,6 +25,7 @@ import { CartComponent } from './cart/cart.component';
 import { CartService } from './cart.service';
 import { CategoryComponent } from './category/category.component';
 import { ProductPageComponent } from './product-page/product-page.component';
+import { Globals } from './globals';
 
 const routes: Routes = [
   { path: '', component: MainComponent, pathMatch: 'full' },
@@ -71,7 +72,7 @@ const routes: Routes = [
     Ng2GoogleChartsModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [CartService],
+  providers: [CartService, NavbarComponent, Globals],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
