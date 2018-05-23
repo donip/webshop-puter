@@ -13,6 +13,7 @@ const LocalStrategy = require('passport-local').Strategy;
 const db = require('./config/database.js');
 const User = require('./models/user');
 const userRouter = require('./route/user.route');
+const commentRouter = require('./route/comment.route');
 const blogpostRouter = require('./route/blogpost.route');
 const productRouter = require('./route/product.route');
 const categoryRouter = require('./route/category.route');
@@ -87,6 +88,9 @@ app.use('/blogpost/', blogpostRouter);
 
 // product router
 app.use('/product/', productRouter);
+
+// comment router
+app.use('/comment/', commentRouter);
 
 // category router
 app.use('/category/', categoryRouter);
