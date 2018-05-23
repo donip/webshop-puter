@@ -44,15 +44,9 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-3">
-      <table>
-        <tbody>
-          <tr *ngFor="let category of datas">
-            <th>
-              <button class="btn btn-outline-dark btn-block" (click)="getByCat(category)">{{ category.title }}</button>
-            </th>
-          </tr>
-        </tbody>
-      </table>
+      <div class="btn-group-vertical">
+        <button *ngFor="let category of datas" class="btn btn-outline-dark btn-block" (click)="getByCat(category)">{{ category.title }}</button>
+      </div>
     </div>
     <div class="col-3" *ngFor="let item of dataHelper">
       <div class="card" style="width: 18rem;">
@@ -64,7 +58,11 @@
           <a href="http://localhost:4200/products/{{item.producturl}}" class="btn btn-outline-info">Részletek</a>
           <button class="btn btn-outline-success" (click)="toTheCart(item)">Kosárba</button>
         </div>
+        <div class="card-footer text-center">
+          <small class="text-muted">Utoljára frissült ekkor: {{item.createdAt | date:'yyyy. MM. dd. HH:mm'}}</small>
+        </div>
       </div>
     </div>
   </div>
+  <br>
 </div>
