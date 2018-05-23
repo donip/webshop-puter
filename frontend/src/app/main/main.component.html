@@ -1,55 +1,12 @@
-<div class="container-fluid last-ten-products">
-  <h1> Legfrissebb 10 termék</h1>
-  <table class="table table-fluid table-hover table-borderless">
-    <thead>
-      <tr>
-        <th>Kép</th>
-        <th>ID</th>
-        <th>Termék Név</th>
-        <th>Márka</th>
-        <th>Ár</th>
-        <th>Kategória</th>
-        <th>Utoljára fríssítve</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let data of lastTenProducts">
-        <td class="align-middle">
-          <img *ngIf="data.imgurl" src="{{ data.imgurl }}" alt="{{ data.productname }}" width="150" height="150">
-          <img *ngIf="!data.imgurl" src="http://localhost:8080/uploads/feltoltes_alatt.jpg" alt="feltoltes-alatt" width="150" height="150">
-        </td>
-        <td class="align-middle">
-          {{data['_id']}}
-        </td>
-        <td class="align-middle">
-          {{data.productname}}
-        </td>
-        <td class="align-middle">
-          {{data.brand}}
-        </td>
-        <td class="align-middle">
-          {{data.price}} Ft
-        </td>
-        <td class="align-middle">
-          {{data.category.title}}
-        </td>
-        <td class="align-middle">
-          {{data.updatedAt | date:'yyyy-MM-dd HH:mm':'+0200'}}
-        </td>
-                        
-      </tr>
-    </tbody>
-  </table>
-</div>
 <div class="container-fluid">
   <div class="row">
-    <div class="col-3">
+    <div class="col-3 align-middle">
       <div class="btn-group-vertical">
         <button *ngFor="let category of datas" class="btn btn-outline-dark btn-block" (click)="getByCat(category)">{{ category.title }}</button>
       </div>
     </div>
-    <div class="col-3" *ngFor="let item of dataHelper">
-      <div class="card" style="width: 18rem;">
+    <div class="card-deck col-9">
+      <div class="card" style="min-width: 18rem; max-width: 18rem;" *ngFor="let item of dataHelper">
         <img *ngIf="item.imgurl" class="card-img-top" src="{{item.imgurl}}" alt="{{item.producturl}}" width="50" height="300">
         <img *ngIf="!item.imgurl" class="card-img-top" src="http://localhost:8080/uploads/feltoltes_alatt.jpg" alt="feltoltes-alatt" width="50" height="300">
         <div class="card-body">
@@ -59,7 +16,7 @@
           <button class="btn btn-outline-success" (click)="toTheCart(item)">Kosárba</button>
         </div>
         <div class="card-footer text-center">
-          <small class="text-muted">Utoljára frissült ekkor: {{item.updatedAt | date:'yyyy. MM. dd. HH:mm'}}</small>
+          <small class="text-muted font-italic">Utoljára frissült ekkor: {{item.updatedAt | date:'yyyy. MM. dd. HH:mm'}}</small>
         </div>
       </div>
     </div>
