@@ -1,28 +1,17 @@
-<div id="Cart">
+<div class="container">
 <div class="jumbotron jumbotron-fluid">
   <h1 class="display-2 text-center">Kosár tartalma:</h1>
 </div>
-  <div class="d-flex" *ngFor="let product of myCart.products">
-    <div class="mr-auto">
-      <p class="">Terméknév: {{product.productname}}</p>
-      <img *ngIf="product.imageurl" src="{{product.imageurl}}" alt="{{product.productname}}">
-      <img *ngIf="!product.imageurl" src="http://localhost:8080/uploads/error.png" alt="feltoltes-alatt">
-    </div>
-    <div class="ml-auto">
-      <input type="text" name="postcode" [(ngModel)]="delivAd.postcode">
-      <input type="text" name="city" [(ngModel)]="delivAd.city">
-      <input type="text" name="address" [(ngModel)]="delivAd.address">
-      <input type="text" name="postcode" [(ngModel)]="delivBill.postcode">
-      <input type="text" name="city" [(ngModel)]="delivBill.city">
-      <input type="text" name="address" [(ngModel)]="delivBill.address">
-      <input type="text" name="phone" [(ngModel)]="delivPhone">
-      <p class="">Darabár: {{product.price}}</p>
-      <p class="">Fizetendő összeg: {{product.price*product.quantity}}</p>
-      <input type="number" name="quantity" [(ngModel)]="product.quantity">
-    </div>
-  </div>
-  <div class="btn-group" role="group" aria-label="Basic example">
-    <button class="btn btn-primary" (click)="setCart()">Próbarendelés</button>
+  <div *ngFor="let p of myCart.products; let i = index">
+    <p>{{i+1}}.</p>
+ <span>Termék: {{p.productname}}</span>
+ <span>Egységár: {{p.price | currency:'HUF':'local' }}</span>
+ <div class="input-group">
+<input class="form-control" type="number" name="quantity" [(ngModel)]="p.quantity">
+<div class="input-group-append"><span class="input-group-text"> db</span></div>
+</div>
+<p>Összár: {{p.price*p.quantity | currency:'HUF':'local' }}</p>
+</div>
     <button class="btn btn-success" (click)="createOrder()">Rendelés leadás</button>
-  </div>
+
 </div>

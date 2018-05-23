@@ -46,14 +46,10 @@ module.exports = {
    * @return {Array} - visszatér a product-ok tömbjével
    */
   list: (req, res) => {
-    if (req.user) {
-      if (req.user.isAdmin === 'true') {
-        Product.find({})
-          .populate('category', 'title')
-          .then(product => res.json(product))
-          .catch(err => res.send(err));
-      } else { res.json({ err: 'Művelet megtagadva' }); }
-    } else { res.json({ err: 'Nincs bejelentkezve!' }); }
+    Product.find({})
+      .populate('category', 'title')
+      .then(product => res.json(product))
+      .catch(err => res.send(err));
   },
   /**
    * mongo _id alapján megkeres egy productot

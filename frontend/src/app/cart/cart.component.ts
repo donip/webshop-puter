@@ -10,41 +10,39 @@ import { Http, RequestOptions } from '@angular/http';
 export class CartComponent implements OnInit {
   options = new RequestOptions({ withCredentials: true });
   baseUrl = 'http://localhost:8080/order/';
-  myCart: any;
-  productsData: any;
+  myCart = {
+    customer: '',
+    products: []
+  };
+  productsData = [{
+    products: ''
+  }];
   userId: any;
-  delivAd: {
+  delivery: {
     postcode: '0',
     city: 'nincs',
     address: 'nincs'
   };
-  delivBill: {
+  invoice: {
     postcode: '0',
     city: 'nincs',
     address: 'nincs'
   };
-  delivPhone: 'nincs';
-  democart = {
-    customer: '123c',
-    products: [
-      { productname: 'E-Hoover', price: 1000, quantity: 4 },
-      { productname: 'Cleaner-Stix', price: 5000, quantity: 10 },
-      { productname: 'Dryer-300', price: 10000, quantity: 1 },
-      { productname: 'Clean-Rag', price: 10, quantity: 300 },
-      { productname: 'Kikkoman', price: 6000, quantity: 7 },
-    ],
-  };
+  productsInCart = [];
+  phone: 'nincs';
+
   constructor(public http: Http) {
-    this.getOrder();
+    this.getAll();
     this.profile();
   }
 
   ngOnInit() {
   }
   getOrder() {
-    if (this.userId === JSON.parse(localStorage.getItem('cart')).customer) {
+    if (JSON.parse(localStorage.getItem('cart'))) {
       this.myCart = JSON.parse(localStorage.getItem('cart'));
       console.log(this.myCart);
+      this.testFill();
     } else {
       this.myCart = {
         customer: '',
@@ -54,30 +52,52 @@ export class CartComponent implements OnInit {
       };
     }
   }
-  setCart() {
-    localStorage.setItem('cart', JSON.stringify(this.democart));
+  emptyCart() {
+    localStorage.removeItem('cart');
+    this.getOrder();
   }
   createOrder() {
     // this.newOrder.products = this.newOrder.products.filter(pr => pr.product !== '');
+    console.log('EZT KÜLDJÜK', this.myCart);
+    this.myCart['customer'] = this.myCart['userId'];
     this.http.post(`${this.baseUrl}`, this.myCart, this.options)
       .subscribe(data => {
         console.log(data['_body']);
+        this.emptyCart();
+      }, error => {
+        window.alert('Rendelés sikertelen');
       });
   }
   getAll() {
     this.http.get('http://localhost:8080/product', this.options).subscribe(
       data => {
         this.productsData = JSON.parse(data['_body']);
+        this.getOrder();
+        console.log(this.productsData);
       });
   }
+
+  getProduct(id) {
+    const productData = this.productsData.filter(product => product['_id'] == id);
+    console.log(productData);
+    return productData[0]['productname'];
+  }
+
+  testFill() {
+    for (let i = 0; i < this.myCart.products.length; i++) {
+      const a = this.getProduct(this.myCart.products[i].product);
+      this.myCart.products[i].productname = this.getProduct(this.myCart.products[i].product);
+      console.log( this.myCart.products[i].product);
+    }
+  }
+
   profile() {
     this.http.get('http://localhost:8080/user/profile', this.options)
       .subscribe(data => {
-        const recData = JSON.parse(data['_body']);
-        this.userId = recData._id;
-        this.delivAd = recData.delivery;
-        this.delivBill = recData.invoice;
-        this.delivPhone = recData.phone;
+
+
       });
   }
+
+
 }
