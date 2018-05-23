@@ -68,7 +68,7 @@ export class OrdersComponent {
       .subscribe(data => {
         const d = JSON.parse(data['_body']);
         if (d.err) {
-          this.router.navigate(['/login']);
+          this.router.navigate(['/main']);
         } else {
           for (let i = 0; i < d.length; i++) {
             for (let j = 0; j < d[i].products.length; j++) {
@@ -96,7 +96,7 @@ export class OrdersComponent {
       .subscribe(data => {
         const d = JSON.parse(data['_body']);
         if (d.err) {
-          this.router.navigate(['/login']);
+          this.router.navigate(['/main']);
         }
       });
   }

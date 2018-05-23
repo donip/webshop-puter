@@ -36,7 +36,7 @@ export class UsersComponent implements OnInit {
       .subscribe(data => {
         const d = JSON.parse(data['_body']);
         if (d.err) {
-          this.router.navigate(['/login']);
+          this.router.navigate(['/main']);
         } else { this.users = d; }
       });
   }
@@ -47,7 +47,7 @@ export class UsersComponent implements OnInit {
       .subscribe(data => {
         const d = JSON.parse(data['_body']);
         if (d.err) {
-          this.router.navigate(['/login']);
+          this.router.navigate(['/main']);
         }
       });
   }
@@ -58,7 +58,7 @@ export class UsersComponent implements OnInit {
       .subscribe(data => {
         const d = JSON.parse(data['_body']);
         if (d.err) {
-          this.router.navigate(['/login']);
+          this.router.navigate(['/main']);
         }
       });
   }

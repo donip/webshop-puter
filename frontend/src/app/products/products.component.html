@@ -27,9 +27,9 @@
               </form>
             </td>
             <td>
-              <form name="myForm4">
-                <input type="text" class="form-control" name="category" [(ngModel)]="adat.category" placeholder="Kategória" required #category="ngModel">
-              </form>
+                <select class="form-control" [(ngModel)]="adat.category['_id']">
+                  <option *ngFor="let y of catData" value="{{y['_id']}}">{{ y.title }}</option>
+                </select>
             </td>
             <td>
               <button class="btn btn-outline-success btn-block" type="button" (click)="creator()">Bevitel</button>
@@ -65,13 +65,7 @@
                 </div>
               </div>
             </td>
-            <td>
-              <div *ngIf="category.invalid && (category.dirty || category.touched)" class="alert alert-danger">
-                <div *ngIf="category.errors.required">
-                    Ezt a mezőt kötelező kitölteni.
-                </div>
-              </div>
-            </td>
+            <td></td>
           </tr>
         </table>
       </div>
@@ -121,8 +115,8 @@
                 </div>
               </td>
               <td class="align-middle">
-                <select class="form-control">
-                  <option *ngFor="let y of catData" value="y.['_id']">{{ y.title }}</option>
+                <select class="form-control" [(ngModel)]="x.category['_id']">
+                  <option *ngFor="let y of catData" value="{{y['_id']}}">{{ y.title }}</option>
                 </select>
                 <!-- <input type="text" class="form-control" [(ngModel)]="x.category.title" readonly> -->
               </td>

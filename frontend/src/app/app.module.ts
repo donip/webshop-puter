@@ -24,6 +24,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { CartComponent } from './cart/cart.component';
 import { CartService } from './cart.service';
 import { CategoryComponent } from './category/category.component';
+import { ProductPageComponent } from './product-page/product-page.component';
 
 const routes: Routes = [
   { path: '', component: MainComponent, pathMatch: 'full' },
@@ -32,6 +33,7 @@ const routes: Routes = [
   { component: LoginComponent, path: 'login' },
   { component: RegisterComponent, path: 'register' },
   { component: ProductsComponent, path: 'products' },
+  { component: ProductPageComponent, path: 'products/:url' },
   { component: UsersComponent, path: 'users' },
   { component: OrdersComponent, path: 'orders' },
   { component: StatisticsComponent, path: 'statistics' },
@@ -55,7 +57,8 @@ const routes: Routes = [
     MainComponent,
     ProfileComponent,
     CartComponent,
-    CategoryComponent
+    CategoryComponent,
+    ProductPageComponent
   ],
   imports: [
     AgmCoreModule.forRoot({

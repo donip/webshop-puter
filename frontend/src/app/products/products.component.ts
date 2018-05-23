@@ -3,6 +3,7 @@ import { Http, Headers, Response, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import * as faker from 'faker';
 import { validateConfig } from '@angular/router/src/config';
+import { Body } from '@angular/http/src/body';
 
 @Component({
   selector: 'app-products',
@@ -17,7 +18,7 @@ export class ProductsComponent implements OnInit {
     productname: '',
     brand: '',
     price: '',
-    category: ''
+    category: {_id: '', title: ''},
   };
   uploadFile: File = null;
   checker: any;
@@ -100,12 +101,13 @@ export class ProductsComponent implements OnInit {
   bodyCreator(param) {
     const body = new FormData();
     body.append('productname', param.productname);
-    body.append('category', param.category);
+    body.append('category', param.category['_id']);
     body.append('price', param.price);
     body.append('brand', param.brand);
     if (this.uploadFile) {
       body.append('uploadimg', this.uploadFile, this.uploadFile.name);
     }
+    console.log(param.category['_id']);
     return body;
   }
   /**
@@ -113,26 +115,18 @@ export class ProductsComponent implements OnInit {
    */
   creator() {
     const body = this.bodyCreator(this.adat);
+    console.log(this.adat);
     this.http.post('http://localhost:8080/product', body, this.options).subscribe(
       data => {
         console.log(data);
         this.getAll();
-        if (!JSON.parse(data['_body']).errors) {
+        if (!JSON.parse(data['_body']).errors && !JSON.parse(data['_body']).errmsg) {
           alert('A termék hozzáadásra került.');
         } else {
           alert('Hozzáadás sikertelen.');
         }
       });
   }
-
-  // catUpdater(product) {
-  //   this.http.put('http://localhost:8080/product/' + product['_id'], product, this.options).subscribe(
-  //     data => {
-  //       console.log(data);
-  //     }
-  //   );
-  // }
-
   /**
    * Meglévő terméket frissít.
    * @param product Maga a frissítendő termék.
@@ -183,20 +177,18 @@ export class ProductsComponent implements OnInit {
   */
   createFakeProduct() {
     this.adat.brand = this.brands[Math.floor(Math.random() * this.brands.length)];
-    this.adat.category = this.categories[Math.floor(Math.random() * this.categories .length)];
-    this.adat.productname = this.adat.brand.split('')[0] + this.adat.category.split('')[0] + Math.ceil(Math.random() * 10) * 100;
+    this.adat.category._id = '5b03eafd02ec481b405812d7'; // this.categories[Math.floor(Math.random() * this.categories .length)];
+    this.adat.productname = 'def'; // this.adat.brand.split('')[0] + this.adat.category.split('')[0] + Math.ceil(Math.random() * 10) * 100;
     this.adat.price = (faker.commerce.price().toString());
     console.log(this.adat.productname);
     this.creator();
   }
   /**
    * Comment írás termékhez (abban az esetben jogosult erre a felhasználó, ha már rendelt)
-   * @param product Maga a frissítendő termék.
    */
   comment(product) {
-    this.selectedProduct = product;
-    const body = {'brand': 'EGYEDI'};
-      this.http.patch('http://localhost:8080/product/' + this.selectedProduct['_id'], body, this.options).subscribe(
+      const body = {'productname': 'újnév'};
+      this.http.patch('http://localhost:8080/product/5b04758301bc500fa4e3267e', body, this.options).subscribe(
         data => {
           console.log(data);
           this.getAll();
