@@ -4,15 +4,15 @@
 </div>
   <div class="d-flex" *ngFor="let product of myCart.products">
     <div class="mr-auto">
-      <p class="">Terméknév: {{product.productname}}</p>
-      <img *ngIf="product.imageurl" src="{{product.imageurl}}" alt="{{product.productname}}">
-      <img *ngIf="!product.imageurl" src="http://localhost:8080/uploads/error.png" alt="feltoltes-alatt">
+      <p>Terméknév: {{product.productname}}</p>
+      <!-- <img *ngIf="product.imageurl" src="{{product.imageurl}}" alt="{{product.productname}}"> -->
+      <!-- <img *ngIf="!product.imageurl" src="http://localhost:8080/uploads/error.png" alt="feltoltes-alatt"> -->
     </div>
     <div class="ml-auto">
-      <input type="text" name="postcode" [(ngModel)]="delivAd.postcode">
+      <input type="number" name="postcode" [(ngModel)]="delivAd.postcode">
       <input type="text" name="city" [(ngModel)]="delivAd.city">
       <input type="text" name="address" [(ngModel)]="delivAd.address">
-      <input type="text" name="postcode" [(ngModel)]="delivBill.postcode">
+      <input type="number" name="postcode" [(ngModel)]="delivBill.postcode">
       <input type="text" name="city" [(ngModel)]="delivBill.city">
       <input type="text" name="address" [(ngModel)]="delivBill.address">
       <input type="text" name="phone" [(ngModel)]="delivPhone">

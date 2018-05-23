@@ -13,17 +13,17 @@ export class CartComponent implements OnInit {
   myCart: any;
   productsData: any;
   userId: any;
-  delivAd: {
-    postcode: '0',
+  delivAd = {
+    postcode: 1340,
     city: 'nincs',
     address: 'nincs'
   };
-  delivBill: {
-    postcode: '0',
+  delivBill = {
+    postcode: 2420,
     city: 'nincs',
     address: 'nincs'
   };
-  delivPhone: 'nincs';
+  delivPhone = 'nincs';
   democart = {
     customer: '123c',
     products: [
@@ -35,25 +35,46 @@ export class CartComponent implements OnInit {
     ],
   };
   constructor(public http: Http) {
-    this.getOrder();
     this.profile();
   }
 
   ngOnInit() {
   }
+  profile() {
+    this.http.get('http://localhost:8080/user/profile', this.options)
+      .subscribe(data => {
+        const recData = JSON.parse(data['_body']).user;
+        console.log(recData);
+        this.userId = recData._id;
+        console.log(this.userId);
+        this.delivAd = recData.delivery;
+        console.log(this.delivAd);
+        this.delivBill = recData.invoice;
+        this.delivPhone = recData.phone;
+        this.getOrder();
+      });
+  }
   getOrder() {
-    if (this.userId === JSON.parse(localStorage.getItem('cart')).customer) {
+    if (JSON.parse(localStorage.getItem('cart')) === null) {
+      this.myCart = {
+        customer: 'abc',
+        products: [
+          { productname: 'Üres a kosár', price: 0, quantity: 0 },
+        ]
+      };
+    } else if (this.userId == JSON.parse(localStorage.getItem('cart')).customer) {
       this.myCart = JSON.parse(localStorage.getItem('cart'));
       console.log(this.myCart);
     } else {
       this.myCart = {
-        customer: '',
+        customer: 'abc',
         products: [
           { productname: 'Üres a kosár', price: 0, quantity: 0 },
-        ],
+        ]
       };
     }
   }
+
   setCart() {
     localStorage.setItem('cart', JSON.stringify(this.democart));
   }
@@ -68,16 +89,6 @@ export class CartComponent implements OnInit {
     this.http.get('http://localhost:8080/product', this.options).subscribe(
       data => {
         this.productsData = JSON.parse(data['_body']);
-      });
-  }
-  profile() {
-    this.http.get('http://localhost:8080/user/profile', this.options)
-      .subscribe(data => {
-        const recData = JSON.parse(data['_body']);
-        this.userId = recData._id;
-        this.delivAd = recData.delivery;
-        this.delivBill = recData.invoice;
-        this.delivPhone = recData.phone;
       });
   }
 }
