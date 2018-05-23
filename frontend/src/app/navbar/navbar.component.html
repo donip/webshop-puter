@@ -34,9 +34,9 @@
       <div class="modal-body">
         <form>
           <label for="email">Email</label>
-          <input class="form-control" type="email" name="email" id="emailModal" [(ngModel)]="user.username">
+          <input class="form-control" type="email" name="email" id="emailModal"  placeholder="a@b.c" [(ngModel)]="user.username">
           <label for="password">Password</label>
-          <input class="form-control" type="password" name="password" id="passwordModal" [(ngModel)]="user.password">
+          <input class="form-control" type="password" name="password" id="passwordModal" placeholder="12345678" [(ngModel)]="user.password">
           <br>
           <div class="btn-group">
               <button type="button" class="btn btn-success" (click)="login()">Login</button>

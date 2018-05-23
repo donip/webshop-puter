@@ -42,11 +42,28 @@
   </table>
 </div>
 <div class="container-fluid">
-    <div class="row" *ngFor="let category of datas">
-        <div class="col-4">
-            <button class="btn btn-outline-dark btn-block" (click)="getByCat(category)">{{ category.title }}</button>
-        </div>
-        <div class="col-8">
-        </div>
+  <div class="row">
+    <div class="col-2">
+      <table>
+        <tbody>
+          <tr *ngFor="let category of datas">
+            <th>
+              <button class="btn btn-outline-dark btn-block" (click)="getByCat(category)">{{ category.title }}</button>
+            </th>
+          </tr>
+        </tbody>
+      </table>
     </div>
+    <div class="col-2" *ngFor="let item of dataHelper">
+      <div class="card" style="width: 18rem;">
+        <img *ngIf="item.imgurl" class="card-img-top" src="{{item.imgurl}}" alt="{{item.producturl}}" width="50" height="300">
+        <img *ngIf="!item.imgurl" class="card-img-top" src="http://localhost:8080/uploads/feltoltes_alatt.jpg" alt="feltoltes-alatt" width="50" height="300">
+        <div class="card-body">
+          <h5 class="card-title">{{item.productname}}</h5>
+          <p class="card-text">{{item.price}} Ft</p>
+          <a href="http://localhost:4200/products{{item.producturl}}" class="btn btn-outline-info">Részletek</a>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
