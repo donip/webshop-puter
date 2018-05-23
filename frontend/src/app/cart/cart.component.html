@@ -1,17 +1,62 @@
 <div class="container">
-<div class="jumbotron jumbotron-fluid">
-  <h1 class="display-2 text-center">Kosár tartalma:</h1>
-</div>
+  <div class="jumbotron jumbotron-fluid">
+    <h1 class="display-2 text-center">Kosár tartalma:</h1>
+  </div>
   <div *ngFor="let p of myCart.products; let i = index">
     <p>{{i+1}}.</p>
- <span>Termék: {{p.productname}}</span>
- <span>Egységár: {{p.price | currency:'HUF':'local' }}</span>
- <div class="input-group">
-<input class="form-control" type="number" name="quantity" [(ngModel)]="p.quantity">
-<div class="input-group-append"><span class="input-group-text"> db</span></div>
-</div>
-<p>Összár: {{p.price*p.quantity | currency:'HUF':'local' }}</p>
-</div>
-    <button class="btn btn-success" (click)="createOrder()">Rendelés leadás</button>
+    <span>Termék: {{p.productname}}</span>
+    <span>Egységár: {{p.price | currency:'HUF':'local' }}</span>
+    <div class="input-group">
+      <input class="form-control" type="number" name="quantity" [(ngModel)]="p.quantity">
+      <div class="input-group-append">
+        <span class="input-group-text"> db</span>
+      </div>
+    </div>
+    <p>Összár: {{p.price*p.quantity | currency:'HUF':'local' }}</p>
+  </div>
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#orderModal">Rendelés leadás</button>
 
-</div>
+  <div class="modal" tabindex="-1" role="dialog" id="orderModal">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div *ngFor="let j of myCart.products; let i = index">
+            <p>{{i+1}}.</p>
+            <span>Termék: {{j.productname}}</span>
+            <span>Egységár: {{j.price | currency:'HUF':'local' }}</span>
+            <p>Összár: {{j.price*j.quantity | currency:'HUF':'local' }}</p>
+          </div>
+          <div>
+            <label>Telefonszám</label>
+            <input type="text" name="phone" class="form-control" placeholder="+36..." [(ngModel)]="userData.phone" pattern="[0-9]*"
+              minlength="8" maxlength="8" #phone="ngModel">
+
+            <div class="form-group">
+              <label>Szállítási cím</label>
+              <div class="form-group">
+                <input type="number" maxlength="4" minlength="4" name="postcodeD" class="form-control" placeholder="Irányítószám" [(ngModel)]="userData.delivery.postcode">
+              </div>
+              <div class="form-group">
+                <input type="text" name="cityD" class="form-control" placeholder="Város" [(ngModel)]="userData.delivery.city">
+              </div>
+              <div class="form-group">
+                <input type="text" name="addressD" class="form-control" placeholder="Cím" [(ngModel)]="userData.delivery.address">
+              </div>
+
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-success" (click)="createOrder()">Rendelés leadás</button>
+            <button type="button" class="btn btn-primary">Rendelés elküldése</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Mégse</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
