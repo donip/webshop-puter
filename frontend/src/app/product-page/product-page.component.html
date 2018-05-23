@@ -1,0 +1,8 @@
+<div class="container" *ngIf="!error">
+  <p>{{productData.productname}}</p>
+  <p>{{productData._id}}</p>
+  <p>{{productData.price}}</p>
+  <p *ngIf="productData.imgurl !== ''"> <img src="{{productData.imgurl}}" alt="{{productData.imgurl}}" > </p>
+</div>
+
+<h1 *ngIf="error"> 404 ERROR - NOT FOUND</h1>
