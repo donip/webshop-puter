@@ -13,6 +13,17 @@ export class CartComponent implements OnInit {
   myCart: any;
   productsData: any;
   userId: any;
+  delivAd: {
+    postcode: '0',
+    city: 'nincs',
+    address: 'nincs'
+  };
+  delivBill: {
+    postcode: '0',
+    city: 'nincs',
+    address: 'nincs'
+  };
+  delivPhone: 'nincs';
   democart = {
     customer: '123c',
     products: [
@@ -62,7 +73,11 @@ export class CartComponent implements OnInit {
   profile() {
     this.http.get('http://localhost:8080/user/profile', this.options)
       .subscribe(data => {
-        this.userId = JSON.parse(data['_body'])._id;
+        const recData = JSON.parse(data['_body']);
+        this.userId = recData._id;
+        this.delivAd = recData.delivery;
+        this.delivBill = recData.invoice;
+        this.delivPhone = recData.phone;
       });
   }
 }
