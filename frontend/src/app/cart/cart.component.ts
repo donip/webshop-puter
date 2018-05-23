@@ -128,6 +128,5 @@ export class CartComponent implements OnInit {
       .subscribe(data => {
         console.log('Rendelés sikeres');
       });
-
-
   }
+}
