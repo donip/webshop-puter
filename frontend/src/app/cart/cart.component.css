@@ -17,3 +17,15 @@
   .btn-group{
     padding-top: 50px;
   }
+
+  form > .row {
+    padding: 15px;
+  }
+
+  form > .row:nth-of-type(even) {
+    background: rgb(230, 230, 230);
+  }
+
+  .btn {
+    margin: 5px;
+  }

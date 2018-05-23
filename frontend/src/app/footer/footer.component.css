@@ -1,18 +1,37 @@
-.footer {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    background-color: #343A40;
-    color: white;
-    text-align: center;
+.container {
+  height: 5vh;
 }
-.footer.icons a {
-    color: #70726F;
-    font-size: 20px;
-    padding: 30px;
-    transition: all .5s ease;
-  }
-  .footer.icons a:hover {
-    color: white;
-  }
+
+.pewter {
+  color: #70726F;
+  padding-left: 5%;
+  text-align: left;
+}
+
+.footer {
+  background-color: #343A40;
+  bottom: 0;
+  color: white;
+  left: 0;
+  position: fixed;
+  text-align: center;
+  width: 100%;
+}
+
+.footer a {
+  color: #70726F;
+  float: left;
+  font-size: 20px;
+  padding: 0px 30px;
+  transition: all .5s ease;
+}
+
+.footer a:hover {
+  color: white;
+}
+
+.cY {
+  color: #70726F;
+  float: right;
+  padding: 0px 30px
+}
