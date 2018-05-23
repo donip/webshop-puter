@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, RequestOptions } from '@angular/http';
+import { Globals } from './globals';
 
 @Injectable()
 export class CartService {
@@ -16,7 +17,7 @@ export class CartService {
   cart: Object;
   products: any;
 
-  constructor(public http: Http) {
+  constructor(public http: Http, public global: Globals) {
     this.getUserId();
   }
   /**
@@ -39,6 +40,18 @@ export class CartService {
    */
   private getCartFromStorage() {
     this.cart = JSON.parse(localStorage.getItem('cart'));
+  }
+  public getQuantity() {
+    if (JSON.parse(localStorage.getItem('cart')) === null) {
+      this.global.badge = 0;
+    } else {
+    const cart = JSON.parse(localStorage.getItem('cart')).products;
+    let sum = 0;
+    for (let i = 0; i < cart.length; i++ ) {
+      sum += cart[i]['quantity'];
+    }
+    this.global.badge = sum;
+    }
   }
   /**
    * Saves cart to LocalStorage

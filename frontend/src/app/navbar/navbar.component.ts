@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Injectable } from '@angular/core';
 import { Http, RequestOptions } from '@angular/http';
 import { Router } from '@angular/router';
+import { CartService } from '../cart.service';
+import { Globals } from '../globals';
 declare var $: any;
 declare var jquery: any;
 
@@ -9,6 +11,7 @@ declare var jquery: any;
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
+@Injectable()
 export class NavbarComponent implements OnInit {
 
   menuList: Array<{ label: string, url: string }> = [
@@ -34,8 +37,9 @@ export class NavbarComponent implements OnInit {
   userName = '';
   userAdmin = 'false';
   loginError = false;
+  badger: Number = 0;
 
-  constructor(public http: Http, public router: Router) {
+  constructor(public http: Http, public router: Router, public cart: CartService, public global: Globals) {
     this.profile();
   }
 /**

@@ -15,7 +15,7 @@
     <div class="ml-auto">
     <button *ngIf="userName === 'none'" class="btn btn-success"  (click)="showLoginModal()">Bejelentkezés</button>
     <button *ngIf="userName === 'none'" class="btn btn-primary" routerLink="/register">Regisztráció</button>
-    <button *ngIf="userName !== 'none'" class="btn btn-warning" routerLink="/cart">Kosár <span class="badge badge-dark">0</span> </button>
+    <button *ngIf="userName !== 'none'" class="btn btn-warning" routerLink="/cart">Kosár <span class="badge badge-dark">{{global.badge}}</span> </button>
     <button *ngIf="userName !== 'none'" class="btn btn-success" routerLink="/profile">Profil: {{userName}} </button>
     <button *ngIf="userAdmin === 'true'" class="btn btn-success" routerLink="/statistics">ADMIN: {{userName}}</button>
     <button *ngIf="userName !=='none'" class="btn btn-danger" routerLink="/main" (click)="logout()" >Kijelentkezés</button>

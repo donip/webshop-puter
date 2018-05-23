@@ -1,6 +1,7 @@
 import { CartService } from './../cart.service';
 import { Component, OnInit } from '@angular/core';
 import { Http, Headers, Response, RequestOptions } from '@angular/http';
+import { NavbarComponent } from '../navbar/navbar.component';
 
 @Component({
   selector: 'app-main',
@@ -18,7 +19,7 @@ export class MainComponent implements OnInit {
   lastTenProducts: any;
   selectedCategory: any;
   options = new RequestOptions({ withCredentials: true });
-  constructor(public http: Http, public cart: CartService) {
+  constructor(public http: Http, public cart: CartService, public navbar: NavbarComponent) {
     this.getAllC();
     this.getAllProducts();
     this.getAllProductsForReal();
@@ -152,5 +153,6 @@ export class MainComponent implements OnInit {
 
   toTheCart(product) {
     this.cart.addToCart(product);
+    this.cart.getQuantity();
   }
 }
