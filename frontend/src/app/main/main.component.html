@@ -43,7 +43,7 @@
 </div>
 <div class="container-fluid">
   <div class="row">
-    <div class="col-2">
+    <div class="col-3">
       <table>
         <tbody>
           <tr *ngFor="let category of datas">
@@ -54,14 +54,15 @@
         </tbody>
       </table>
     </div>
-    <div class="col-2" *ngFor="let item of dataHelper">
+    <div class="col-3" *ngFor="let item of dataHelper">
       <div class="card" style="width: 18rem;">
         <img *ngIf="item.imgurl" class="card-img-top" src="{{item.imgurl}}" alt="{{item.producturl}}" width="50" height="300">
         <img *ngIf="!item.imgurl" class="card-img-top" src="http://localhost:8080/uploads/feltoltes_alatt.jpg" alt="feltoltes-alatt" width="50" height="300">
         <div class="card-body">
           <h5 class="card-title">{{item.productname}}</h5>
           <p class="card-text">{{item.price}} Ft</p>
-          <a href="http://localhost:4200/products{{item.producturl}}" class="btn btn-outline-info">Részletek</a>
+          <a href="http://localhost:4200/products/{{item.producturl}}" class="btn btn-outline-info">Részletek</a>
+          <button class="btn btn-outline-success" (click)="toTheCart(item)">Kosárba</button>
         </div>
       </div>
     </div>

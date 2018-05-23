@@ -40,6 +40,5 @@ options = new RequestOptions({ withCredentials: true });
   }
   toTheCart(product) {
     this.cart.addToCart(product);
-    console.log(this.productData);
   }
 }
