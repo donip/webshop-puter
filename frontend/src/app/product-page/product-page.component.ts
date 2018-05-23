@@ -1,3 +1,4 @@
+import { CartService } from './../cart.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Http, Headers, Response, RequestOptions } from '@angular/http';
@@ -15,10 +16,11 @@ productData = {
   brand: '',
   price: '',
   imgurl: '',
+  comments: []
 };
 url: any;
 options = new RequestOptions({ withCredentials: true });
-  constructor(private route: ActivatedRoute, public http: Http) {
+  constructor(private route: ActivatedRoute, public http: Http, public cart: CartService) {
     this.route.params.subscribe(params =>  {
       this.url = params;
     });
@@ -36,5 +38,7 @@ options = new RequestOptions({ withCredentials: true });
   ngOnInit() {
     this.navigate();
   }
-
+  toTheCart(product) {
+    this.cart.addToCart(product);
+  }
 }

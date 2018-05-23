@@ -52,10 +52,10 @@ module.exports = {
       .catch(err => res.send(err));
   },
   /**
-  * mongo _id alapján megkeres egy productot
-  * @param {object} req - HTTP request objektum
-  * @param {object} res - HTTP response objektum
-  */
+   * mongo _id alapján megkeres egy productot
+   * @param {object} req - HTTP request objektum
+   * @param {object} res - HTTP response objektum
+   */
   find: (req, res) => {
     Product.findById(req.params.id)
       .then(product => res.json(product))
@@ -68,7 +68,9 @@ module.exports = {
    * @return {Object} - product object-jét küldi vissza
    */
   findByUrl: (req, res) => {
-    Product.findOne({ producturl: req.params.producturl })
+    Product.findOne({
+      producturl: req.params.producturl,
+    })
       .then(product => res.json(product))
       .catch(err => res.send(err));
   },
@@ -92,7 +94,9 @@ module.exports = {
         .then(product => res.send(product))
         .catch(err => res.send(err));
     } else {
-      res.send({ err: 'You are not an admin!' });
+      res.send({
+        err: 'You are not an admin!',
+      });
       // res.send({ err: 'You are not an admin!', data: req.user.isAdmin });
     }
   },
@@ -126,22 +130,24 @@ module.exports = {
               console.log('img file was deleted');
             });
           }
-          
+
           res.json(product);
         })
         .catch(err => res.send(err));
     } else {
-      res.send({ err: 'You are not an admin!' });
+      res.send({
+        err: 'You are not an admin!',
+      });
     }
   },
   /**
-  * Eltávolít egy productot az id alapján
-  * és törli a hozzátartozó képet az imgurl-ből nyert img fájlnév és útvonal alapján.
-  * Csak admin jogosultsággal működik.
-  *@param {object} req - HTTP request objektum
-  *@param {object} res - HTTP response objektum
-  *@return {Object} - A törölt elemmet küldi vissza
-  */
+   * Eltávolít egy productot az id alapján
+   * és törli a hozzátartozó képet az imgurl-ből nyert img fájlnév és útvonal alapján.
+   * Csak admin jogosultsággal működik.
+   *@param {object} req - HTTP request objektum
+   *@param {object} res - HTTP response objektum
+   *@return {Object} - A törölt elemmet küldi vissza
+   */
   remove: (req, res) => {
     req.user = JSON.stringify(req.user);
     req.user = JSON.parse(req.user);
@@ -159,7 +165,9 @@ module.exports = {
         })
         .catch(err => res.send(err));
     } else {
-      res.send({ err: 'You are not an admin!' });
+      res.send({
+        err: 'You are not an admin!',
+      });
     }
   },
   addComment: (req, res) => {
@@ -181,7 +189,9 @@ module.exports = {
         })
         .catch(err => res.send(err));
     } else {
-      res.send({ err: 'You are not an admin!' });
+      res.send({
+        err: 'You are not an admin!',
+      });
     }
   },
 };

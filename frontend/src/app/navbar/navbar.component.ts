@@ -22,8 +22,8 @@ export class NavbarComponent implements OnInit {
     { label: 'Kategória', url: '/category' },
   ];
   user: any = {
-    username: 'a@b.c',
-    password: '12345678',
+    username: '',
+    password: '',
   };
   loginChecker = false;
   loginCheckerForButton = false;
