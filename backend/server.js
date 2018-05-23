@@ -13,7 +13,15 @@ const LocalStrategy = require('passport-local').Strategy;
 const db = require('./config/database.js');
 const User = require('./models/user');
 const userRouter = require('./route/user.route');
+const commentRouter = require('./route/comment.route');
 const blogpostRouter = require('./route/blogpost.route');
+const productRouter = require('./route/product.route');
+const categoryRouter = require('./route/category.route');
+const nodemailer = require('nodemailer');
+
+const orderRouter = require('./route/order.route');
+const useradminRouter = require('./route/useradmin.route');
+// const contactRouter = require('./route/contact.route');
 
 const logDirectory = path.join(__dirname, 'log');
 const port = process.env.PORT || 8080;
@@ -61,8 +69,12 @@ passport.deserializeUser(User.deserializeUser());
 
 // Connect to MongoDB
 mongoose.connect(db.uri, db.options)
-  .then(() => { console.log('MongoDB connected.'); })
-  .catch((err) => { console.error(`MongoDB error.:${err}`); });
+  .then(() => {
+    console.log('MongoDB connected.');
+  })
+  .catch((err) => {
+    console.error(`MongoDB error.:${err}`);
+  });
 
 // Enable CORS
 app.use(cors({
@@ -74,5 +86,50 @@ app.use(cors({
 app.use('/user/', userRouter);
 app.use('/blogpost/', blogpostRouter);
 
+// product router
+app.use('/product/', productRouter);
+
+// comment router
+app.use('/comment/', commentRouter);
+
+// category router
+app.use('/category/', categoryRouter);
+
+// order router
+app.use('/order/', orderRouter);
+
+// useradmin router
+app.use('/useradmin/', useradminRouter);
+
+// contact router
+// app.use('/contact/', contactRouter);
+
+
 // Start server
 app.listen(port);
+
+app.use('/uploads', express.static('./uploads'));
+
+// nodemailer
+app.post('/contact/sendClientMsg', (req, res) => {
+  const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: 'pjutoersmitt@gmail.com',
+      pass: 'kiafaszagyerek',
+    },
+  });
+  const mailOptions = {
+    from: 'youremail@gmail.com', // X-Google-Original-From:
+    to: 'pjutoersmitt@gmail.com',
+    subject: `Ügyfél észrevétel From: ${req.body.email}`,
+    text: `\n\rFrom: ${req.body.email}\n\rMsg:  ${req.body.coreMsg}`,
+  };
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.log(error);
+    } else {
+      res.json({ success: `Email sent: ${info.response}` });
+    }
+  });
+});

@@ -1,0 +1,54 @@
+<div class="container-fluid">
+  <div class="jumbotron jumbotron-fluid">
+    <h1 class="display-2 text-center">Regisztráció</h1>
+  </div>
+  <hr>
+  <br>
+</div>
+<div class="container">
+  <form #loginForm="ngForm">
+    <div class="row">
+      <div class="col-md-6 offset-md-3">
+        
+        <label for="name">Név</label>
+        <input class="form-control" type="text" id="name" name="name" [(ngModel)]="user.username" required #name="ngModel">
+        <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
+          <div [hidden]="!name.hasError('required')">Kötelező kitölteni.</div>
+        </div>
+
+        <label for="email">Email</label>
+        <input class="form-control" type="email" id="email" name="email" [(ngModel)]="user.email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+          required #email="ngModel">
+        <div [hidden]="email.valid || email.pristine" class="alert alert-danger">
+          <div [hidden]="!email.hasError('required')">Kötelező kitölteni.</div>
+          <div [hidden]="!email.hasError('pattern')">Email formátum. Pl.:
+            <small>
+              <b>kisjozsi@abc.hu</b>
+            </small>
+          </div>
+        </div>
+
+        <label for="password">Jelszó</label>
+        <div class="form-group has-danger">
+          <div class="input-group">
+            <input type="password" name="password" class="form-control" id="passwordReg" minlength="8" required [(ngModel)]="user.password"
+              #password="ngModel">
+          </div>
+        </div>
+        <div [hidden]="password.valid || password.pristine" class="alert alert-danger">
+          <div [hidden]="!password.hasError('required')">Kötelező kitölteni.</div>
+          <div [hidden]="!password.hasError('minlength')">Minimum 8 karakter</div>
+        </div>
+
+        <label for="password2">Jelszó megerősítése</label>
+        <div class="form-group">
+          <div class="input-group">
+            <input type="password" name="passwordConfirmation" class="form-control" id="passwordConfirm" required [(ngModel)]="passwordConf">
+          </div>
+        </div>
+
+        <input type="button" [disabled]="!loginForm.form.valid" class="btn btn-success" value="Regisztráció" (click)="validation()">
+      </div>
+    </div>
+  </form>
+</div>

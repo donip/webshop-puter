@@ -1,0 +1,86 @@
+<div class="container-fluid">
+  <div class="jumbotron jumbotron-fluid">
+    <h1 class="display-2 text-center">Kategóriák</h1>
+  </div>
+  <hr>
+  <br>
+  <div class="row">
+    <div class="col-sm-10 offset-sm-1">
+      <table>
+        <tr>
+          <td class="text-center">
+            Új Kategória hozzáadása
+          </td>
+          <td>
+            <form name="myForm">
+              <input type="text" class="form-control" name="title" [(ngModel)]="adat.title" placeholder="Kategória" required #title="ngModel">
+            </form>
+          </td>
+          <td>
+            <form name="myForm2">
+              <input type="text" class="form-control" name="brand" [(ngModel)]="adat.rank" placeholder="Sorszám" required #rank="ngModel">
+            </form>
+          </td>
+          <td>
+            <button class="btn btn-outline-success btn-block" type="button" (click)="creator()">Bevitel</button>
+          </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>
+            <div *ngIf="title.invalid && (title.dirty || title.touched)" class="alert alert-danger">
+              <div *ngIf="title.errors.required">
+                  Ezt a mezőt kötelező kitölteni.
+              </div>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="rank.invalid && (rank.dirty || rank.touched)" class="alert alert-danger">
+              <div *ngIf="rank.errors.required">
+                  Ezt a mezőt kötelező kitölteni.
+              </div>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-sm-12">
+      <table class="table table-fluid table-hover table-borderless">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Id</th>
+            <th>Kategória Név</th>
+            <th>Sorszám</th>
+            <th>Magic Makers</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let category of datas">
+            <td></td>
+            <td class="align-middle">
+              <input type="text" class="form-control" [(ngModel)]="category['_id']" readonly>
+            </td>
+            <td class="align-middle">
+              <input type="text" class="form-control" [(ngModel)]="category.title">
+            </td>
+            <td class="align-middle">
+              <input type="number" min="0" class="form-control" [(ngModel)]="category.rank">
+            </td>
+            <td class="align-middle">
+              <div class="btn-group">
+                <button class="btn btn-outline-primary" type="button" (click)="updater(category)">Frissítés</button>
+                <button class="btn btn-outline-danger" type="button" (click)="rowDeleter(category)">Törlés</button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+</div>
+

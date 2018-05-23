@@ -1,0 +1,9 @@
+.container-fluid {
+    position: relative;
+};
+
+.jumbotron {
+    background: url("../../assets/what-is-statistics.jpg") center center no-repeat;
+    color: white;
+    text-shadow: 0px 0px 10px black;
+  };

@@ -11,6 +11,35 @@ const userSchema = mongoose.Schema({
     required: true,
     unique: true,
   },
+  phone: {
+    type: String,
+  },
+  invoice: {
+    city: {
+      type: String,
+    },
+    address: {
+      type: String,
+    },
+    postcode: {
+      type: Number,
+    },
+  },
+  delivery: {
+    city: {
+      type: String,
+    },
+    address: {
+      type: String,
+    },
+    postcode: {
+      type: Number,
+    },
+  },
+  isAdmin: {
+    type: String,
+    required: true,
+  },
 }, {
   timestamps: true,
 });
@@ -18,6 +47,7 @@ const userSchema = mongoose.Schema({
 userSchema.plugin(passportLocalMongoose, {
   maxAttempts: 5,
   hashField: 'password',
+  usernameField: 'email',
 });
 
 module.exports = mongoose.model('User', userSchema);

@@ -1,0 +1,37 @@
+<div class="container-fluid">
+    <div class="jumbotron jumbotron-fluid">
+      <h1 class="display-2 text-center">Login</h1>
+    </div>
+    <hr>
+    <br>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-10 offset-1">
+            <div class="alert alert-success" role="alert" *ngIf="loginChecker">
+                Sikeres bejelentkezés!
+            </div>
+            <div class="alert alert-success" role="alert" *ngIf="logoutChecker">
+                Sikeres kijelentkezés!
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <form>
+                <label for="email">Email</label>
+                <input class="form-control"type="email" name="email" id="email" [(ngModel)]="user.username">
+                <label for="password">Password</label>
+                <input class="form-control" type="password" name="password" id="password" [(ngModel)]="user.password">
+                <br>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-success" (click)="login()">Login</button>
+                    <button *ngIf="loginCheckerForButton" type="button" class="btn btn-info" (click)="profile()">Profil</button>
+                    <button type="button" class="btn btn-danger" (click)="logout()">Logout</button>  
+                </div>
+            </form>
+            <br>
+            <a routerLink="/register">Még nem regisztrált felhasználó?</a>
+        </div>
+    </div>
+</div>
