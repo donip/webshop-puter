@@ -66,27 +66,6 @@ export class ProductsComponent implements OnInit {
     );
   }
   /**
-   * Egy adott lekért adatot ad vissza, későbbiekben szükséges lesz.
-   * @param id Az egyedi azonosító, ami speciálisan a keresett adatra mutat.
-   */
-  getOne(id) {
-    this.http.get('http://localhost:8080/product/url/' + id, this.options).subscribe(
-      data => {
-        this.errorHandling(data);
-      });
-  }
-  /**
-   * Egy adott termék oldalára navigál át - még folyamatban van, későbbiekben lesz rá szükség.
-   * @param product A termék, aminek az oldalára navigálunk.
-   */
-  navigate(product) {
-    this.selectedProduct = product;
-    this.http.get('http://localhost:8080/product/url/' + this.selectedProduct['producturl'], this.options).subscribe(
-      data => {
-        console.log(data);
-      });
-  }
-  /**
    * A file uploadhoz esszenciális függvény.
    * @param event Az esemény amit figyel.
    */
