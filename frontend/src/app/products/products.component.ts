@@ -101,7 +101,7 @@ export class ProductsComponent implements OnInit {
   bodyCreator(param) {
     const body = new FormData();
     body.append('productname', param.productname);
-    body.append('category', param.category);
+    body.append('category', param.category['_id']);
     body.append('price', param.price);
     body.append('brand', param.brand);
     if (this.uploadFile) {
@@ -120,22 +120,13 @@ export class ProductsComponent implements OnInit {
       data => {
         console.log(data);
         this.getAll();
-        if (!JSON.parse(data['_body']).errors) {
+        if (!JSON.parse(data['_body']).errors && !JSON.parse(data['_body']).errmsg) {
           alert('A termék hozzáadásra került.');
         } else {
           alert('Hozzáadás sikertelen.');
         }
       });
   }
-
-  // catUpdater(product) {
-  //   this.http.put('http://localhost:8080/product/' + product['_id'], product, this.options).subscribe(
-  //     data => {
-  //       console.log(data);
-  //     }
-  //   );
-  // }
-
   /**
    * Meglévő terméket frissít.
    * @param product Maga a frissítendő termék.

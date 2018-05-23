@@ -27,7 +27,7 @@
               </form>
             </td>
             <td>
-                <select class="form-control" [(ngModel)]="adat.category">
+                <select class="form-control" [(ngModel)]="adat.category['_id']">
                   <option *ngFor="let y of catData" value="{{y['_id']}}">{{ y.title }}</option>
                 </select>
             </td>
