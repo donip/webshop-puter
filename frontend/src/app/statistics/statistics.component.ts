@@ -18,7 +18,7 @@ export class StatisticsComponent {
       ['Nap', 'Bevétel'],
     ],
     options: {
-      'title': 'Havi bevétel napokra leosztva',
+      'title': 'Havi bevétel napi eloszlása',
       is3D: true,
       legend: 'none',
       height: 500
