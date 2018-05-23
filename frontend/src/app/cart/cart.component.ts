@@ -78,6 +78,7 @@ export class CartComponent implements OnInit {
   }
 
   getProduct(id) {
+    // tslint:disable-next-line:triple-equals
     const productData = this.productsData.filter(product => product['_id'] == id);
     console.log(productData);
     return productData[0]['productname'];
