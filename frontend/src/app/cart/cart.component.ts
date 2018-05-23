@@ -62,6 +62,7 @@ export class CartComponent implements OnInit {
           { productname: 'Üres a kosár', price: 0, quantity: 0 },
         ]
       };
+    // tslint:disable-next-line:triple-equals
     } else if (this.userId == JSON.parse(localStorage.getItem('cart')).customer) {
       this.myCart = JSON.parse(localStorage.getItem('cart'));
       console.log(this.myCart);
