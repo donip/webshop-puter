@@ -26,6 +26,7 @@ import { CartService } from './cart.service';
 import { CategoryComponent } from './category/category.component';
 import { ProductPageComponent } from './product-page/product-page.component';
 import { Globals } from './globals';
+import { FooterComponent } from './footer/footer.component';
 
 const routes: Routes = [
   { path: '', component: MainComponent, pathMatch: 'full' },
@@ -59,7 +60,8 @@ const routes: Routes = [
     ProfileComponent,
     CartComponent,
     CategoryComponent,
-    ProductPageComponent
+    ProductPageComponent,
+    FooterComponent
   ],
   imports: [
     AgmCoreModule.forRoot({
