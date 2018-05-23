@@ -16,8 +16,11 @@ productData = {
   brand: '',
   price: '',
   imgurl: '',
-  comments: []
+  comments: [],
+  category: ''
 };
+cats = [];
+chosenOne: any;
 url: any;
 options = new RequestOptions({ withCredentials: true });
   constructor(private route: ActivatedRoute, public http: Http, public cart: CartService) {
@@ -30,6 +33,7 @@ options = new RequestOptions({ withCredentials: true });
       data => {
         const body = JSON.parse(data['_body']);
         this.productData = body;
+        this.getCat();
         if (body === null || body.error ) {
            this.error = true;
         }
@@ -40,5 +44,17 @@ options = new RequestOptions({ withCredentials: true });
   }
   toTheCart(product) {
     this.cart.addToCart(product);
+  }
+  getCat() {
+    this.http.get('http://localhost:8080/category', this.options).subscribe(
+      data => {
+        this.cats = JSON.parse(data['_body']);
+        for (let i = 0; i < this.cats.length; i++) {
+          if (this.productData.category === this.cats[i]['_id']) {
+            this.chosenOne = this.cats[i].title;
+          }
+        }
+      }
+    );
   }
 }
