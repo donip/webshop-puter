@@ -30,7 +30,7 @@ export class CartComponent implements OnInit {
   };
   productsInCart = [];
   phone: 'nincs';
-
+userData: any;
   constructor(public http: Http) {
     this.getAll();
     this.profile();
@@ -94,10 +94,13 @@ export class CartComponent implements OnInit {
   profile() {
     this.http.get('http://localhost:8080/user/profile', this.options)
       .subscribe(data => {
-
+this.userData = JSON.parse(data['_body']);
 
       });
   }
+  updateProfile() {
+    this.http.put(this.baseUrl + 'useradmin/' + this.userData['_id'], this.userData, this.options)
+      .subscribe();
 
 
 }

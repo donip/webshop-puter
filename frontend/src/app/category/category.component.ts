@@ -73,12 +73,16 @@ export class CategoryComponent implements OnInit {
   }
   /**
    * Meglévő terméket frissít.
-   * @param product Maga a frissítendő termék.
+   * @param category Maga a frissítendő termék.
    */
   updater(category) {
     this.selectedCategory = category;
-    const body = this.category;
-      this.http.put('http://localhost:8080/product/' + this.selectedCategory['_id'], body, this.options).subscribe(
+    const body = {
+      title: category.title,
+      rank: category.rank,
+    };
+    console.log(body);
+      this.http.put('http://localhost:8080/category/' + this.selectedCategory['_id'], body, this.options).subscribe(
         data => {
           console.log(data);
           this.getAll();

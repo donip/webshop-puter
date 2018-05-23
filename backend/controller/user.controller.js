@@ -44,6 +44,7 @@ module.exports = {
    */
   logout: (req, res) => {
     req.logout();
+    req.session.destroy();
     res.json({
       success: 'Sikeres kilépés',
     });
@@ -59,7 +60,7 @@ module.exports = {
    */
   changePass: (req, res) => {
     if (req.user) {
-      if (req.user['_id'] == req.params.id) {
+      if (req.user._id == req.params.id) {
         User.findById(req.params.id).then((user) => {
           user.changePassword(req.body.oldPassword, req.body.newPassword, (passwordErr) => {
             if (passwordErr) {
