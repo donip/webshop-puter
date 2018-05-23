@@ -7,7 +7,7 @@
     <span>Termék: {{p.productname}}</span>
     <span>Egységár: {{p.price | currency:'HUF':'local' }}</span>
     <div class="input-group">
-      <input class="form-control" type="number" name="quantity" [(ngModel)]="p.quantity">
+      <input class="form-control" min="0" type="number" name="quantity" [(ngModel)]="p.quantity">
       <div class="input-group-append">
         <span class="input-group-text"> db</span>
       </div>
@@ -16,11 +16,15 @@
   </div>
   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#orderModal">Rendelés leadás</button>
 
+<<<<<<< HEAD
+=======
+  <!-- ORDER CONFIRMATION MODAL -->
+>>>>>>> 1383278b4613305f3d6ec9cc1f68bcbcf940c55b
   <div class="modal fade" tabindex="-1" role="dialog" id="orderModal">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Modal title</h5>
+          <h5 class="modal-title">Rendelés összesítése</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -31,12 +35,26 @@
             <span>Termék: {{j.productname}}</span>
             <span>Egységár: {{j.price | currency:'HUF':'local' }}</span>
             <p>Összár: {{j.price*j.quantity | currency:'HUF':'local' }}</p>
+            <p>Felhaszn: {{j.customer}}</p>
           </div>
           <div>
             <label>Telefonszám</label>
-            <input type="text" name="phone" class="form-control" placeholder="+36..." [(ngModel)]="userData.phone" pattern="[0-9]*"
-              minlength="8" maxlength="8" #phone="ngModel">
+            <input type="text" name="phone" class="form-control" placeholder="+36..." [(ngModel)]="userData.phone" pattern="[0-9]*" minlength="8"
+              maxlength="9" #phone="ngModel">
 
+            <div class="form-group">
+              <label>Számlázási Adatok</label>
+              <div class="form-group">
+                <input type="number" maxlength="4" minlength="4" name="postcodeI" class="form-control" placeholder="Irányítószám" [(ngModel)]="userData.invoice.postcode">
+              </div>
+              <div class="form-group">
+                <input type="text" name="cityI" class="form-control" placeholder="Város" [(ngModel)]="userData.invoice.city">
+              </div>
+              <div class="form-group">
+                <input type="text" name="addressI" class="form-control" placeholder="Cím" [(ngModel)]="userData.invoice.address">
+              </div>
+
+            </div>
             <div class="form-group">
               <label>Szállítási cím</label>
               <div class="form-group">
@@ -53,7 +71,6 @@
           </div>
           <div class="modal-footer">
             <button class="btn btn-success" (click)="createOrder()">Rendelés leadás</button>
-            <button type="button" class="btn btn-primary">Rendelés elküldése</button>
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Mégse</button>
           </div>
         </div>

@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top"><a class="navbar-brand" href="/main">PUTörschmidt</a>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top"><a class="navbar-brand" href="/main"><img src="../../assets/prob.png" width="30" height="60" alt="pewpew"></a>
   <button class="navbar-toggler" id="loginButton" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
   <div class="collapse navbar-collapse" id="navbarNavDropdown">
     <ul class="navbar-nav">
@@ -15,7 +15,8 @@
     <div class="ml-auto">
     <button *ngIf="userName === 'none'" class="btn btn-success"  (click)="showLoginModal()">Bejelentkezés</button>
     <button *ngIf="userName === 'none'" class="btn btn-primary" routerLink="/register">Regisztráció</button>
-    <button *ngIf="userName !== 'none' && userAdmin === 'false'" class="btn btn-success" routerLink="/profile" >{{userName}}</button>
+    <button *ngIf="userName !== 'none'" class="btn btn-warning" routerLink="/cart">Kosár</button>
+    <button *ngIf="userName !== 'none'" class="btn btn-success" routerLink="/profile">Profil: {{userName}} </button>
     <button *ngIf="userAdmin === 'true'" class="btn btn-success" routerLink="/statistics">ADMIN: {{userName}}</button>
     <button *ngIf="userName !=='none'" class="btn btn-danger" routerLink="/main" (click)="logout()" >Kijelentkezés</button>
   </div>
