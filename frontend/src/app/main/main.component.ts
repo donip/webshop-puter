@@ -23,6 +23,7 @@ export class MainComponent implements OnInit {
     this.getAllC();
     this.getAllProducts();
     this.getAllProductsForReal();
+    this.cart.getQuantity();
   }
 
   ngOnInit() {

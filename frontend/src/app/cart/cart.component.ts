@@ -1,3 +1,4 @@
+import { CartService } from './../cart.service';
 import { Component, OnInit } from '@angular/core';
 import { getOrCreateNodeInjector } from '@angular/core/src/render3/instructions';
 import { Http, RequestOptions } from '@angular/http';
@@ -48,9 +49,10 @@ export class CartComponent implements OnInit {
       address: ''
     },
   };
-  constructor(public http: Http) {
+  constructor(public http: Http, public cart: CartService) {
     this.getAll();
     this.profile();
+    this.cart.getQuantity();
   }
 
   ngOnInit() {
@@ -81,6 +83,7 @@ export class CartComponent implements OnInit {
         console.log(data['_body']);
         this.updateProfile();
         this.emptyCart();
+        this.cart.getQuantity();
         $('#orderModal').modal('hide');
       }, error => {
         window.alert('Rendelés sikertelen');
@@ -96,7 +99,7 @@ export class CartComponent implements OnInit {
   }
 
   getProduct(id) {
-    const productData = this.productsData.filter(product => product['_id'] == id);
+    const productData = this.productsData.filter(product => product['_id'] === id);
     console.log(productData);
     return productData[0]['productname'];
   }

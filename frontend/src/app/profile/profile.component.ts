@@ -1,3 +1,4 @@
+import { CartService } from './../cart.service';
 import { Component } from '@angular/core';
 import { Http, Headers, Response, RequestOptions } from '@angular/http';
 
@@ -53,9 +54,10 @@ export class ProfileComponent {
   activeOrders: any;
 
 
-  constructor(public http: Http, public router: Router) {
+  constructor(public http: Http, public router: Router, public cart: CartService) {
     this.profile();
     this.getMyOrders();
+    this.cart.getQuantity();
   }
   /**
    * Felhasználói profil lekérése
