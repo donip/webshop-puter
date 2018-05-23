@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import * as faker from 'faker';
 import { validateConfig } from '@angular/router/src/config';
 import { Body } from '@angular/http/src/body';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-products',
@@ -18,7 +19,7 @@ export class ProductsComponent implements OnInit {
     productname: '',
     brand: '',
     price: '',
-    category: {_id: '', title: ''},
+    category: { _id: '', title: '' },
   };
   uploadFile: File = null;
   checker: any;
@@ -27,7 +28,7 @@ export class ProductsComponent implements OnInit {
   catData: any;
   selectedProduct: any;
   options = new RequestOptions({ withCredentials: true });
-  constructor(public http: Http) {
+  constructor(public http: Http, public router: Router) {
     this.getAll();
   }
 
@@ -52,8 +53,13 @@ export class ProductsComponent implements OnInit {
   getAll() {
     this.http.get('http://localhost:8080/product', this.options).subscribe(
       data => {
-        this.errorHandling(data);
-        this.getCategory();
+        const d = JSON.parse(data['_body']);
+        if (d.err) {
+          this.router.navigate(['/main']);
+        } else {
+          this.errorHandling(data);
+          this.getCategory();
+        }
       });
   }
 
@@ -123,8 +129,8 @@ export class ProductsComponent implements OnInit {
           alert('A termék sikeresen frissítve.');
         });
     } else {
-        this.getAll();
-        alert('Sikertelen frissítés.');
+      this.getAll();
+      alert('Sikertelen frissítés.');
     }
   }
   /**
@@ -166,12 +172,12 @@ export class ProductsComponent implements OnInit {
    * Comment írás termékhez (abban az esetben jogosult erre a felhasználó, ha már rendelt)
    */
   comment(product) {
-      const body = {'productname': 'újnév'};
-      this.http.patch('http://localhost:8080/product/5b04758301bc500fa4e3267e', body, this.options).subscribe(
-        data => {
-          console.log(data);
-          this.getAll();
-          alert('Patch ok');
-        });
-    }
+    const body = { 'productname': 'újnév' };
+    this.http.patch('http://localhost:8080/product/5b04758301bc500fa4e3267e', body, this.options).subscribe(
+      data => {
+        console.log(data);
+        this.getAll();
+        alert('Patch ok');
+      });
+  }
 }
