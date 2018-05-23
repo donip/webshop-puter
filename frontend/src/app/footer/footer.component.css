@@ -1,18 +1,24 @@
-.footer {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    background-color: #343A40;
-    color: white;
-    text-align: center;
+.container {
+  height: 5vh;
 }
+
+.footer {
+  background-color: #343A40;
+  bottom: 0;
+  color: white;
+  left: 0;
+  position: fixed;
+  text-align: center;
+  width: 100%;
+}
+
 .footer a {
-    color: #70726F;
-    font-size: 20px;
-    padding: 30px;
-    transition: all .5s ease;
-  }
-  .footer a:hover {
-    color: white;
-  }
+  color: #70726F;
+  font-size: 20px;
+  padding: 0px 30px;
+  transition: all .5s ease;
+}
+
+.footer a:hover {
+  color: white;
+}
