@@ -80,7 +80,7 @@
               <th>Kép</th>
               <th>ID</th>
               <th>Termék Név</th>
-              <th>Termék URL</th>
+              <th>Hozzáadva</th>
               <th>Márka</th>
               <th>Ár</th>
               <th>Kategória</th>
@@ -101,7 +101,7 @@
                 <input type="text" class="form-control" [(ngModel)]="x.productname">
               </td>
               <td class="align-middle">
-                <input type="text" class="form-control" [(ngModel)]="x.producturl" readonly>
+                <input type="text" class="form-control" [ngModel]="x.createdAt |  date:'yyyy-MM-dd'" (ngModelChange)="x.createdAt=$event" readonly>
               </td>
               <td class="align-middle">
                 <input type="text" class="form-control" [(ngModel)]="x.brand">
@@ -122,10 +122,10 @@
               </td>
               <td class="align-middle">
                 <div class="btn-group-vertical btn-group-block">
-                  <a class="btn btn-outline-dark" role="button" href="http://localhost:4200/products/{{x.producturl}}">Részletek</a>
+                  <a class="btn btn-outline-info" role="button" href="http://localhost:4200/products/{{x.producturl}}">Részletek</a>
                   <button class="btn btn-outline-primary" type="button" (click)="updater(x)">Frissítés</button>
                   <button class="btn btn-outline-danger" type="button" (click)="rowDeleter(x)">Törlés</button>
-                  <button class="btn btn-outline-danger" type="button" (click)="comment(x)">Comment</button>
+                  <button class="btn btn-outline-dark" type="button" (click)="comment(x)">Hozzászólás</button>
                 </div>
               </td>
             </tr>
