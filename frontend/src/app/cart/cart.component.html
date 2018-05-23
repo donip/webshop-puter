@@ -2,19 +2,22 @@
   <div class="jumbotron jumbotron-fluid">
     <h1 class="display-2 text-center">Kosár tartalma:</h1>
   </div>
-  <div *ngFor="let p of myCart.products; let i = index">
-    <p>{{i+1}}.</p>
-    <span>Termék: {{p.productname}}</span>
-    <span>Egységár: {{p.price | currency:'HUF':'local' }}</span>
-    <div class="input-group">
-      <input class="form-control" min="0" type="number" name="quantity" [(ngModel)]="p.quantity">
-      <div class="input-group-append">
-        <span class="input-group-text"> db</span>
+  <form #cartForm="ngForm">
+    <div *ngFor="let p of myCart.products; let i = index">
+      <p>{{i+1}}.</p>
+      <span>Termék: {{p.productname}}</span>
+      <span>Egységár: {{p.price | currency:'HUF':'local' }}</span>
+      <div class="input-group">
+        <input class="form-control" min="0" [disabled]="p.productname === 'Üres a kosár'" pattern="^[1-9]" type="number" name="quantity" [(ngModel)]="p.quantity">
+        <div class="input-group-append">
+          <span class="input-group-text"> db</span>
+        </div>
       </div>
+      <p>Összár: {{p.price*p.quantity | currency:'HUF':'local' }}</p>
+      <button class="btn btn-danger" [hidden]="p.productname ==='Üres a kosár'" (click)="deleteRow(i)">X</button>
     </div>
-    <p>Összár: {{p.price*p.quantity | currency:'HUF':'local' }}</p>
-  </div>
-  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#orderModal">Rendelés leadás</button>
+    <button type="button" [disabled]="cartForm.invalid" class="btn btn-primary" data-toggle="modal" data-target="#orderModal">Rendelés leadás</button>
+  </form>
 
   <!-- ORDER CONFIRMATION MODAL -->
   <div class="modal fade" tabindex="-1" role="dialog" id="orderModal">
@@ -34,40 +37,69 @@
             <p>Összár: {{j.price*j.quantity | currency:'HUF':'local' }}</p>
             <p>Felhaszn: {{j.customer}}</p>
           </div>
-          <div>
+
+          <form #orderForm="ngForm">
             <label>Telefonszám</label>
-            <input type="text" name="phone" class="form-control" placeholder="+36..." [(ngModel)]="userData.phone" pattern="[0-9]*" minlength="8"
-              maxlength="9" #phone="ngModel">
+            <input type="text" name="phone" class="form-control" placeholder="pl.: 301234567" [(ngModel)]="userData.phone" pattern="[0-9]*"
+              minlength="8" maxlength="9" #phone="ngModel" required>
+            <div [hidden]="phone.valid || phone.pristine" class="alert alert-danger">
+              <div [hidden]="!phone.hasError('required')">Kötelező kitölteni.</div>
+              <div [hidden]="!phone.hasError('minlength')">Legalább 8 számjegy</div>
+              <div [hidden]="!phone.hasError('maxlength')">Legalább 9 számjegy</div>
+            </div>
 
             <div class="form-group">
               <label>Számlázási Adatok</label>
               <div class="form-group">
-                <input type="number" maxlength="4" minlength="4" name="postcodeI" class="form-control" placeholder="Irányítószám" [(ngModel)]="userData.invoice.postcode">
+                <input type="number" #i1="ngModel" required min="1000" max="9999" name="postcodeI" class="form-control" pattern="[1-9][0-9][0-9][0-9]"
+                  placeholder="Irányítószám" [(ngModel)]="userData.invoice.postcode">
+                <div [hidden]="i1.valid || i1.pristine" class="alert alert-danger">
+                  <div [hidden]="!i1.hasError('required')">Kötelező kitölteni.</div>
+                  <div [hidden]="!i1.hasError('pattern')">Nem érvényes irányítószám.</div>
+                </div>
               </div>
               <div class="form-group">
-                <input type="text" name="cityI" class="form-control" placeholder="Város" [(ngModel)]="userData.invoice.city">
+                <input type="text" #i2="ngModel" required name="cityI" class="form-control" placeholder="Város" [(ngModel)]="userData.invoice.city">
+                <div [hidden]="i2.valid || i2.pristine" class="alert alert-danger">
+                  <div [hidden]="!i2.hasError('required')">Kötelező kitölteni.</div>
+                </div>
               </div>
               <div class="form-group">
-                <input type="text" name="addressI" class="form-control" placeholder="Cím" [(ngModel)]="userData.invoice.address">
+                <input type="text" required name="addressI" #i3="ngModel" class="form-control" placeholder="Cím" [(ngModel)]="userData.invoice.address">
+                <div [hidden]="i3.valid || i3.pristine" class="alert alert-danger">
+                  <div [hidden]="!i3.hasError('required')">Kötelező kitölteni.</div>
+                </div>
               </div>
+              <button class="btn btn-secondary" (click)="copyAddress()">Szállítási adatok megegyeznek</button>
 
             </div>
             <div class="form-group">
               <label>Szállítási cím</label>
               <div class="form-group">
-                <input type="number" maxlength="4" minlength="4" name="postcodeD" class="form-control" placeholder="Irányítószám" [(ngModel)]="userData.delivery.postcode">
+                <input type="number" #d1="ngModel" maxlength="4" required minlength="4" name="postcodeD" pattern="[1-9][0-9][0-9][0-9]" class="form-control"
+                  placeholder="Irányítószám" [(ngModel)]="userData.delivery.postcode">
+                <div [hidden]="d1.valid || d1.pristine" class="alert alert-danger">
+                  <div [hidden]="!d1.hasError('required')">Kötelező kitölteni.</div>
+                  <div [hidden]="!d1.hasError('pattern')">Nem érvényes irányítószám.</div>
+                </div>
               </div>
               <div class="form-group">
-                <input type="text" name="cityD" class="form-control" placeholder="Város" [(ngModel)]="userData.delivery.city">
+                <input type="text" name="cityD" #d2="ngModel" required class="form-control" placeholder="Város" [(ngModel)]="userData.delivery.city">
+                <div [hidden]="d2.valid || d2.pristine" class="alert alert-danger">
+                  <div [hidden]="!d2.hasError('required')">Kötelező kitölteni.</div>
+                </div>
               </div>
               <div class="form-group">
-                <input type="text" name="addressD" class="form-control" placeholder="Cím" [(ngModel)]="userData.delivery.address">
+                <input type="text" #d3="ngModel" name="addressD" required class="form-control" placeholder="Cím" [(ngModel)]="userData.delivery.address">
+                <div [hidden]="d3.valid || d3.pristine" class="alert alert-danger">
+                  <div [hidden]="!d3.hasError('required')">Kötelező kitölteni.</div>
+                </div>
               </div>
 
             </div>
-          </div>
+          </form>
           <div class="modal-footer">
-            <button class="btn btn-success" (click)="createOrder()">Rendelés leadás</button>
+            <button [disabled]="orderForm.invalid" class="btn btn-success" (click)="createOrder()">Rendelés leadás</button>
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Mégse</button>
           </div>
         </div>
