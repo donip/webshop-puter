@@ -147,7 +147,7 @@ export class ProfileComponent {
         const d = JSON.parse(data['_body']);
         console.log(d);
         if (d.err) {
-          this.router.navigate(['/main']);
+          this.router.navigate(['/login']);
         } else {
           for (let i = 0; i < d.length; i++) {
             for (let j = 0; j < d[i].products.length; j++) {
