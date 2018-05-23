@@ -7,12 +7,12 @@
     color: white;
     text-align: center;
 }
-.footer a {
+.footer.icons a {
     color: #70726F;
     font-size: 20px;
     padding: 30px;
     transition: all .5s ease;
   }
-  .footer a:hover {
+  .footer.icons a:hover {
     color: white;
   }
