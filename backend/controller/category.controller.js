@@ -1,16 +1,15 @@
 const Category = require('../models/category');
 const mongoose = require('mongoose');
-const fs = require('fs');
 mongoose.Promise = require('bluebird');
 
 /** @module Product */
 
 module.exports = {
   /**
-   * kilistáz minden productot
+   * kilistáz minden category-t
    * @param {Object} req - HTTP request objektum
    * @param {Object} res - HTTP response objektum
-   * @return {Array} - visszatér a product-ok tömbjével
+   * @return {Array} - visszatér a category-k tömbjével
    */
   list: (req, res) => {
     Category.find({})
@@ -18,9 +17,10 @@ module.exports = {
       .catch(err => res.send(err));
   },
   /**
-  * mongo _id alapján megkeres egy productot
+  * mongo _id alapján megkeres egy category-t
   * @param {object} req - HTTP request objektum
   * @param {object} res - HTTP response objektum
+  * @return {Object} visszaküldi a keresendő kategóriát
   */
   find: (req, res) => {
     Category.findById(req.params.id)
@@ -28,11 +28,11 @@ module.exports = {
       .catch(err => res.send(err));
   },
   /**
-   * Generál egy productot, a producturl-t és a imgurl generálja a file.path-ból
+   * Generál egy category-t
    * csak admin jogosultsággal fut le ha nem admin akkor visszadob egy hibát
    * @param {Object} req - HTTP request objektum
    * @param {Object} res - HTTP response objektum
-   * @return létrehozott product object-jét küldi vissza
+   * @return létrehozott category object-jét küldi vissza
    */
   create: (req, res) => {
     Category.create(req.body)
@@ -40,13 +40,12 @@ module.exports = {
       .catch(err => res.send(err));
   },
   /**
-   * update-el egy productot az id alapján
+   * update-el egy category-t az id alapján
    * a productname-ből generálja a product url-t és imgurl-t.
    * csak admin jogosultsággal működik.
-   * Amennyiben az imgurl property létezik törli az url-ből kinyert nevű imaget.
    * @param {Object} req - HTTP request objektum
    * @param {Object} res - HTTP response objektum
-   * @return {Object} - az update-d product régi értékével tér vissza
+   * @return {Object} - az update-d category régi értékével tér vissza
    */
   update: (req, res) => {
     Category.findByIdAndUpdate(req.params.id, req.body)
@@ -56,12 +55,11 @@ module.exports = {
       .catch(err => res.send(err));
   },
   /**
-  * Eltávolít egy productot az id alapján
-  * és törli a hozzátartozó képet az imgurl-ből nyert img fájlnév és útvonal alapján.
+  * Eltávolít egy category-t az id alapján
   * Csak admin jogosultsággal működik.
   *@param {object} req - HTTP request objektum
   *@param {object} res - HTTP response objektum
-  *@return {Object} - A törölt elemmet küldi vissza
+  *@return {Object} - A törölt elemet küldi vissza
   */
   remove: (req, res) => {
     Category.findByIdAndRemove(req.params.id)

@@ -29,7 +29,7 @@ export class RegisterComponent implements OnInit {
       return alert('Jelszó nem egyezik.');
     } else {
       this.register();
-      this.router.navigate(['/login']);
+      this.router.navigate(['/main']);
     }
   }
 
