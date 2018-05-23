@@ -1,8 +1,10 @@
+import { CartService } from './../cart.service';
 
 import { Component, NgModule } from '@angular/core';
 import { Http, RequestOptions } from '@angular/http';
 import { ProductsComponent } from '../products/products.component';
 import { Ng2GoogleChartsModule } from 'ng2-google-charts';
+import { CartComponent } from '../cart/cart.component';
 
 @Component({
   selector: 'app-statistics',
@@ -45,9 +47,10 @@ export class StatisticsComponent {
 
   chartData = [];
 
-  constructor(public http: Http) {
+  constructor(public http: Http, public cart: CartService) {
     this.getUsers();
     this.getOrders();
+    this.cart.getQuantity();
     // this.pieChartData.dataTable = [['Rendelések', 'Napra leosztott rendelések'], ];
 
   }

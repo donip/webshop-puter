@@ -1,3 +1,4 @@
+import { CartService } from './../cart.service';
 import { Component, OnInit } from '@angular/core';
 import { Http, Headers, Response, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
@@ -27,8 +28,9 @@ export class ProductsComponent implements OnInit {
   catData: any;
   selectedProduct: any;
   options = new RequestOptions({ withCredentials: true });
-  constructor(public http: Http) {
+  constructor(public http: Http, public cart: CartService) {
     this.getAll();
+    this.cart.getQuantity();
   }
 
   ngOnInit() {

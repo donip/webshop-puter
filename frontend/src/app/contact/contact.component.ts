@@ -3,6 +3,7 @@ import { Http, RequestOptions } from '@angular/http';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { AgmCoreModule } from '@agm/core';
+import { CartService } from '../cart.service';
 declare const google: any;
 
 @Component({
@@ -20,8 +21,9 @@ export class ContactComponent implements OnInit {
 
   baseUrl = 'http://localhost:8080/contact/';
 
-  constructor(public http: Http,
-              public router: Router) { }
+  constructor(public http: Http, public router: Router, public cart: CartService) {
+    this.cart.getQuantity();
+  }
 
   sendMsg() {
     this.http.post(this.baseUrl + 'sendClientMsg', this.msg)
