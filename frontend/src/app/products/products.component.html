@@ -122,7 +122,7 @@
               </td>
               <td class="align-middle">
                 <div class="btn-group-vertical btn-group-block">
-                  <button class="btn btn-outline-dark" type="button" (click)="navigate(x)" disabled>Részletek</button>
+                  <a class="btn btn-outline-dark" role="button" href="http://localhost:4200/products/{{x.producturl}}">Részletek</a>
                   <button class="btn btn-outline-primary" type="button" (click)="updater(x)">Frissítés</button>
                   <button class="btn btn-outline-danger" type="button" (click)="rowDeleter(x)">Törlés</button>
                   <button class="btn btn-outline-danger" type="button" (click)="comment(x)">Comment</button>

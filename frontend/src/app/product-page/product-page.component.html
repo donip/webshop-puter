@@ -1,8 +1,57 @@
-<div class="container" *ngIf="!error">
-  <p>{{productData.productname}}</p>
-  <p>{{productData._id}}</p>
-  <p>{{productData.price}}</p>
-  <p *ngIf="productData.imgurl !== ''"> <img src="{{productData.imgurl}}" alt="{{productData.imgurl}}" > </p>
+<div class="container-fluid" *ngIf="!error">
+  <br>
+  <div class="section">
+    <div class="row">
+      <div class="col-4 offset-4 text-center">
+        <h1>{{productData.productname}}</h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-8 offset-2">
+        <table class="table table-borderless">
+          <thead>
+            <tr class="text-center">
+              <th></th>
+              <th>Márka</th>
+              <th>Ár</th>
+              <!-- <th>Kategória</th> -->
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <img *ngIf="productData.imgurl" src="{{productData.imgurl}}" alt="{{productData.imgurl}}" height="300" width="300"> 
+                <img *ngIf="!productData.imgurl" src="http://localhost:8080/uploads/feltoltes_alatt.jpg" alt="feltoltes-alatt" height="300" width="300">
+              </td>
+              <td>{{productData.brand}}</td>
+              <td>{{productData.price}} Ft</td>
+              <!-- <td>{{productData.category}}</td> -->
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div class="row" *ngIf="productData.comments !== []">
+    <div class="col-4 offset-2">
+        <div class="card text-center" *ngFor="let comment of productData.comments">
+            <div class="card-body">
+              <h5 class="card-title"></h5>
+              <p class="card-text">{{comment.body}}</p>
+            </div>
+            <div class="card-footer text-muted">
+              {{comment.date}}
+            </div>
+          </div>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-2 offset-5">
+      <button class="btn btn-success btn-lg btn-block" (click)="toTheCart(productData)">Kosárba</button>
+    </div>
+  </div>
 </div>
 
 <h1 *ngIf="error"> 404 ERROR - NOT FOUND</h1>
