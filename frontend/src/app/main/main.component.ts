@@ -60,6 +60,7 @@ export class MainComponent implements OnInit {
       console.error('API error:' + res.error);
     } else {
       this.lastTenProducts = res;
+      this.dataHelper = this.lastTenProducts;
       this.filterProducts();
     }
   }

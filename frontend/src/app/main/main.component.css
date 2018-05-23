@@ -1,0 +1,12 @@
+.btn-group-vertical {
+  margin-top: 20px;
+}
+
+.btn-group-vertical .btn {
+  border: 0;
+}
+
+.card {
+  box-shadow: 0px 0px 10px 5px #888888;
+  margin-top: 20px;
+}
