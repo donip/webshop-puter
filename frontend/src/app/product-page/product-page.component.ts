@@ -36,6 +36,7 @@ options = new RequestOptions({ withCredentials: true });
   constructor(private route: ActivatedRoute, public http: Http, public cart: CartService) {
     this.route.params.subscribe(params =>  {
       this.url = params;
+      this.cart.getQuantity();
     });
    }
    navigate() {
@@ -52,6 +53,7 @@ options = new RequestOptions({ withCredentials: true });
   }
    toTheCart(product) {
     this.cart.addToCart(product);
+    this.cart.getQuantity();
   }
   getCat() {
     this.http.get('http://localhost:8080/category', this.options).subscribe(

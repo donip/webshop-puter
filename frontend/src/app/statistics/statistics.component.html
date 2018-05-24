@@ -1,30 +1,86 @@
-<div class="container-fluid">
-  <div class="jumbotron jumbotron-fluid">
-    <h1 class="display-2 text-center">Statisztika:</h1>
+<div class="jumbotron jumbotron-fluid">
+  <h1 class="display-2 text-center">Statisztika:</h1>
+</div>
+<div class="container-fluid stat-graph">
+  <div class="row justify-content-md-center">
+    <div class="col-md-3">
+      <div class="row">
+        <div class="col-4 text-right">
+          <img src="../../assets/img/shopping-cart.svg" height="100px" alt="icon">
+        </div>
+        <div class="col-8 text-center">
+          <div class="count-text">Átl. kosárérték</div>
+          <div class="count-num">{{(income/sumbuyer) | number:'1.0-0'}} Ft</div>
+          <br>
+        </div>
+      </div>
+      <br>
+    </div>
+    <div class="col-md-3">
+      <div class="row">
+        <div class="col-4 text-right">
+          <img src="../../assets/img/suitcase.svg" height="100px" alt="icon">
+        </div>
+        <div class="col-8 text-center">
+          <div class="count-text">Termék/rendelés</div>
+          <div class="count-num">{{(sumsoldstuff/sumbuyer).toFixed(0)}} db</div>
+          <br>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="row">
+        <div class="col-4 text-right">
+          <img src="../../assets/img/creative.svg" height="100px" alt="icon">
+        </div>
+        <div class="col-8 text-center">
+          <div class="count-text">Eladott termékek</div>
+          <div class="count-num">{{sumsoldstuff}} db</div>
+          <br>
+        </div>
+      </div>
+    </div>
   </div>
-  <table class="table">
-    <thead>
-      <tr class="text-center">
-        <th scope="col">Átlagos kosárérték</th>
-        <th scope="col">Termék / rendelés </th>
-        <th scope="col">Eladott termékek</th>
-        <th scope="col">Rendelések száma</th>
-        <th scope="col">Bevétel</th>
-        <th scope="col">Felhasználók</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr class="text-center">
-        <td>{{(income/sumbuyer) | number:'1.0-2'}} Ft</td>
-        <td>{{(sumsoldstuff/sumbuyer).toFixed(0)}}</td>
-        <td>{{sumsoldstuff}}</td>
-        <td>{{sumbuyer}}</td>
-        <td>{{income | number:'1.0-2'}} Ft</td>
-        <td>{{sumuser}} Fő</td>
-      </tr>
-    </tbody>
-  </table>
-  <div *ngIf="displayChart">
-    <google-chart style="height: 500px" [data]="pieChartData"></google-chart>
+  <div class="row justify-content-md-center">
+    <div class="col-md-3">
+      <div class="row">
+        <div class="col-4 text-right">
+          <img src="../../assets/img/gears.svg" height="100px" alt="icon">
+        </div>
+        <div class="col-8 text-center">
+          <div class="count-text">Rendelések száma</div>
+          <div class="count-num">{{sumbuyer}} db</div>
+          <br>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="row">
+        <div class="col-4 text-right">
+          <img src="../../assets/img/banknote.svg" height="100px" alt="icon">
+        </div>
+        <div class="col-8 text-center">
+          <div class="count-text">Bevétel</div>
+          <div class="count-num">{{income | number:'1.0-2'}} Ft</div>
+          <br>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="row">
+        <div class="col-4 text-right">
+          <img src="../../assets/img/network.svg" height="100px" alt="icon">
+        </div>
+        <div class="col-8 text-center">
+          <div class="count-text">Felhasználók</div>
+          <div class="count-num">{{sumuser}} fő</div>
+          <br>
+        </div>
+      </div>
+    </div>
+    <br>
+  </div>
+  <div *ngIf="displayChart" style="width: 97%;">
+    <google-chart [data]="pieChartData"></google-chart>
   </div>
 </div>

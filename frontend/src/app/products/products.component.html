@@ -1,142 +1,142 @@
-<div class="container-fluid">
-    <div class="jumbotron jumbotron-fluid img-fluid">
+<section>
+  <div class="jumbotron">
+    <div class="container">
       <h1 class="display-2 text-center">Termékek</h1>
     </div>
-    <hr>
-    <br>
-    <div class="row">
-      <div class="col-sm-10 offset-sm-1">
-        <table>
-          <tr>
-            <td class="text-center">
-              Új termék hozzáadása
-            </td>
-            <td>
-              <form name="myForm">
-                <input type="text" class="form-control" name="productname" [(ngModel)]="adat.productname" placeholder="Név" required #productname="ngModel">
-              </form>
-            </td>
-            <td>
-              <form name="myForm2">
-                <input type="text" class="form-control" name="brand" [(ngModel)]="adat.brand" placeholder="Márka" required #brand="ngModel">
-              </form>
-            </td>
-            <td>
-              <form name="myForm3">
-                <input type="number" class="form-control" name="price" [(ngModel)]="adat.price" placeholder="Ár (HUF)" required #price="ngModel">
-              </form>
-            </td>
-            <td>
-                <select class="form-control" [(ngModel)]="adat.category['_id']">
-                  <option *ngFor="let y of catData" value="{{y['_id']}}">{{ y.title }}</option>
-                </select>
-            </td>
-            <td>
-              <button class="btn btn-outline-success btn-block" type="button" (click)="creator()">Bevitel</button>
-            </td>
-            <td width="230" class="text-center">Kérlek, a feltöltésnél és a frissítésnél is ezt a mezőt használd kép bevitelére:</td>
-            <td width="100">
-              <form name="myForm5">
-                <!-- ez kell a file uploadhoz -->
-                <input (change)="onFileSelected($event)" type="file" id="uploader" class="fileinput">
-              </form>
-            </td>
-          </tr>
-          <tr>
-            <td></td>
-            <td>
-              <div *ngIf="productname.invalid && (productname.dirty || productname.touched)" class="alert alert-danger">
-                <div *ngIf="productname.errors.required">
-                    Ezt a mezőt kötelező kitölteni.
-                </div>
-              </div>
-            </td>
-            <td>
-              <div *ngIf="brand.invalid && (brand.dirty || brand.touched)" class="alert alert-danger">
-                <div *ngIf="brand.errors.required">
-                    Ezt a mezőt kötelező kitölteni.
-                </div>
-              </div>
-            </td>
-            <td>
-              <div *ngIf="price.invalid && (price.dirty || price.touched)" class="alert alert-danger">
-                <div *ngIf="price.errors.required">
-                    Ezt a mezőt kötelező kitölteni.
-                </div>
-              </div>
-            </td>
-            <td></td>
-          </tr>
-        </table>
-      </div>
-    </div>
-    <br>
-    <div class="row">
-      <div class="col-sm-12">
-        <table class="table table-fluid table-hover table-borderless">
-          <thead>
-            <tr>
-              <th></th>
-              <th>Kép</th>
-              <th>ID</th>
-              <th>Termék Név</th>
-              <th>Hozzáadva</th>
-              <th>Márka</th>
-              <th>Ár</th>
-              <th>Kategória</th>
-              <th class="text-center">Magic Makers</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let x of datas">
-              <td></td>
-              <td class="align-middle">
-                <img *ngIf="x.imgurl" src="{{ x.imgurl }}" alt="{{ x.productname }}" width="150" height="150">
-                <img *ngIf="!x.imgurl" src="http://localhost:8080/uploads/feltoltes_alatt.jpg" alt="feltoltes-alatt" width="150" height="150">
-              </td>
-              <td class="align-middle">
-                <input type="text" class="form-control" [(ngModel)]="x['_id']" readonly>
-              </td>
-              <td class="align-middle">
-                <input type="text" class="form-control" [(ngModel)]="x.productname">
-              </td>
-              <td class="align-middle">
-                <input type="text" class="form-control" [ngModel]="x.createdAt |  date:'yyyy-MM-dd'" (ngModelChange)="x.createdAt=$event" readonly>
-              </td>
-              <td class="align-middle">
-                <input type="text" class="form-control" [(ngModel)]="x.brand">
-              </td>
-              <td class="align-middle">
-                <div class="input-group">
-                  <input type="number" class="form-control" [(ngModel)]="x.price">
-                  <div class="input-group-append">
-                    <span class="input-group-text">Ft</span>
-                  </div>
-                </div>
-              </td>
-              <td class="align-middle">
-                <select class="form-control" [(ngModel)]="x.category['_id']">
-                  <option *ngFor="let y of catData" value="{{y['_id']}}">{{ y.title }}</option>
-                </select>
-                <!-- <input type="text" class="form-control" [(ngModel)]="x.category.title" readonly> -->
-              </td>
-              <td class="align-middle">
-                <div class="btn-group-vertical btn-group-block">
-                  <a class="btn btn-outline-info" role="button" href="http://localhost:4200/products/{{x.producturl}}">Részletek</a>
-                  <button class="btn btn-outline-primary" type="button" (click)="updater(x)">Frissítés</button>
-                  <button class="btn btn-outline-danger" type="button" (click)="rowDeleter(x)">Törlés</button>
-                  <button class="btn btn-outline-dark" type="button" (click)="comment(x)">Hozzászólás</button>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-2 offset-5">
-        <button class="btn btn-outline-light" (click)="createFakeProduct()">Create Fake Product</button>
-      </div>
-    </div>
   </div>
-  
+</section>
+<div class="row product-creator">
+  <div class="col-sm-10 offset-sm-1">
+    <table>
+      <tr>
+        <td class="text-center">
+          Új termék hozzáadása
+        </td>
+        <td>
+          <form name="myForm">
+            <input type="text" class="form-control" name="productname" [(ngModel)]="adat.productname" placeholder="Név" required #productname="ngModel">
+          </form>
+        </td>
+        <td>
+          <form name="myForm2">
+            <input type="text" class="form-control" name="brand" [(ngModel)]="adat.brand" placeholder="Márka" required #brand="ngModel">
+          </form>
+        </td>
+        <td>
+          <form name="myForm3">
+            <input type="number" class="form-control" name="price" [(ngModel)]="adat.price" placeholder="Ár (HUF)" required #price="ngModel">
+          </form>
+        </td>
+        <td>
+          <select class="form-control" [(ngModel)]="adat.category['_id']">
+            <option *ngFor="let y of catData" value="{{y['_id']}}">{{ y.title }}</option>
+          </select>
+        </td>
+        <td>
+          <button class="btn btn-outline-success btn-block" type="button" (click)="creator()">Bevitel</button>
+        </td>
+        <td width="230" class="text-center">Kérlek, a feltöltésnél és a frissítésnél is ezt a mezőt használd kép bevitelére:</td>
+        <td width="100">
+          <form name="myForm5">
+            <!-- ez kell a file uploadhoz -->
+            <input (change)="onFileSelected($event)" type="file" id="uploader" class="fileinput">
+          </form>
+        </td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>
+          <div *ngIf="productname.invalid && (productname.dirty || productname.touched)" class="alert alert-danger">
+            <div *ngIf="productname.errors.required">
+              Ezt a mezőt kötelező kitölteni.
+            </div>
+          </div>
+        </td>
+        <td>
+          <div *ngIf="brand.invalid && (brand.dirty || brand.touched)" class="alert alert-danger">
+            <div *ngIf="brand.errors.required">
+              Ezt a mezőt kötelező kitölteni.
+            </div>
+          </div>
+        </td>
+        <td>
+          <div *ngIf="price.invalid && (price.dirty || price.touched)" class="alert alert-danger">
+            <div *ngIf="price.errors.required">
+              Ezt a mezőt kötelező kitölteni.
+            </div>
+          </div>
+        </td>
+        <td></td>
+      </tr>
+    </table>
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-sm-12">
+    <table class="table table-fluid table-hover table-borderless">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Kép</th>
+          <th>ID</th>
+          <th>Termék Név</th>
+          <th>Hozzáadva</th>
+          <th>Márka</th>
+          <th>Ár</th>
+          <th>Kategória</th>
+          <th class="text-center">Magic Makers</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let x of datas">
+          <td></td>
+          <td class="align-middle">
+            <img *ngIf="x.imgurl" src="{{ x.imgurl }}" alt="{{ x.productname }}" width="150" height="150">
+            <img *ngIf="!x.imgurl" src="http://localhost:8080/uploads/feltoltes_alatt.jpg" alt="feltoltes-alatt" width="150" height="150">
+          </td>
+          <td class="align-middle">
+            <input type="text" class="form-control" [(ngModel)]="x['_id']" readonly>
+          </td>
+          <td class="align-middle">
+            <input type="text" class="form-control" [(ngModel)]="x.productname">
+          </td>
+          <td class="align-middle">
+            <input type="text" class="form-control" [ngModel]="x.createdAt |  date:'yyyy-MM-dd'" (ngModelChange)="x.createdAt=$event"
+              readonly>
+          </td>
+          <td class="align-middle">
+            <input type="text" class="form-control" [(ngModel)]="x.brand">
+          </td>
+          <td class="align-middle">
+            <div class="input-group">
+              <input type="number" class="form-control" [(ngModel)]="x.price">
+              <div class="input-group-append">
+                <span class="input-group-text">Ft</span>
+              </div>
+            </div>
+          </td>
+          <td class="align-middle">
+            <select class="form-control" [(ngModel)]="x.category['_id']">
+              <option *ngFor="let y of catData" value="{{y['_id']}}">{{ y.title }}</option>
+            </select>
+            <!-- <input type="text" class="form-control" [(ngModel)]="x.category.title" readonly> -->
+          </td>
+          <td class="align-middle">
+            <div class="btn-group-vertical btn-group-block">
+              <a class="btn btn-outline-info" role="button" href="http://localhost:4200/products/{{x.producturl}}">Részletek</a>
+              <button class="btn btn-outline-primary" type="button" (click)="updater(x)">Frissítés</button>
+              <button class="btn btn-outline-danger" type="button" (click)="rowDeleter(x)">Törlés</button>
+              <button class="btn btn-outline-dark" type="button" (click)="comment(x)">Hozzászólás</button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-2 offset-5">
+    <button class="btn btn-outline-light" (click)="createFakeProduct()">Create Fake Product</button>
+  </div>
+</div>

@@ -1,3 +1,4 @@
+import { CartService } from './../cart.service';
 import { Component, OnInit } from '@angular/core';
 import { Http, RequestOptions } from '@angular/http';
 import { Router } from '@angular/router';
@@ -21,8 +22,9 @@ export class RegisterComponent implements OnInit {
   options = new RequestOptions({ withCredentials: true });
   baseUrl = 'http://localhost:8080/user/';
 
-  constructor(public http: Http,
-              public router: Router) { }
+  constructor(public http: Http, public router: Router, public cart: CartService) {
+    this.cart.getQuantity();
+  }
 
   validation() {
     if (this.user.password !== this.passwordConf) {

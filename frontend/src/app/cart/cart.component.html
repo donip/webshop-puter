@@ -1,19 +1,23 @@
-<div class="container">
+<div class="container-fluid">
   <div class="jumbotron jumbotron-fluid">
-    <h1 class="display-2 text-center">Kosár tartalma:</h1>
+    <h1 class="display-2 text-center">Kosár tartalma</h1>
   </div>
+  <hr>
+  <br>
+</div>
+<div class="container">
   <form #cartForm="ngForm">
-    <div *ngFor="let p of myCart.products; let i = index">
+    <div class="row" *ngFor="let p of myCart.products; let i = index">
       <p>{{i+1}}.</p>
-      <span>Termék: {{p.productname}}</span>
-      <span>Egységár: {{p.price | currency:'HUF':'local' }}</span>
-      <div class="input-group">
-        <input class="form-control" min="0" [disabled]="p.productname === 'Üres a kosár'" pattern="^[1-9]" type="number" name="quantity" [(ngModel)]="p.quantity">
+      <span class="col-3">Termék: {{p.productname}}</span>
+      <span class="col-2">Egységár: {{p.price | currency:'HUF':'local' }}</span>
+      <div class="input-group col-2">
+        <input class="form-control" min="0" [disabled]="p.productname === 'Üres a kosár'" pattern="^[1-9]" type="number" name="quantity{{i}}" [(ngModel)]="p.quantity">
         <div class="input-group-append">
           <span class="input-group-text"> db</span>
         </div>
       </div>
-      <p>Összár: {{p.price*p.quantity | currency:'HUF':'local' }}</p>
+      <span class="col-2">Összár: {{p.price*p.quantity | currency:'HUF':'local' }}</span>
       <button class="btn btn-danger" [hidden]="p.productname ==='Üres a kosár'" (click)="deleteRow(i)">X</button>
     </div>
     <button type="button" [disabled]="cartForm.invalid" class="btn btn-primary" data-toggle="modal" data-target="#orderModal">Rendelés leadás</button>
@@ -99,10 +103,11 @@
             </div>
           </form>
           <div class="modal-footer">
-            <button [disabled]="orderForm.invalid" class="btn btn-success" (click)="createOrder()">Rendelés leadás</button>
+            <button [disabled]="orderForm.invalid" class="btn btn-success" (click)="createOrder()">Rendelés véglegesítése</button>
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Mégse</button>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>

@@ -1,3 +1,4 @@
+import { CartService } from './../cart.service';
 import { Component, OnInit } from '@angular/core';
 import { Http, RequestOptions } from '@angular/http';
 
@@ -24,9 +25,10 @@ export class UsersComponent implements OnInit {
   };
   addSuccess = 'empty';
 
-  constructor(public http: Http, public router: Router) {
+  constructor(public http: Http, public router: Router, public cart: CartService) {
     this.getUsers();
     this.hideMessage();
+    this.cart.getQuantity();
   }
 
   ngOnInit() {

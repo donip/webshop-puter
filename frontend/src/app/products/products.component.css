@@ -2,5 +2,10 @@
   background: url("../../assets/backgprob.jpg") center center no-repeat;
   background-size: 100% 100%;
   color: white;
-  text-shadow: 0px 0px 20px black;
+  text-shadow: 0px 0px 10px black;
+}
+
+.row {
+  margin-left: 0px;
+  margin-right: 0px;
 }

@@ -1,8 +1,10 @@
+import { CartService } from './../cart.service';
 
 import { Component, NgModule } from '@angular/core';
 import { Http, RequestOptions } from '@angular/http';
 import { ProductsComponent } from '../products/products.component';
 import { Ng2GoogleChartsModule } from 'ng2-google-charts';
+import { CartComponent } from '../cart/cart.component';
 
 @Component({
   selector: 'app-statistics',
@@ -18,7 +20,7 @@ export class StatisticsComponent {
       ['Nap', 'Bevétel'],
     ],
     options: {
-      'title': 'Havi bevétel napokra leosztva',
+      'title': 'Havi bevétel napi eloszlása',
       is3D: true,
       legend: 'none',
       height: 500
@@ -26,7 +28,7 @@ export class StatisticsComponent {
   };
   d = new Date();
   currentmonth = this.d.getMonth();
-  equalday;
+  equalday: any;
   newDate: any;
   allusers: any;
   allorders: Array<Object>;
@@ -45,9 +47,10 @@ export class StatisticsComponent {
 
   chartData = [];
 
-  constructor(public http: Http) {
+  constructor(public http: Http, public cart: CartService) {
     this.getUsers();
     this.getOrders();
+    this.cart.getQuantity();
     // this.pieChartData.dataTable = [['Rendelések', 'Napra leosztott rendelések'], ];
 
   }
@@ -99,10 +102,8 @@ export class StatisticsComponent {
   sumIncomeByDay(filteredOrders) {
     const days = this.daysInMonth(this.selectedYear, this.selectedMonth);
     let sum = 0;
-    // this.pieChartData.dataTable = [['Rendelések', 'Napra leosztott rendelések']];
     for (let i = 1; i <= days; i++) {
       sum = 0;
-      // tslint:disable-next-line:triple-equals
       const oneDay = filteredOrders.filter(order => order['createdAt'].substring(8, 10) == i);
       if (oneDay.length > 0) {
         for (let j = 0; j < oneDay.length; j++) {
