@@ -1,9 +1,7 @@
+<div class="jumbotron jumbotron-fluid">
+  <h1 class="display-2 text-center">Kategóriák</h1>
+</div>
 <div class="container-fluid">
-  <div class="jumbotron jumbotron-fluid">
-    <h1 class="display-2 text-center">Kategóriák</h1>
-  </div>
-  <hr>
-  <br>
   <div class="row">
     <div class="col-sm-10 offset-sm-1">
       <table>
@@ -30,14 +28,14 @@
           <td>
             <div *ngIf="title.invalid && (title.dirty || title.touched)" class="alert alert-danger">
               <div *ngIf="title.errors.required">
-                  Ezt a mezőt kötelező kitölteni.
+                Ezt a mezőt kötelező kitölteni.
               </div>
             </div>
           </td>
           <td>
             <div *ngIf="rank.invalid && (rank.dirty || rank.touched)" class="alert alert-danger">
               <div *ngIf="rank.errors.required">
-                  Ezt a mezőt kötelező kitölteni.
+                Ezt a mezőt kötelező kitölteni.
               </div>
             </div>
           </td>
@@ -81,6 +79,5 @@
       </table>
     </div>
   </div>
-  
-</div>
 
+</div>

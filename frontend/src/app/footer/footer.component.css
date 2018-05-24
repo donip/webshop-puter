@@ -13,6 +13,8 @@
   bottom: 0;
   color: white;
   left: 0;
+  margin-left: 0px;
+  margin-right: 0px;
   position: fixed;
   text-align: center;
   width: 100%;

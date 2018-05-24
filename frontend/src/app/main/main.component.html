@@ -1,4 +1,6 @@
-<div class="container-fluid">
+<div class="container-fluid hommage" [ngClass]="{'hommage': isActive }">
+  <span>Hommmage á osziFő</span>
+  <button class="btn btn-outline-dark btn-sm hommage-btn" (click)="isActive = !isActive;">X</button>
   <div class="row">
     <div class="col-2 offset-1">
       <div class="btn-group-vertical">
@@ -8,7 +10,8 @@
     <div class="card-deck col-9">
       <div class="card" style="min-width: 18rem; max-width: 18rem;" *ngFor="let item of dataHelper">
         <img *ngIf="item.imgurl" class="card-img-top" src="{{item.imgurl}}" alt="{{item.producturl}}" width="50" height="300">
-        <img *ngIf="!item.imgurl" class="card-img-top" src="http://localhost:8080/uploads/feltoltes_alatt.jpg" alt="feltoltes-alatt" width="50" height="300">
+        <img *ngIf="!item.imgurl" class="card-img-top" src="http://localhost:8080/uploads/feltoltes_alatt.jpg" alt="feltoltes-alatt"
+          width="50" height="300">
         <div class="card-body">
           <h5 class="card-title">{{item.productname}}</h5>
           <p class="card-text">{{item.price}} Ft</p>
