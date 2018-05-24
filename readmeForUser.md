@@ -2,9 +2,20 @@
 
 ## Felhasználói kézikönyv
 
+### 0. Rendszer indítás
+
+- Backend indítás: a projekt backend mappájából `nodemon start` paranccsal
+- Frontend indítás: a projekt backend mappájából `ng s --o` paranccsal
+- Ha nem nyílik  meg automatikusan a browser ablak, akkor azt a `http://localhost:4200/` címen érhetjük el.
+- Ha nem megy a MongoDB server (`MongoDB error` a console-on), akkor a windows szolgáltatások menüjében kell elindítani a MongoDb-t.
+
+Adatbázis információk:
+- https://mlab.com/databases/pewterschmidt/collections/users
+- user: pewterschmidt
+- pw: qwertz123
+
 
 ### 1. Felhasználó regisztráció
-
 
 Kötelezően megadandó adatok
 - Név
@@ -78,9 +89,16 @@ A rendelésnél populate-tel hozzáfűzi a termékneveket és felhasználó adat
 * Meglévő rendelés törlése
   1. Rendelésnél lévő X gomb megnyomásával töröljük a megrendelést
 
-### 8. Adatbázis információk
+### 8. Kategóriák felvitele, módosítása és törlése
 
-- database
-- https://mlab.com/databases/pewterschmidt/collections/users
-- user: pewterschmidt
-- pw: qwertz123
+A rendelésekhez hasonlóan a bevitel, frissítés és törlés gombokkal történik a kategóriák karbantartása.
+
+### 9. Kapcsolat menüpont
+
+A felhasználó alap információkat talál a webshopra vonatkozóan.
+Észrevétel küldhető a webshop által bellított email címre.
+Az email cím a backend/server.js-ben állítható át tetszőlegesen
+
+### 10. Rendelés menete, kosár
+
+A főoldalon a bal oldali kategória menüsorra kattintva szűrhetőek a termékek, és az adott termék kosarára kattintva tudunk a kosárba rakni termékeket. A kosárra kattintva módosíthatóak a rendelés egyes tételei.
