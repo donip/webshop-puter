@@ -45,4 +45,13 @@
   .pewter {
     display: none;
   }
+  .icon {
+    margin: 0;
+    padding: 0;
+  }
+  .footer {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+  }
 }

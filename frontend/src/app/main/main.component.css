@@ -27,3 +27,10 @@ img {
 .hommage-btn {
   border-radius: 100%;
 }
+
+@media (max-width: 500px) {
+  .category-sidebar {
+    margin-bottom: 300px;
+    margin-left: 120px;
+  }
+}

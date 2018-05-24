@@ -12,3 +12,9 @@
   color: white;
   text-shadow: 0px 0px 10px black;
 }
+
+@media (max-width: 500px) {
+  .jumbotron h1 {
+    font-size: 45px;
+  }
+}
