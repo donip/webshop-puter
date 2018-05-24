@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Module: UserAdmin</title>
+    <title>JSDoc: Module: Category</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Module: UserAdmin</h1>
+    <h1 class="page-title">Module: Category</h1>
 
     
 
@@ -64,7 +64,7 @@
     
 
     
-    <h4 class="name" id=".editUser"><span class="type-signature">(static) </span>editUser<span class="signature">(req, res)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+    <h4 class="name" id=".create"><span class="type-signature">(static) </span>create<span class="signature">(req, res)</span><span class="type-signature"></span></h4>
     
 
     
@@ -72,8 +72,7 @@
 
 
 <div class="description">
-    Módosít egy usert mongo _id alapján.
-Leellenőrzi, hogy van a usernek isAdmin==='true' tulajdonsága csak akkor engedi a módosítást
+    Generál egy category-t
 </div>
 
 
@@ -189,7 +188,7 @@ Leellenőrzi, hogy van a usernek isAdmin==='true' tulajdonsága csak akkor enged
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="useradmin.controller.js.html">useradmin.controller.js</a>, <a href="useradmin.controller.js.html#line28">line 28</a>
+        <a href="category.controller.js.html">category.controller.js</a>, <a href="category.controller.js.html#line36">line 36</a>
     </li></ul></dd>
     
 
@@ -216,7 +215,175 @@ Leellenőrzi, hogy van a usernek isAdmin==='true' tulajdonsága csak akkor enged
 
         
 <div class="param-desc">
-    - visszaküldi a módosított user régi adatait
+    létrehozott category object-jét küldi vissza
+</div>
+
+
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".find"><span class="type-signature">(static) </span>find<span class="signature">(req, res)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    mongo _id alapján megkeres egy category-t
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>req</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">HTTP request objektum</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>res</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">HTTP response objektum</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="category.controller.js.html">category.controller.js</a>, <a href="category.controller.js.html#line25">line 25</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    visszaküldi a keresendő kategóriát
 </div>
 
 
@@ -245,7 +412,7 @@ Leellenőrzi, hogy van a usernek isAdmin==='true' tulajdonsága csak akkor enged
     
 
     
-    <h4 class="name" id=".listUsers"><span class="type-signature">(static) </span>listUsers<span class="signature">(req, res)</span><span class="type-signature"> &rarr; {Array}</span></h4>
+    <h4 class="name" id=".list"><span class="type-signature">(static) </span>list<span class="signature">(req, res)</span><span class="type-signature"> &rarr; {Array}</span></h4>
     
 
     
@@ -253,7 +420,7 @@ Leellenőrzi, hogy van a usernek isAdmin==='true' tulajdonsága csak akkor enged
 
 
 <div class="description">
-    Kilistázza a usereket
+    kilistáz minden category-t
 </div>
 
 
@@ -369,7 +536,7 @@ Leellenőrzi, hogy van a usernek isAdmin==='true' tulajdonsága csak akkor enged
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="useradmin.controller.js.html">useradmin.controller.js</a>, <a href="useradmin.controller.js.html#line12">line 12</a>
+        <a href="category.controller.js.html">category.controller.js</a>, <a href="category.controller.js.html#line14">line 14</a>
     </li></ul></dd>
     
 
@@ -396,7 +563,7 @@ Leellenőrzi, hogy van a usernek isAdmin==='true' tulajdonsága csak akkor enged
 
         
 <div class="param-desc">
-    - visszaküld egy tömböt amiben benne vannak a userek tulajdonságai objektumként
+    - visszatér a category-k tömbjével
 </div>
 
 
@@ -425,7 +592,7 @@ Leellenőrzi, hogy van a usernek isAdmin==='true' tulajdonsága csak akkor enged
     
 
     
-    <h4 class="name" id=".removeUser"><span class="type-signature">(static) </span>removeUser<span class="signature">(req, res)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+    <h4 class="name" id=".remove"><span class="type-signature">(static) </span>remove<span class="signature">(req, res)</span><span class="type-signature"> &rarr; {Object}</span></h4>
     
 
     
@@ -433,8 +600,187 @@ Leellenőrzi, hogy van a usernek isAdmin==='true' tulajdonsága csak akkor enged
 
 
 <div class="description">
-    Töröl egy usert Mongo _id alapján.
-Leellenőrzi, hogy van a usernek isAdmin==='true' tulajdonsága csak akkor engedi a törlést
+    Eltávolít egy category-t az id alapján
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>req</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">HTTP request objektum</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>res</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">HTTP response objektum</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="category.controller.js.html">category.controller.js</a>, <a href="category.controller.js.html#line62">line 62</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - A törölt elemet küldi vissza
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".update"><span class="type-signature">(static) </span>update<span class="signature">(req, res)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    update-el egy category-t az id alapján
 </div>
 
 
@@ -550,7 +896,7 @@ Leellenőrzi, hogy van a usernek isAdmin==='true' tulajdonsága csak akkor enged
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="useradmin.controller.js.html">useradmin.controller.js</a>, <a href="useradmin.controller.js.html#line44">line 44</a>
+        <a href="category.controller.js.html">category.controller.js</a>, <a href="category.controller.js.html#line48">line 48</a>
     </li></ul></dd>
     
 
@@ -577,7 +923,7 @@ Leellenőrzi, hogy van a usernek isAdmin==='true' tulajdonsága csak akkor enged
 
         
 <div class="param-desc">
-    - visszaküldi a törölt user adatait
+    - az update-d category régi értékével tér vissza
 </div>
 
 

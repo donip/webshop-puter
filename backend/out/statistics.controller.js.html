@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: statistics.controller.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,38 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: statistics.controller.js</h1>
 
     
 
 
 
     
-
-
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>const Users = require('../models/user');
+const Orders = require('../models/order');
+/**
+ * Exporálja az összes felhasználóadatot.
+ */
+module.exports = {
+  getUsers: (req, res) => {
+    Users.find({}).then(user => res.json(user))
+      .catch(err => res.send(err));
+  },
+};
+/**
+ * Exporálja az összes rendelés adatát.
+ */
+module.exports = {
+  getOrders: (req, res) => {
+    Orders.find({}).then(orders => res.json(orders))
+      .catch(err => res.send(err));
+  },
+};
+</code></pre>
+        </article>
+    </section>
 
 
 
