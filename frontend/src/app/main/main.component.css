@@ -15,3 +15,15 @@
 img {
   padding-top: 5px;
 }
+
+.hommage {
+    background: url('../../assets/img/mapblue.jpg');
+    position: relative;
+}
+.hommage2 {
+  background: url('../../assets/img/bg-pattern.png'), linear-gradient(to bottom left, rgba(217, 36, 51, 0.1), rgba(125, 66, 150, 0.1));
+}
+
+.hommage-btn {
+  border-radius: 100%;
+}
