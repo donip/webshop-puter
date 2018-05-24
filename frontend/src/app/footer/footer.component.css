@@ -34,5 +34,15 @@
 
 .cY {
   color: #70726F;
-  padding-right: 5%;
+  float: right;
+  padding: 0px 30px
+}
+
+@media (max-width: 600px) {
+  .cY {
+    display: none;
+  }
+  .pewter {
+    display: none;
+  }
 }
