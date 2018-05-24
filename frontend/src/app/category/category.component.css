@@ -1,0 +1,6 @@
+.jumbotron {
+  background: url("../../assets/categorybg.jpg") center center no-repeat;
+  background-size: 100% auto;
+  color: white;
+  text-shadow: 0px 0px 15px black;
+}

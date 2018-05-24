@@ -6,7 +6,7 @@
       </div>
     </div>
     <div class="card-deck col-12 col-md-9">
-      <div class="card" style="min-width: 18rem; max-width: 18rem;" *ngFor="let item of dataHelper">
+      <div class="card" *ngFor="let item of dataHelper">
         <img *ngIf="item.imgurl" class="card-img-top" src="{{item.imgurl}}" alt="{{item.producturl}}" width="50" height="300">
         <img *ngIf="!item.imgurl" class="card-img-top" src="http://localhost:8080/uploads/feltoltes_alatt.jpg" alt="feltoltes-alatt"
           width="50" height="300">

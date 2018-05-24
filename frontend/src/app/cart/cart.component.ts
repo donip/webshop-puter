@@ -115,6 +115,7 @@ export class CartComponent implements OnInit {
   deleteRow(index) {
     this.myCart['products'].splice(index, 1);
     localStorage.setItem('cart', JSON.stringify(this.myCart));
+    this.cart.getQuantity();
   }
 
   profile() {

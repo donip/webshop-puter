@@ -1,9 +1,10 @@
 .container-fluid {
-    position: relative;
-};
+  position: relative;
+}
 
 .jumbotron {
-    background: url("../../assets/what-is-statistics.jpg") center center no-repeat;
-    color: white;
-    text-shadow: 0px 0px 10px black;
-  };
+  background: url("../../assets/statbg.jpg") center center no-repeat;
+  background-size: 100% auto;
+  color: white;
+  text-shadow: 0px 0px 15px black;
+}
