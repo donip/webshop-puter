@@ -46,6 +46,7 @@ options = new RequestOptions({ withCredentials: true });
         this.productData = body;
         console.log(this.productData);
         this.getCat();
+        this.getComment();
         if (body === null || body.error ) {
            this.error = true;
         }
@@ -166,6 +167,5 @@ options = new RequestOptions({ withCredentials: true });
     this.profile();
     this.getOrders();
     this.navigate();
-    this.getComment();
     }
 }
