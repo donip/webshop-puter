@@ -59,6 +59,49 @@
       <button class="btn btn-success btn-lg btn-block" (click)="toTheCart(productData)">Kosárba</button>
     </div>
   </div>
+  <div class="row">
+    <div class="col-12">
+      <h2>Értékelések</h2>
+        <table *ngIf="canComment" class="table table-borderless">
+            <thead class="text-center">
+              <tr>
+                <th>Értékelés szövege</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="text-center">
+                <td><input type="string" class="form-control" name="new-comment" [(ngModel)]="newComment.post" required></td>
+                <td><button  class="btn btn-block btn-outline-primary" type="button" (click)="createComment()">Létrehozás</button></td>
+              </tr>
+            </tbody>
+          </table>
+        <table class="table table-borderless">
+            <thead class="text-center">
+              <tr>
+                <th>Értékelés szövege</th>
+                <th>Értékelés id</th>
+                <th>User id</th>
+                <th>Módosítás</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="text-center" *ngFor="let com of comments; let i = index">
+                <td>
+                    <form name="myForm">
+                        <input type="string" class="form-control" name="post{{i}}" [(ngModel)]="com.post" required [readonly]="com.userid !== userId">
+                      </form>
+                </td>
+                <td>{{com._id}}</td>
+                <td>{{com.userid}}</td>
+                <td><div class="btn-group"> <button *ngIf="com.userid === userId" class="btn btn-outline-primary" type="button" (click)="modifyComment(com)">Frissítés</button>
+                  <button *ngIf="com.userid === userId" class="btn btn-outline-danger" type="button" (click)="deleteComment(com)">Törlés</button></div></td>
+              </tr>
+            </tbody>
+          </table>
+  </div>
+   
+</div>
 </div>
 
 <h1 *ngIf="error"> 404 ERROR - NOT FOUND</h1>
