@@ -27,6 +27,7 @@ import { CategoryComponent } from './category/category.component';
 import { ProductPageComponent } from './product-page/product-page.component';
 import { Globals } from './globals';
 import { FooterComponent } from './footer/footer.component';
+import { InsteadPptComponent } from './instead-ppt/instead-ppt.component';
 
 const routes: Routes = [
   { path: '', component: MainComponent, pathMatch: 'full' },
@@ -40,6 +41,7 @@ const routes: Routes = [
   { component: OrdersComponent, path: 'orders' },
   { component: StatisticsComponent, path: 'statistics' },
   { component: ContactComponent, path: 'contact' },
+  { component: InsteadPptComponent, path: 'instead-ppt' },
   { component: CartComponent, path: 'cart' },
   { component: CategoryComponent, path: 'category' }
 ];
@@ -61,7 +63,8 @@ const routes: Routes = [
     CartComponent,
     CategoryComponent,
     ProductPageComponent,
-    FooterComponent
+    FooterComponent,
+    InsteadPptComponent
   ],
   imports: [
     AgmCoreModule.forRoot({

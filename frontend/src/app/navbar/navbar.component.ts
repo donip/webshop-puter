@@ -22,6 +22,7 @@ export class NavbarComponent implements OnInit {
     { label: 'Rendelések', url: '/orders' },
     { label: 'Statisztika', url: '/statistics' },
     { label: 'Kapcsolat', url: '/contact' },
+    { label: 'PPT helyett', url: '/instead-ppt' },
     { label: 'Kategória', url: '/category' },
   ];
   user: any = {
