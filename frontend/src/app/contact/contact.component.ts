@@ -2,9 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Http, RequestOptions } from '@angular/http';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { AgmCoreModule } from '@agm/core';
 import { CartService } from '../cart.service';
-declare const google: any;
 
 @Component({
     selector: 'app-contact',
@@ -12,8 +10,6 @@ declare const google: any;
     styleUrls: ['./contact.component.css']
 })
 export class ContactComponent implements OnInit {
-  lat = 47.4977973;
-  lng = 19.0403225;
   msg: any = {
     email: '',
     coreMsg: '',
