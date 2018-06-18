@@ -8,8 +8,6 @@ import { HttpModule } from '@angular/http';
 import {FormsModule} from '@angular/forms';
 import { Ng2GoogleChartsModule } from 'ng2-google-charts';
 import { FileSelectDirective } from 'ng2-file-upload';
-import { AgmCoreModule } from '@agm/core';
-
 
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
@@ -67,10 +65,6 @@ const routes: Routes = [
     InsteadPptComponent
   ],
   imports: [
-    AgmCoreModule.forRoot({
-      // Hey Folks! Forget to use this malicious key. Use your own one.
-      apiKey: 'AIzaSyBBUFtYxZJ-ot9ZMjQzQI-4QDq90ccEGwE'
-    }),
     BrowserModule,
     HttpModule,
     FormsModule,
