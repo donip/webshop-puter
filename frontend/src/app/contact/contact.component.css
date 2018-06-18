@@ -1,3 +1,7 @@
-agm-map {
+agm-map iframe {
   height: 300px;
+}
+
+.container {
+  margin-top: 10px;
 }
