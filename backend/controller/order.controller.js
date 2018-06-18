@@ -1,4 +1,5 @@
 const Order = require('../models/order');
+const Product = require('../models/product');
 const mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
 
@@ -38,15 +39,26 @@ module.exports = {
   },
   /**
    * Generál egy rendelést activ státusszal.
+   * Kikeresi és átmásolja a rendelés leaásakor érvényes egységárakat, és terméknevet
+   * Ha a termék törlődne, a név és ár a rendelésben megmarad
    * @param {Object} req - HTTP request objektum
    * @param {Object} res - HTTP response objektum
    * @return {Object} - a rendelés objektumát küldi vissza
    */
   create: (req, res) => {
     req.body.status = 'active';
-    Order.create(req.body)
-      .then(order => res.send(order))
-      .catch(err => res.send(err));
+    for (let i = 0; i < req.body.products.length; i += 1) {
+      console.log(req.body.products[i].product);
+      Product.findById(req.body.products[i].product, (error, found) => {
+        req.body.products[i].pName = found.productname;
+        req.body.products[i].pPrice = found.price;
+        if (i === req.body.products.length - 1) {
+          Order.create(req.body)
+            .then(order => res.send(order))
+            .catch(err => res.send(err));
+        }
+      });
+    }
   },
   /**
    * admin jogosultságot ellenőriz,

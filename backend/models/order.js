@@ -13,6 +13,14 @@ const orderSchema = mongoose.Schema(
         type: Number,
         required: true,
       },
+      pName: {
+        type: String,
+        required: false,
+      },
+      pPrice: {
+        type: Number,
+        required: false,
+      },
     }],
     customer: {
       type: mongoose.Schema.Types.ObjectId,

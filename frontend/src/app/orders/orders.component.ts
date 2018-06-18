@@ -18,6 +18,8 @@ export class OrdersComponent {
     products: [{
       product: '',
       quantity: '',
+      pName: '',
+      pPrice: '',
     }],
     status: '',
   };
@@ -26,6 +28,8 @@ export class OrdersComponent {
     products: [{
       product: '',
       quantity: '',
+      pName: '',
+      pPrice: '',
     }],
     status: '',
   };
@@ -44,7 +48,9 @@ export class OrdersComponent {
   addRow() {
     this.newOrder.products.push({
       product: '',
-      quantity: ''
+      quantity: '',
+      pName: '',
+      pPrice: '',
     });
     console.log(this.newOrder);
   }
@@ -52,7 +58,9 @@ export class OrdersComponent {
   addModalRow() {
     this.selectedOrder.products.push({
       product: '',
-      quantity: ''
+      quantity: '',
+      pName: '',
+      pPrice: '',
     });
   }
 
@@ -74,7 +82,10 @@ export class OrdersComponent {
           for (let i = 0; i < d.length; i++) {
             for (let j = 0; j < d[i].products.length; j++) {
               if (d[i].products[j]['product'] === null) {
-                d[i].products[j]['product'] = { productname: 'Termék törölve' };
+                d[i].products[j]['product'] = {
+                  productname: d[i].products[j]['pName'] + ' (termék törölve)',
+                  price: d[i].products[j]['pPrice']
+                };
               }
             }
           }

@@ -67,11 +67,26 @@ export class StatisticsComponent {
   }
   /**
    * Rendelési adatok lekérése és betöltése
+   * Hibakeresés: Ha a terméket időközben törölték,
+   *  a rendelés hiányzó szükséges adatait visszatölti
+   * A javított tömböt adja át a Grafikon készítéséhez
    */
   getOrders() {
     this.http.get('http://localhost:8080/order', this.options)
       .subscribe(getOrders => {
         this.allorders = JSON.parse(getOrders['_body']);
+        console.log(this.allorders);
+        this.allorders.forEach(order => {
+          order['products'].forEach(prds => {
+            if (!prds.product) {
+              console.log(prds);
+              prds.product = {
+                productname: prds.pName,
+                price: prds.pPrice
+                };
+            }
+          });
+        });
         this.Income(this.allorders);
         this.filterOrdersBySelectedMonth();
       });
