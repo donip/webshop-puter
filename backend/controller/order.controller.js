@@ -47,6 +47,9 @@ module.exports = {
    */
   create: (req, res) => {
     req.body.status = 'active';
+    if (!req.body.customer) {
+      req.body.customer = req.user._id;
+    }
     for (let i = 0; i < req.body.products.length; i += 1) {
       console.log(req.body.products[i].product);
       Product.findById(req.body.products[i].product, (error, found) => {
