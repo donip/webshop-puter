@@ -25,6 +25,7 @@ export class ContactComponent implements OnInit {
     this.http.post(this.baseUrl + 'sendClientMsg', this.msg)
       .subscribe(data => {
         console.log(data['_body']);
+        alert('Köszönjük a bejelentést, hamarosan válaszolunk észrevételére.');
       });
   }
 

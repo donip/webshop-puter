@@ -37,10 +37,9 @@
         <div class="form-group">
           <textarea class="form-control" name="coreMsg" rows="5" placeholder="az Ön észrevételei" [(ngModel)]="msg.coreMsg" required #coreMsg="ngModel"></textarea>
         </div>
-        <input type="button" class="btn btn-success" value="Észrevételek beküldése" (click)="sendMsg()">
+        <input type="button" class="btn btn-success" value="Észrevételek beküldése" (click)="sendMsg(); f.reset()">
       </form>
       <br>
     </div>
   </div>
 </div>
-
