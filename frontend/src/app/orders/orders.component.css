@@ -1,3 +1,8 @@
+.btn-group.main-control {
+  margin: auto;
+  margin-bottom: 20px;
+}
+
 .tr-customer {
   background: linear-gradient( #d6d6d6 , rgb(243, 243, 243),white);
 }
@@ -17,4 +22,12 @@
   .jumbotron h1 {
     font-size: 45px;
   }
+}
+
+.modal .modal-header {
+  background: rgba(250, 171, 1, 0.65);
+}
+
+.modal .product-header {
+  background: rgba(152, 186, 187, 0.65);
 }

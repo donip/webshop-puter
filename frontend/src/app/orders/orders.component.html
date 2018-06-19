@@ -5,7 +5,23 @@
     </div>
   </div>
 </section>
-<div class="container">
+<section>
+  <div class="container text-center">
+    <div class="btn-group main-control">
+      <a class="btn btn-success" data-toggle="collapse" href="#newOrderDiv" role="button" aria-expanded="false" aria-controls="collapseExample">
+        Új megrendelés
+      </a>
+      <a class="btn btn-primary" data-toggle="collapse" href="#activeOrdersDiv" role="button" aria-expanded="false" aria-controls="collapseExample">
+        Folyamatban lévő megrendelések
+      </a>
+      <a class="btn btn-secondary" data-toggle="collapse" href="#doneOrdersDiv" role="button" aria-expanded="false" aria-controls="collapseExample">
+        Lezárult megrendelések
+      </a>
+    </div>
+  </div>
+</section>
+<!-- =========== ÚJ MEGRENDELÉS ============ -->
+<div class="container collapse" id="newOrderDiv">
   <h3 class="text-center">Új megrendelés felvétele</h3>
   <div class="row">
     <input id="customer" list="customers" class="form-control tableinput text-center" name="myCustomers" type="text" placeholder="Ügyfél kiválasztása"
@@ -24,104 +40,110 @@
     <button *ngIf="newOrder.products[0].product!=='' && newOrder.customer !==''" class="btn btn-primary" (click)="createOrder()">Rögzítés</button>
   </div>
 </div>
-<br>
-<br>
-<hr>
-<br>
-<h3 class="text-center">Folyamatban lévő megrendelések</h3>
-<br>
-<table class="table">
-  <tbody *ngFor="let order of activeOrders; let i = index">
-    <tr class="tr-customer">
-      <td>{{i+1}}</td>
-      <td>
-        {{order.customer.username}}
-      </td>
-      <td>
-        {{order.customer.email}}
-      </td>
-      <td>
-        {{order.createdAt | date : 'yyyy.MM.dd HH:mm'}}
-      </td>
-      <td>{{order.status}}</td>
-      <td>
-        <button class="btn btn-warning" data-toggle="modal" data-target="#editOrderModal" (click)="loadModalData(order)">Módosít</button>
-        <button class="btn btn-danger" (click)="removeOrder(order)">X</button>
-      </td>
-    </tr>
-    <tr class="tr-head">
-      <td></td>
-      <td>Termék</td>
-      <td>Mennyiség</td>
-      <td>Összesen</td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr *ngFor="let pr of order.products">
-      <td></td>
-      <td>
-        {{pr.product.productname}}
-      </td>
-      <td>
-        {{pr.quantity}}
-      </td>
-      <td>{{pr.product.price*pr.quantity}}</td>
-      <td></td>
-      <td></td>
-    </tr>
-  </tbody>
-</table>
 
-<br>
-<h2 class="text-center">Lezárult megrendelések</h2>
-<br>
-<table class="table">
-  <tbody *ngFor="let order of doneOrders; let i = index">
-    <tr class="tr-customer">
-      <td>{{i+1}}</td>
-      <td>
-        {{order.customer.username}}
-      </td>
-      <td>
-        {{order.customer.email}}
-      </td>
-      <td>
-        {{order.createdAt | date : 'yyyy.MM.dd HH:mm'}}
-      </td>
-      <td>{{order.status}}</td>
-      <td>
-        <button class="btn btn-warning" data-toggle="modal" data-target="#editOrderModal" (click)="loadModalData(order)">Módosít</button>
-        <button class="btn btn-danger" (click)="removeOrder(order)">X</button>
-      </td>
-    </tr>
-    <tr class="tr-head">
-      <td></td>
-      <td>Termék</td>
-      <td>Mennyiség</td>
-      <td>Összesen</td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr *ngFor="let pr of order.products">
-      <td></td>
-      <td>
-        {{pr.product.productname}}
-      </td>
-      <td>
-        {{pr.quantity}}
-      </td>
-      <td>{{pr.product.price*pr.quantity}}</td>
-      <td></td>
-      <td></td>
-    </tr>
-  </tbody>
-</table>
+<!-- =========== AKTÍV MEGRENDELÉSEK ============ -->
+<section class="collapse" id="activeOrdersDiv">
+  <h3 class="text-center">Folyamatban lévő megrendelések</h3>
+  <br>
+  <table class="table">
+    <tbody *ngFor="let order of activeOrders; let i = index">
+      <tr class="tr-customer">
+        <td>{{i+1}}</td>
+        <td>
+          {{order.customer.username}}
+        </td>
+        <td>
+          {{order.customer.email}}
+        </td>
+        <td>
+          {{order.createdAt | date : 'yyyy.MM.dd HH:mm'}}
+        </td>
+        <td>{{order.status}}</td>
+        <td>
+          <button class="btn btn-warning" data-toggle="modal" data-target="#editOrderModal" (click)="loadModalData(order)">Módosít</button>
+          <button class="btn btn-danger" (click)="removeOrder(order)">X</button>
+        </td>
+      </tr>
+      <tr class="tr-head">
+        <td></td>
+        <td>Termék</td>
+        <td>Mennyiség</td>
+        <td>Összesen</td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr *ngFor="let pr of order.products">
+        <td></td>
+        <td>
+          {{pr.product.productname}}
+        </td>
+        <td>
+          {{pr.quantity}}
+        </td>
+        <td>{{pr.product.price*pr.quantity}}</td>
+        <td></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <br>
+  <br>
+  <hr>
+</section>
 
-<!-- modal -->
+<!-- =========== DONE MEGRENDELÉSEK ============ -->
 
+<section class="collapse" id="doneOrdersDiv">
+  <h2 class="text-center">Lezárult megrendelések</h2>
+  <br>
+  <table class="table">
+    <tbody *ngFor="let order of doneOrders; let i = index">
+      <tr class="tr-customer">
+        <td>{{i+1}}</td>
+        <td>
+          {{order.customer.username}}
+        </td>
+        <td>
+          {{order.customer.email}}
+        </td>
+        <td>
+          {{order.createdAt | date : 'yyyy.MM.dd HH:mm'}}
+        </td>
+        <td>{{order.status}}</td>
+        <td>
+          <button class="btn btn-warning" data-toggle="modal" data-target="#editOrderModal" (click)="loadModalData(order)">Módosít</button>
+          <button class="btn btn-danger" (click)="removeOrder(order)">X</button>
+        </td>
+      </tr>
+      <tr class="tr-head">
+        <td></td>
+        <td>Termék</td>
+        <td>Mennyiség</td>
+        <td>Összesen</td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr *ngFor="let pr of order.products">
+        <td></td>
+        <td>
+          {{pr.product.productname}}
+        </td>
+        <td>
+          {{pr.quantity}}
+        </td>
+        <td>{{pr.product.price*pr.quantity}}</td>
+        <td></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <br>
+  <br>
+  <hr>
+</section>
 <!-- Modal -->
 <div class="modal fade" id="editOrderModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLongTitle">Rendelés módosítása</h5>
@@ -150,20 +172,48 @@
 
             </div>
           </div>
-          <br>
-          <hr>
-          <br>
-          <h5>Termékek</h5>
-          <div class="row" *ngFor="let p of selectedOrder.products; let i = index">
-            <span>{{i+1}}.</span>
-            <select class="custom-select" [(ngModel)]="selectedOrder.products[i].product._id" name="product">
-              <option *ngFor="let product of products" value="{{product['_id']}}">{{product.productname}}</option>
-            </select>
-            <div class="input-group">
-              <span class="input-group-text">Mennyiség</span>
-              <input class="form-control input-group-prepend" type="number" name="amount" min="0" placeholder="Mennyiség" [(ngModel)]="selectedOrder.products[i].quantity">
-            </div>
-          </div>
+        </div>
+      </div>
+      <div class="modal-footer product-header">
+        <h5 class="mr-auto">Termékek</h5>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+              <th>#</th>
+              <th>Termék</th>
+              <th>Egységár</th>
+              <th>Mennyiség</th>
+              <th>Összesen</th>
+            </tr>
+            </thead>
+            <tr *ngFor="let p of selectedOrder.products; let i = index">
+              <td>
+                <span class="btn">{{i+1}}</span>
+              </td>
+              <td>
+                <select class="custom-select" [(ngModel)]="selectedOrder.products[i].product._id" name="product">
+                  <option *ngFor="let product of products" value="{{product['_id']}}">{{product.productname}}</option>
+                </select>
+              </td>
+              <td>{{p.product.price}} Ft</td>
+              <td>
+                <div class="input-group">
+                  <input  (change)="sumSelectedOrder(i)" class="form-control" type="number" name="amount" min="0" placeholder="Mennyiség" [(ngModel)]="selectedOrder.products[i].quantity">
+                </div>
+              </td>
+              <td>{{p.product.price * p.quantity}} Ft</td>
+            </tr>
+            <tr>
+              <td>Összesítés:</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>{{orderSum}} Ft</td>
+            </tr>
+          </table>
           <!-- <button class="btn btn-secondary" (click)="addModalRow()">Új termék</button> -->
         </div>
 

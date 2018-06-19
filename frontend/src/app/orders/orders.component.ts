@@ -37,6 +37,7 @@ export class OrdersComponent {
   products: any;
   doneOrders: any;
   activeOrders: any;
+  orderSum: Number;
 
   constructor(public http: Http, public router: Router, public cart: CartService) {
     this.getOrders();
@@ -62,6 +63,15 @@ export class OrdersComponent {
       pName: '',
       pPrice: '',
     });
+  }
+
+  sumSelectedOrder() {
+    console.log('SUM init');
+    let sum = 0;
+    for (let i = 0; i < this.selectedOrder.products.length; i++) {
+      sum += (this.selectedOrder.products[i].product['price'] * this.selectedOrder.products[i].quantity);
+    }
+    this.orderSum = sum;
   }
 
   getUsers() {
@@ -136,6 +146,7 @@ export class OrdersComponent {
   loadModalData(order) {
     this.selectedOrder = order;
     console.log(this.selectedOrder);
+    this.sumSelectedOrder();
   }
 
   listDoneOrders() {
