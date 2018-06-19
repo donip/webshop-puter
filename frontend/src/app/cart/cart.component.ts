@@ -17,6 +17,7 @@ export class CartComponent implements OnInit {
     customer: '',
     products: []
   };
+  orderMoney = 0;
   productsData = [{
     products: ''
   }];
@@ -61,6 +62,7 @@ export class CartComponent implements OnInit {
     if (JSON.parse(localStorage.getItem('cart'))) {
       this.myCart = JSON.parse(localStorage.getItem('cart'));
       console.log(this.myCart);
+      this.sumOfOrder();
       this.testFill();
     } else {
       this.myCart = {
@@ -71,6 +73,15 @@ export class CartComponent implements OnInit {
       };
     }
   }
+  sumOfOrder() {
+    let sum = 0;
+    console.log(this.myCart);
+    for (let i = 0; i < this.myCart.products.length; i++) {
+      sum += this.myCart.products[i]['price'] * this.myCart.products[i]['quantity'];
+    }
+    this.orderMoney = sum;
+  }
+
   emptyCart() {
     localStorage.removeItem('cart');
     this.getOrder();
@@ -116,6 +127,7 @@ export class CartComponent implements OnInit {
     this.myCart['products'].splice(index, 1);
     localStorage.setItem('cart', JSON.stringify(this.myCart));
     this.cart.getQuantity();
+    this.sumOfOrder();
   }
 
   profile() {

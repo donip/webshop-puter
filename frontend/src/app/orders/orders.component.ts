@@ -17,7 +17,7 @@ export class OrdersComponent {
     customer: '',
     products: [{
       product: '',
-      quantity: '',
+      quantity: 0,
       pName: '',
       pPrice: '',
     }],
@@ -59,7 +59,7 @@ export class OrdersComponent {
   addModalRow() {
     this.selectedOrder.products.push({
       product: '',
-      quantity: '',
+      quantity: 0,
       pName: '',
       pPrice: '',
     });
@@ -69,7 +69,7 @@ export class OrdersComponent {
     console.log('SUM init');
     let sum = 0;
     for (let i = 0; i < this.selectedOrder.products.length; i++) {
-      sum += (this.selectedOrder.products[i].product['price'] * this.selectedOrder.products[i].quantity);
+      sum += (this.selectedOrder.products[i].product['price'] * this.selectedOrder.products[i]['quantity']);
     }
     this.orderSum = sum;
   }
