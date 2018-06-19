@@ -6,3 +6,7 @@ h1{
 .modal-dialog{
     max-width: 100%;
 }
+
+a{
+    font-size: 24px;
+}
