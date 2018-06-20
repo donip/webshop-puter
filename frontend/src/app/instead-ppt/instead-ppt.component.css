@@ -10,3 +10,7 @@ h1{
 a{
     font-size: 24px;
 }
+
+.carousel img{
+    max-height: 90vh;
+}
